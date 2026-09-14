@@ -1,69 +1,144 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Hero } from "@/components/sections/Hero";
+import { NarrativeText } from "@/components/sections/NarrativeText";
+import { CardStack } from "@/components/sections/CardStack";
+import { BreathSection } from "@/components/sections/BreathSection";
+import { ZigZagGrid } from "@/components/sections/ZigZagGrid";
+import { Footer } from "@/components/sections/Footer";
+import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_EMAIL } from "@/config";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Balade à Cheval Versailles | Expérience Royale dans les Jardins du Château",
+  description:
+    "Balade à cheval à Versailles – 2h dans les jardins royaux avec guide expert. Tickets d'accès au Château inclus. À partir de 490€/pers. Réservation en ligne.",
+  alternates: {
+    canonical: SITE_URL,
+    languages: { fr: SITE_URL, en: `${SITE_URL}?lang=en`, "x-default": SITE_URL },
+  },
+};
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    name: "Versailles à Cheval – Balades Équestres dans les Jardins du Château",
+    description:
+      "Balade à cheval à Versailles – Découvrez les jardins du Château de Versailles à cheval avec un guide expert. Tickets d'accès inclus. Expérience unique et mémorable.",
+    url: SITE_URL,
+    image: `${SITE_URL}/hero-real.jpg`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Versailles",
+      addressRegion: "Île-de-France",
+      postalCode: "78000",
+      addressCountry: "FR",
+    },
+    geo: { "@type": "GeoCoordinates", latitude: 48.8044, longitude: 2.123 },
+    priceRange: "€€€",
+    isAccessibleForFree: false,
+    publicAccess: true,
+    touristType: ["Familles", "Couples", "Groupes", "Solo"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: SITE_NAME,
+    description: "Centre équestre proposant des balades à cheval dans les jardins du Château de Versailles",
+    url: SITE_URL,
+    telephone: SITE_PHONE,
+    email: SITE_EMAIL,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Versailles",
+      addressRegion: "Île-de-France",
+      postalCode: "78000",
+      addressCountry: "FR",
+    },
+    geo: { "@type": "GeoCoordinates", latitude: 48.8044, longitude: 2.123 },
+    priceRange: "€€€",
+    image: `${SITE_URL}/hero-real.jpg`,
+    sameAs: [
+      "https://www.instagram.com/versaillesacheval",
+      "https://www.facebook.com/versaillesacheval",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Expériences équestres à Versailles",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "L'Expérience Royale Complète",
+          description: "2h de balade à cheval dans les jardins royaux. Tickets d'accès au Château inclus.",
+          price: "490",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/reservation`,
+        },
+      ],
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Où faire une balade à cheval à Versailles ?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Versailles à Cheval propose des balades à cheval dans les jardins du Château de Versailles. Nos promenades de 2 heures traversent le Grand Canal, les bosquets et les allées royales.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Combien coûte une balade à cheval à Versailles ?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "L'Expérience Royale Complète (2h de balade à cheval + tickets d'accès au Château) est proposée à partir de 490€ par personne. Des options sont disponibles : visite guidée privée du Château (120€), déjeuner gastronomique Alain Ducasse (200€), transport depuis votre hôtel (200-300€).",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Faut-il savoir monter à cheval ?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Non, aucune expérience n'est nécessaire. Nos chevaux sont dressés pour accueillir des débutants. Un briefing de sécurité complet est dispensé avant chaque balade.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Comment réserver une balade à cheval à Versailles ?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "La réservation se fait directement en ligne sur versaillesacheval.fr/reservation : choisissez votre date, le nombre de participants, vos options, et confirmez par paiement sécurisé.",
+        },
+      },
+    ],
+  },
+];
+
+interface PageProps {
+  searchParams: Promise<{ lang?: string }>;
+}
+
+export default async function HomePage({ searchParams }: PageProps) {
+  const { lang = "fr" } = await searchParams;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="bg-[#F3F0EB]">
+      {jsonLd.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      ))}
+      <Hero lang={lang} />
+      <NarrativeText lang={lang} />
+      <CardStack lang={lang} />
+      <BreathSection lang={lang} />
+      <ZigZagGrid lang={lang} />
+      <Footer lang={lang} />
+    </main>
   );
 }

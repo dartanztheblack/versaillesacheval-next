@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --kaleo-sand: #F3F0EB;
+  --kaleo-cream: #FAF8F4;
+  --kaleo-charcoal: #1C1C1C;
+  --kaleo-terracotta: #8C7B6B;
+  --kaleo-muted: #EAE4D9;
+
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--kaleo-sand);
+  color: var(--kaleo-charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Tailwind custom utilities */
+@layer utilities {
+  .bg-kaleo-sand { background-color: var(--kaleo-sand); }
+  .bg-kaleo-cream { background-color: var(--kaleo-cream); }
+  .bg-kaleo-charcoal { background-color: var(--kaleo-charcoal); }
+  .bg-kaleo-terracotta { background-color: var(--kaleo-terracotta); }
+  .bg-kaleo-muted { background-color: var(--kaleo-muted); }
+  .text-kaleo-sand { color: var(--kaleo-sand); }
+  .text-kaleo-cream { color: var(--kaleo-cream); }
+  .text-kaleo-charcoal { color: var(--kaleo-charcoal); }
+  .text-kaleo-terracotta { color: var(--kaleo-terracotta); }
+  .text-kaleo-muted { color: var(--kaleo-muted); }
+  .border-kaleo-muted { border-color: var(--kaleo-muted); }
 }
