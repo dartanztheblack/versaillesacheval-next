@@ -1,48 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --kaleo-sand: #F3F0EB;
-  --kaleo-cream: #FAF8F4;
-  --kaleo-charcoal: #1C1C1C;
-  --kaleo-terracotta: #8C7B6B;
-  --kaleo-muted: #EAE4D9;
+  --white: #FAFAF8;
+  --white-soft: #F4F2EE;
+  --forest: #2C3E2D;
+  --forest-light: #3D5C3E;
+  --charcoal: #1A1A1A;
+  --ink: #2E2E2E;
+  --muted: #6B6B5F;
+  --saddle: #8B7355;
+  --border-light: rgba(44,62,45,0.12);
 
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-body: "Inter", system-ui, sans-serif;
+
+  /* reveal animation */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--kaleo-sand);
-  color: var(--kaleo-charcoal);
+  background-color: var(--white);
+  color: var(--charcoal);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s var(--ease-out-quart), transform 0.75s var(--ease-out-quart);
 }
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
 
-/* Tailwind custom utilities */
-@layer utilities {
-  .bg-kaleo-sand { background-color: var(--kaleo-sand); }
-  .bg-kaleo-cream { background-color: var(--kaleo-cream); }
-  .bg-kaleo-charcoal { background-color: var(--kaleo-charcoal); }
-  .bg-kaleo-terracotta { background-color: var(--kaleo-terracotta); }
-  .bg-kaleo-muted { background-color: var(--kaleo-muted); }
-  .text-kaleo-sand { color: var(--kaleo-sand); }
-  .text-kaleo-cream { color: var(--kaleo-cream); }
-  .text-kaleo-charcoal { color: var(--kaleo-charcoal); }
-  .text-kaleo-terracotta { color: var(--kaleo-terracotta); }
-  .text-kaleo-muted { color: var(--kaleo-muted); }
-  .border-kaleo-muted { border-color: var(--kaleo-muted); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
 }

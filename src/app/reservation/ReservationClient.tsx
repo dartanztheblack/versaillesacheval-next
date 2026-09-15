@@ -4,12 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
-import { Calendar as CalendarIcon, ChevronLeft, Loader2, Check } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { cardStackConfig, addOnOptions } from "@/config";
 import { cn } from "@/lib/utils";
 
@@ -26,15 +22,14 @@ function getAddOnPrice(addOnId: string, count: number): number {
 
 function getAddOnPriceLabel(addOnId: string, count: number, english: boolean): string {
   if (addOnId === "transport") {
-    const price = getAddOnPrice(addOnId, count);
-    return `${price}€ ${english ? "/ booking" : "/ résa."}`;
+    return `+${getAddOnPrice(addOnId, count)}€ ${english ? "/ booking" : "/ résa."}`;
   }
   if (addOnId === "chateau_visit") {
     const price = getAddOnPrice(addOnId, count);
-    return `${price}€ total${count > 1 ? (english ? " (capped)" : " (plafonné)") : ""}`;
+    return `+${price}€ total`;
   }
   const a = addOnOptions.find((x) => x.id === addOnId);
-  return `${a?.price || 0}€ ${english ? "/ person" : "/ pers."}`;
+  return `+${a?.price || 0}€ ${english ? "/ person" : "/ pers."}`;
 }
 
 export function ReservationClient({ searchParams }: Props) {
@@ -42,8 +37,8 @@ export function ReservationClient({ searchParams }: Props) {
   const isEnglish = lang === "en";
   const success = searchParams.success === "true";
   const canceled = searchParams.canceled === "true";
-
   const tour = cardStackConfig.cards.find((c) => c.id === Number(searchParams.tour)) ?? cardStackConfig.cards[0];
+  const dateLocale = isEnglish ? enUS : fr;
 
   const [step, setStep] = useState(success ? 3 : 1);
   const [date, setDate] = useState<Date>();
@@ -52,14 +47,12 @@ export function ReservationClient({ searchParams }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const dateLocale = isEnglish ? enUS : fr;
   const baseAmount = (tour?.basePrice || 490) * participants;
   const addOnsAmount = selectedAddOns.reduce((sum, id) => sum + getAddOnPrice(id, participants), 0);
   const totalAmount = baseAmount + addOnsAmount;
 
-  const toggleAddOn = (id: string) => {
+  const toggleAddOn = (id: string) =>
     setSelectedAddOns((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-  };
 
   const handleProceedToPayment = async () => {
     if (!date || !tour) return;
@@ -83,213 +76,348 @@ export function ReservationClient({ searchParams }: Props) {
       }
       const { url } = await res.json();
       window.location.href = url;
-    } catch (err: unknown) {
-      setError(isEnglish ? "Unable to redirect to payment. Please try again." : "Impossible de rediriger vers le paiement. Veuillez réessayer.");
+    } catch {
+      setError(
+        isEnglish
+          ? "Unable to redirect to payment. Please try again."
+          : "Impossible de rediriger vers le paiement. Veuillez réessayer."
+      );
       setIsLoading(false);
     }
   };
 
-  const t = {
-    back: isEnglish ? "Back" : "Retour",
-    selectDate: isEnglish ? "Choose your date" : "Choisissez votre date",
-    selectDatePlaceholder: isEnglish ? "Select a date" : "Sélectionnez une date",
-    participants: isEnglish ? "Number of travelers" : "Nombre de voyageurs",
-    pricePerPerson: isEnglish ? "Price per person" : "Prix par personne",
-    total: isEnglish ? "Total" : "Total",
-    options: isEnglish ? "Options" : "Options",
-    proceedPayment: isEnglish ? "Proceed to payment" : "Procéder au paiement",
-    continueToOptions: isEnglish ? "Continue" : "Continuer",
-    optionsTitle: isEnglish ? "Customize your experience" : "Personnalisez votre expérience",
-    optionsSubtitle: isEnglish ? "Optional add-ons to enhance your day" : "Options facultatives pour enrichir votre journée",
-    loading: isEnglish ? "Loading..." : "Chargement...",
-    step3Title: isEnglish ? "Booking Confirmed!" : "Réservation confirmée !",
-    thankYou: isEnglish
-      ? "Thank you for your booking! A confirmation email will be sent to you shortly."
-      : "Merci pour votre réservation ! Un email de confirmation vous sera envoyé prochainement.",
-    backHome: isEnglish ? "Back to home" : "Retour à l'accueil",
-    paymentCanceled: isEnglish ? "Payment was canceled. You can try again." : "Le paiement a été annulé. Vous pouvez réessayer.",
-    notFound: isEnglish ? "Tour not found" : "Tour non trouvé",
-  };
-
-  if (!tour) {
-    return (
-      <div className="min-h-screen bg-[#F3F0EB] flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl text-[#1C1C1C] mb-4" style={{ fontFamily: "var(--font-serif)" }}>
-            {t.notFound}
-          </h1>
-          <Button onClick={() => window.history.back()}>
-            <ChevronLeft className="mr-2 h-4 w-4" /> {t.back}
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-[#F3F0EB]">
+    <div className="min-h-screen bg-[#FAFAF8]">
       {/* Header */}
-      <header className="bg-white border-b border-[#EAE4D9]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href={`/?lang=${lang}`} className="text-xl text-[#1C1C1C]" style={{ fontFamily: "var(--font-serif)" }}>
-            {isEnglish ? "Versailles Horse Riding" : "Versailles à Cheval"}
+      <header className="border-b border-[#2C3E2D]/10">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+          <Link
+            href={`/?lang=${lang}`}
+            className="text-xl text-[#1A1A1A] hover:text-[#2C3E2D] transition-colors"
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+          >
+            Versailles à Cheval
           </Link>
-          <div className="flex items-center gap-4">
-            <Link href={`/reservation?tour=${tour.id}&lang=${isEnglish ? "fr" : "en"}`} className="text-sm text-[#8C7B6B] hover:text-[#1C1C1C]">
-              {isEnglish ? "FR" : "EN"}
-            </Link>
-            <Button variant="ghost" onClick={() => window.history.back()}>
-              <ChevronLeft className="mr-2 h-4 w-4" /> {t.back}
-            </Button>
-          </div>
+          <Link
+            href={`/reservation?tour=${tour?.id}&lang=${isEnglish ? "fr" : "en"}`}
+            className="text-sm text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide"
+          >
+            {isEnglish ? "FR" : "EN"}
+          </Link>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-12">
-        {/* Progress */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="flex items-center space-x-4">
-            {[1, 2, 3].map((s) => (
-              <div key={s} className="flex items-center">
-                <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium", step >= s ? "bg-[#8C7B6B] text-white" : "bg-[#EAE4D9] text-[#8C7B6B]")}>
-                  {s}
-                </div>
-                {s < 3 && <div className={cn("w-16 h-0.5 ml-4", step > s ? "bg-[#8C7B6B]" : "bg-[#EAE4D9]")} />}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Canceled notice */}
-        {canceled && step === 1 && (
-          <div className="mb-6 p-4 bg-amber-50 text-amber-600 rounded-lg text-sm">{t.paymentCanceled}</div>
-        )}
-
-        {/* Step 1: Date + Participants */}
-        {step === 1 && (
-          <div className="bg-white rounded-lg p-8 shadow-sm">
-            <h1 className="text-2xl text-[#1C1C1C] mb-2" style={{ fontFamily: "var(--font-serif)" }}>
-              {isEnglish ? tour.titleEn : tour.title}
-            </h1>
-            <p className="text-[#8C7B6B] mb-6">{isEnglish ? tour.descriptionEn : tour.description}</p>
-
-            <div className="space-y-6">
-              <div>
-                <Label className="text-[#1C1C1C] mb-2 block">{t.selectDate}</Label>
-                <Popover>
-                  <PopoverTrigger
-                    className={cn(
-                      "inline-flex w-full items-center justify-start gap-2 rounded-md border border-input bg-background px-3 py-2 text-left text-sm font-normal shadow-xs hover:bg-accent hover:text-accent-foreground",
-                      !date && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="h-4 w-4" />
-                    {date ? format(date, "PPP", { locale: dateLocale }) : <span>{t.selectDatePlaceholder}</span>}
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      disabled={(d) => d < new Date()}
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-
-              <div>
-                <Label className="text-[#1C1C1C] mb-2 block">{t.participants}</Label>
-                <div className="flex items-center space-x-4">
-                  <Button variant="outline" onClick={() => setParticipants(Math.max(1, participants - 1))} disabled={participants <= 1}>-</Button>
-                  <span className="text-xl font-medium w-8 text-center">{participants}</span>
-                  <Button variant="outline" onClick={() => setParticipants(Math.min(10, participants + 1))} disabled={participants >= 10}>+</Button>
-                </div>
-              </div>
-
-              <div className="border-t border-[#EAE4D9] pt-4">
-                <div className="flex justify-between items-center text-[#8C7B6B]">
-                  <span>{t.pricePerPerson} × {participants}</span>
-                  <span className="font-medium text-[#1C1C1C]">{baseAmount}€</span>
-                </div>
-              </div>
-
-              <Button onClick={() => setStep(2)} disabled={!date} className="w-full bg-[#8C7B6B] hover:bg-[#6B5D4F] text-white">
-                {t.continueToOptions}
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Options */}
-        {step === 2 && (
-          <div className="bg-white rounded-lg p-8 shadow-sm">
-            <h2 className="text-2xl text-[#1C1C1C] mb-1" style={{ fontFamily: "var(--font-serif)" }}>{t.optionsTitle}</h2>
-            <p className="text-sm text-[#8C7B6B] mb-6">{t.optionsSubtitle}</p>
-
-            <div className="space-y-3 mb-6">
-              {addOnOptions.map((addOn) => (
-                <div
-                  key={addOn.id}
-                  onClick={() => toggleAddOn(addOn.id)}
-                  className={cn("flex items-start space-x-3 p-4 border rounded-lg cursor-pointer transition-colors", selectedAddOns.includes(addOn.id) ? "border-[#8C7B6B] bg-[#F3F0EB]" : "border-[#EAE4D9] hover:border-[#8C7B6B]")}
-                >
-                  <Checkbox
-                    checked={selectedAddOns.includes(addOn.id)}
-                    onClick={(e) => e.stopPropagation()}
-                    onCheckedChange={() => toggleAddOn(addOn.id)}
-                  />
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start gap-2">
-                      <p className="font-medium text-[#1C1C1C]">{isEnglish ? addOn.nameEn : addOn.name}</p>
-                      <p className="text-[#8C7B6B] font-medium whitespace-nowrap">+{getAddOnPriceLabel(addOn.id, participants, isEnglish)}</p>
-                    </div>
-                    <p className="text-sm text-[#8C7B6B] mt-1">{isEnglish ? addOn.descriptionEn : addOn.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-[#EAE4D9] pt-4 space-y-2 mb-6">
-              <div className="flex justify-between text-sm">
-                <span className="text-[#8C7B6B]">{t.pricePerPerson} × {participants}</span>
-                <span>{baseAmount}€</span>
-              </div>
-              {selectedAddOns.length > 0 && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-[#8C7B6B]">{t.options}</span>
-                  <span className="text-[#8C7B6B]">+{addOnsAmount}€</span>
-                </div>
-              )}
-              <div className="flex justify-between text-lg font-medium pt-2 border-t border-[#EAE4D9]">
-                <span>{t.total}</span>
-                <span className="text-[#8C7B6B]">{totalAmount}€</span>
-              </div>
-            </div>
-
-            {error && <div className="p-4 bg-red-50 text-red-600 rounded-lg text-sm mb-4">{error}</div>}
-
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setStep(1)} className="flex-none">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button onClick={handleProceedToPayment} disabled={isLoading} className="flex-1 bg-[#8C7B6B] hover:bg-[#6B5D4F] text-white">
-                {isLoading ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t.loading}</>) : t.proceedPayment}
-              </Button>
-            </div>
-          </div>
-        )}
-
+      <main className="max-w-5xl mx-auto px-6 py-16">
         {/* Step 3: Confirmation */}
         {step === 3 && (
-          <div className="bg-white rounded-lg p-8 shadow-sm text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 text-green-600" />
+          <div className="max-w-xl mx-auto text-center py-24">
+            <div className="w-14 h-14 border border-[#2C3E2D] rounded-full flex items-center justify-center mx-auto mb-10">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2C3E2D" strokeWidth="1.5" strokeLinecap="round">
+                <polyline points="4 10 8 14 16 6" />
+              </svg>
             </div>
-            <h1 className="text-2xl text-[#1C1C1C] mb-4" style={{ fontFamily: "var(--font-serif)" }}>{t.step3Title}</h1>
-            <p className="text-[#8C7B6B] mb-8">{t.thankYou}</p>
-            <Button onClick={() => (window.location.href = `/?lang=${lang}`)}>
-              {t.backHome}
-            </Button>
+            <h1
+              className="text-4xl text-[#1A1A1A] mb-4"
+              style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+            >
+              {isEnglish ? "Booking confirmed." : "Réservation confirmée."}
+            </h1>
+            <p className="text-[#6B6B5F] mb-10 leading-relaxed">
+              {isEnglish
+                ? "A confirmation email will be sent to you shortly. We look forward to welcoming you."
+                : "Un email de confirmation vous sera envoyé prochainement. Nous avons hâte de vous accueillir."}
+            </p>
+            <Link
+              href={`/?lang=${lang}`}
+              className="inline-flex items-center gap-2 text-sm text-[#2C3E2D] tracking-wide underline underline-offset-4 hover:text-[#1A1A1A] transition-colors"
+            >
+              {isEnglish ? "← Back to home" : "← Retour à l'accueil"}
+            </Link>
+          </div>
+        )}
+
+        {/* Steps 1 & 2 */}
+        {step !== 3 && (
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+            {/* Left: form */}
+            <div className="lg:col-span-3">
+              {/* Step indicator */}
+              <div className="flex items-center gap-3 mb-12">
+                {[1, 2].map((s) => (
+                  <div key={s} className="flex items-center gap-3">
+                    <div
+                      className={cn(
+                        "w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors",
+                        step >= s
+                          ? "bg-[#2C3E2D] border-[#2C3E2D] text-[#FAFAF8]"
+                          : "border-[#2C3E2D]/30 text-[#6B6B5F]"
+                      )}
+                    >
+                      {step > s ? (
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                          <polyline points="2 6 5 9 10 3" />
+                        </svg>
+                      ) : (
+                        s
+                      )}
+                    </div>
+                    {s === 1 && <div className="h-px w-10 bg-[#2C3E2D]/20" />}
+                  </div>
+                ))}
+                <span className="text-xs text-[#6B6B5F] ml-1">
+                  {step === 1
+                    ? (isEnglish ? "Date & travelers" : "Date & participants")
+                    : (isEnglish ? "Options" : "Options")}
+                </span>
+              </div>
+
+              {canceled && (
+                <div className="mb-8 px-5 py-4 border border-[#8B7355]/30 bg-[#8B7355]/5 text-sm text-[#8B7355]">
+                  {isEnglish
+                    ? "Payment was canceled. You can try again below."
+                    : "Le paiement a été annulé. Vous pouvez réessayer ci-dessous."}
+                </div>
+              )}
+
+              {/* STEP 1 */}
+              {step === 1 && (
+                <div>
+                  <h1
+                    className="text-3xl md:text-4xl text-[#1A1A1A] mb-2"
+                    style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+                  >
+                    {isEnglish ? "Choose your date" : "Choisissez votre date"}
+                  </h1>
+                  <p className="text-[#6B6B5F] text-sm mb-10">
+                    {isEnglish ? tour?.descriptionEn : tour?.description}
+                  </p>
+
+                  <div className="space-y-8">
+                    {/* Date picker */}
+                    <div>
+                      <label className="block text-xs tracking-[0.15em] uppercase text-[#6B6B5F] mb-3">
+                        {isEnglish ? "Date" : "Date"}
+                      </label>
+                      <Popover>
+                        <PopoverTrigger
+                          className={cn(
+                            "w-full flex items-center justify-between px-4 py-3 border text-sm transition-colors text-left",
+                            date
+                              ? "border-[#2C3E2D] text-[#1A1A1A]"
+                              : "border-[#2C3E2D]/25 text-[#6B6B5F] hover:border-[#2C3E2D]/50"
+                          )}
+                        >
+                          {date
+                            ? format(date, "EEEE d MMMM yyyy", { locale: dateLocale })
+                            : (isEnglish ? "Select a date" : "Sélectionnez une date")}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.5">
+                            <rect x="1" y="2" width="14" height="13" rx="1" />
+                            <line x1="1" y1="6" x2="15" y2="6" />
+                            <line x1="5" y1="1" x2="5" y2="4" />
+                            <line x1="11" y1="1" x2="11" y2="4" />
+                          </svg>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            onSelect={setDate}
+                            disabled={(d) => d < new Date()}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+
+                    {/* Participants */}
+                    <div>
+                      <label className="block text-xs tracking-[0.15em] uppercase text-[#6B6B5F] mb-3">
+                        {isEnglish ? "Travelers" : "Participants"}
+                      </label>
+                      <div className="flex items-center gap-5">
+                        <button
+                          onClick={() => setParticipants(Math.max(1, participants - 1))}
+                          disabled={participants <= 1}
+                          className="w-10 h-10 border border-[#2C3E2D]/25 hover:border-[#2C3E2D] text-[#1A1A1A] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          −
+                        </button>
+                        <span className="text-2xl text-[#1A1A1A] w-8 text-center" style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}>
+                          {participants}
+                        </span>
+                        <button
+                          onClick={() => setParticipants(Math.min(10, participants + 1))}
+                          disabled={participants >= 10}
+                          className="w-10 h-10 border border-[#2C3E2D]/25 hover:border-[#2C3E2D] text-[#1A1A1A] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                          +
+                        </button>
+                        <span className="text-sm text-[#6B6B5F]">
+                          × {tour?.basePrice || 490}€ = {baseAmount}€
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setStep(2)}
+                      disabled={!date}
+                      className="w-full bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] py-4 text-sm tracking-[0.15em] uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {isEnglish ? "Continue" : "Continuer"} →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 2 */}
+              {step === 2 && (
+                <div>
+                  <button
+                    onClick={() => setStep(1)}
+                    className="flex items-center gap-2 text-xs text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide mb-10"
+                  >
+                    ← {isEnglish ? "Back" : "Retour"}
+                  </button>
+
+                  <h2
+                    className="text-3xl md:text-4xl text-[#1A1A1A] mb-2"
+                    style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+                  >
+                    {isEnglish ? "Complete your experience" : "Complétez votre expérience"}
+                  </h2>
+                  <p className="text-[#6B6B5F] text-sm mb-10">
+                    {isEnglish
+                      ? "Each option can be added or removed — nothing is mandatory."
+                      : "Chaque option peut être ajoutée ou retirée — rien n'est obligatoire."}
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    {addOnOptions.map((addOn) => {
+                      const active = selectedAddOns.includes(addOn.id);
+                      return (
+                        <button
+                          key={addOn.id}
+                          type="button"
+                          onClick={() => toggleAddOn(addOn.id)}
+                          className={cn(
+                            "w-full text-left px-5 py-5 border transition-colors",
+                            active
+                              ? "border-[#2C3E2D] bg-[#2C3E2D]/4"
+                              : "border-[#2C3E2D]/20 hover:border-[#2C3E2D]/50"
+                          )}
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex items-start gap-4 flex-1">
+                              <div
+                                className={cn(
+                                  "mt-0.5 w-4 h-4 border flex-shrink-0 flex items-center justify-center transition-colors",
+                                  active ? "bg-[#2C3E2D] border-[#2C3E2D]" : "border-[#2C3E2D]/30"
+                                )}
+                              >
+                                {active && (
+                                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#FAFAF8" strokeWidth="1.5" strokeLinecap="round">
+                                    <polyline points="2 5 4 7 8 3" />
+                                  </svg>
+                                )}
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-[#1A1A1A] mb-1">
+                                  {isEnglish ? addOn.nameEn : addOn.name}
+                                </p>
+                                <p className="text-xs text-[#6B6B5F] leading-relaxed">
+                                  {isEnglish ? addOn.descriptionEn : addOn.description}
+                                </p>
+                              </div>
+                            </div>
+                            <span className="text-sm text-[#2C3E2D] font-medium whitespace-nowrap flex-shrink-0">
+                              {getAddOnPriceLabel(addOn.id, participants, isEnglish)}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {error && (
+                    <div className="mb-6 px-5 py-4 border border-red-200 bg-red-50 text-sm text-red-600">
+                      {error}
+                    </div>
+                  )}
+
+                  <button
+                    onClick={handleProceedToPayment}
+                    disabled={isLoading}
+                    className="w-full bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] py-4 text-sm tracking-[0.15em] uppercase transition-colors disabled:opacity-50"
+                  >
+                    {isLoading
+                      ? (isEnglish ? "Loading…" : "Chargement…")
+                      : `${isEnglish ? "Pay" : "Payer"} ${totalAmount}€ →`}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Right: Summary */}
+            <div className="lg:col-span-2 lg:sticky lg:top-8">
+              <div className="border border-[#2C3E2D]/12 p-7">
+                <p className="text-xs tracking-[0.2em] uppercase text-[#6B6B5F] mb-5">
+                  {isEnglish ? "Your experience" : "Votre expérience"}
+                </p>
+
+                {/* Tour image */}
+                <div className="aspect-[16/10] overflow-hidden mb-6">
+                  <img
+                    src={tour?.image}
+                    alt={isEnglish ? tour?.titleEn : tour?.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <h3
+                  className="text-xl text-[#1A1A1A] mb-1"
+                  style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+                >
+                  {isEnglish ? tour?.titleEn : tour?.title}
+                </h3>
+                {date && (
+                  <p className="text-sm text-[#6B6B5F] mb-6">
+                    {format(date, "d MMMM yyyy", { locale: dateLocale })} · {participants}{" "}
+                    {participants === 1 ? (isEnglish ? "person" : "personne") : (isEnglish ? "people" : "personnes")}
+                  </p>
+                )}
+
+                <div className="space-y-2 border-t border-[#2C3E2D]/10 pt-5 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-[#6B6B5F]">{(tour?.basePrice || 490)}€ × {participants}</span>
+                    <span className="text-[#1A1A1A]">{baseAmount}€</span>
+                  </div>
+                  {selectedAddOns.map((id) => {
+                    const a = addOnOptions.find((x) => x.id === id);
+                    if (!a) return null;
+                    return (
+                      <div key={id} className="flex justify-between">
+                        <span className="text-[#6B6B5F]">{isEnglish ? a.nameEn : a.name}</span>
+                        <span className="text-[#1A1A1A]">+{getAddOnPrice(id, participants)}€</span>
+                      </div>
+                    );
+                  })}
+                  <div className="flex justify-between pt-4 border-t border-[#2C3E2D]/10">
+                    <span className="font-medium text-[#1A1A1A]">Total</span>
+                    <span
+                      className="text-xl text-[#1A1A1A]"
+                      style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+                    >
+                      {totalAmount}€
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-[#6B6B5F] mt-5 leading-relaxed">
+                  {isEnglish
+                    ? "Secure payment via Stripe. Free cancellation up to 48h before the experience."
+                    : "Paiement sécurisé via Stripe. Annulation gratuite jusqu'à 48h avant l'expérience."}
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </main>

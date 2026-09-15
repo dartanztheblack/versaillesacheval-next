@@ -1,6 +1,6 @@
 "use client";
 
-import { narrativeTextConfig, narrativeTextConfigEn } from "@/config";
+import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 interface NarrativeTextProps {
   lang?: string;
@@ -8,19 +8,32 @@ interface NarrativeTextProps {
 
 export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
   const isEnglish = lang === "en";
-  const config = isEnglish ? narrativeTextConfigEn : narrativeTextConfig;
 
   return (
-    <section className="py-24 px-6 bg-[#F3F0EB]">
-      <div className="max-w-4xl mx-auto text-center">
-        <p className="text-[#8C7B6B] tracking-[0.2em] text-xs uppercase mb-6">{config.line1}</p>
-        <h2
-          className="text-4xl md:text-6xl text-[#1C1C1C] mb-8 leading-tight"
-          style={{ fontFamily: "var(--font-serif)" }}
-        >
-          {config.line2}
-        </h2>
-        <p className="text-[#8C7B6B] text-lg leading-relaxed max-w-2xl mx-auto">{config.line3}</p>
+    <section className="py-32 px-6 bg-[#FAFAF8]">
+      <div className="max-w-3xl mx-auto text-center">
+        <RevealOnScroll>
+          <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-8">
+            {isEnglish ? "Since 2018 · Versailles" : "Depuis 2018 · Versailles"}
+          </p>
+        </RevealOnScroll>
+        <RevealOnScroll delay={1}>
+          <h2
+            className="text-[clamp(2rem,5vw,4.5rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.02em] mb-10"
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+          >
+            {isEnglish
+              ? "The gardens of Versailles, seen from the back of a horse"
+              : "Les jardins de Versailles, vus depuis le dos d'un cheval"}
+          </h2>
+        </RevealOnScroll>
+        <RevealOnScroll delay={2}>
+          <p className="text-[#6B6B5F] text-lg leading-relaxed">
+            {isEnglish
+              ? "There is no better vantage point to understand Versailles than from horseback. The scale of Le Nôtre's allées, the silence between the fountains, the smell of old oak and cut grass — things a tour bus will never give you."
+              : "Il n'existe pas de meilleur point de vue pour comprendre Versailles que depuis le dos d'un cheval. L'échelle des allées de Le Nôtre, le silence entre les fontaines, l'odeur du vieux chêne et de l'herbe fraîche — des sensations qu'aucun bus touristique ne peut vous offrir."}
+          </p>
+        </RevealOnScroll>
       </div>
     </section>
   );
