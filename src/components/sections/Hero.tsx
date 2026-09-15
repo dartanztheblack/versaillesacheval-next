@@ -52,39 +52,33 @@ export function Hero({ lang = "fr" }: HeroProps) {
         </div>
       </nav>
 
-      {/* Image block — top 65% of viewport, fades into white at bottom */}
-      <div
-        className="absolute inset-x-0 top-0"
-        style={{ height: "72vh" }}
-        aria-hidden="true"
-      >
+      {/* Image plein écran */}
+      <div className="absolute inset-0" aria-hidden="true">
         <img
           src={config.backgroundImage}
           alt={config.backgroundAlt}
           className="w-full h-full object-cover object-center"
           fetchPriority="high"
         />
-        {/* gradient to white */}
+        {/* voile sombre pour lisibilité du texte blanc */}
         <div
           className="absolute inset-0"
-          style={{
-            background: "linear-gradient(to bottom, rgba(250,250,248,0.15) 0%, rgba(250,250,248,0) 35%, rgba(250,250,248,0.6) 72%, rgba(250,250,248,1) 100%)",
-          }}
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.55) 100%)" }}
         />
       </div>
 
-      {/* Content — sits over the fade zone */}
-      <div className="relative z-10 flex flex-col items-center justify-end min-h-screen pb-16 px-6 text-center">
+      {/* Texte centré sur la photo */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <p
           ref={eyebrowRef}
-          className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-5"
+          className="text-white/70 tracking-[0.3em] text-xs font-medium uppercase mb-6"
           style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {config.subtitle}
         </p>
         <h1
           ref={titleRef}
-          className="text-[clamp(3rem,9vw,8.5rem)] text-[#1A1A1A] leading-[0.9] tracking-[-0.02em] mb-6"
+          className="text-[clamp(3.5rem,10vw,9rem)] text-white leading-[0.9] tracking-[-0.02em] mb-6"
           style={{
             fontFamily: "var(--font-serif)",
             fontWeight: 300,
@@ -97,7 +91,7 @@ export function Hero({ lang = "fr" }: HeroProps) {
         </h1>
         <p
           ref={subRef}
-          className="text-[#6B6B5F] text-base md:text-lg leading-relaxed max-w-xl mb-10"
+          className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl mb-10"
           style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {isEnglish
@@ -111,13 +105,13 @@ export function Hero({ lang = "fr" }: HeroProps) {
         >
           <Link
             href={`/reservation?lang=${lang}`}
-            className="inline-flex items-center gap-2 bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] px-8 py-3.5 text-sm tracking-[0.12em] uppercase transition-colors duration-200"
+            className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-[#1A1A1A] px-8 py-3.5 text-sm tracking-[0.12em] uppercase transition-colors duration-200"
           >
             {isEnglish ? "Book the experience" : "Réserver l'expérience"}
           </Link>
           <a
             href="#nos-chevaux"
-            className="text-sm text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide underline underline-offset-4"
+            className="text-sm text-white/70 hover:text-white transition-colors tracking-wide underline underline-offset-4"
           >
             {isEnglish ? "Meet our horses" : "Rencontrer nos chevaux"}
           </a>
