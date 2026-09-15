@@ -73,7 +73,7 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
             <RevealOnScroll delay={3}>
               <div className="relative overflow-hidden" style={{ height: "320px" }}>
                 <img
-                  src="/horses-care.jpg"
+                  src="/breath-canal.jpg"
                   alt={isEnglish ? "Horses grazing in the Versailles estate" : "Chevaux au pré dans le Domaine de Versailles"}
                   className="w-full h-full object-cover"
                   onError={(e) => {
