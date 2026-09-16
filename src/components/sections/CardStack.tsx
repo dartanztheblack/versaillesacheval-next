@@ -13,9 +13,9 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section className="py-32 px-6 bg-[#FAFAF8]">
+    <section className="py-48 px-6 bg-[#FAFAF8]">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20">
+        <div className="mb-24">
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
               {isEnglish ? config.sectionSubtitleEn : config.sectionSubtitle}
@@ -34,7 +34,7 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-0">
           {config.cards.map((card, i) => (
             <RevealOnScroll key={card.id} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <article className="group grid grid-cols-1 md:grid-cols-2 border-t border-[#2C3E2D]/12 py-12 gap-8 items-center">
+              <article className="group grid grid-cols-1 md:grid-cols-2 border-t border-[#2C3E2D]/12 py-16 gap-14 items-center">
                 {/* Image */}
                 <div
                   className="overflow-hidden aspect-[16/9]"

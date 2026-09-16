@@ -53,10 +53,10 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-32 px-6 bg-[#F4F2EE]">
+    <section className="py-48 px-6 bg-[#F4F2EE]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-24">
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
               {isEnglish ? "Those who have lived it" : "Ceux qui l'ont vécu"}
@@ -74,7 +74,7 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
 
         {/* Stats bar */}
         <RevealOnScroll>
-          <div className="flex flex-wrap justify-center gap-12 mb-20 py-8 border-t border-b border-[#2C3E2D]/12">
+          <div className="flex flex-wrap justify-center gap-16 mb-24 py-12 border-t border-b border-[#2C3E2D]/12">
             {[
               { value: "4.9/5", label: isEnglish ? "Average rating" : "Note moyenne" },
               { value: "200+", label: isEnglish ? "Experiences in 2025" : "Expériences en 2025" },
@@ -95,19 +95,19 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
         </RevealOnScroll>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((t, i) => (
             <RevealOnScroll key={t.author} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <blockquote className="bg-[#FAFAF8] p-8 h-full flex flex-col">
+              <blockquote className="bg-[#FAFAF8] p-10 h-full flex flex-col">
                 {/* Stars */}
-                <div className="flex gap-1 mb-6" aria-label={`${t.rating} étoiles sur 5`}>
+                <div className="flex gap-1.5 mb-8" aria-label={`${t.rating} étoiles sur 5`}>
                   {Array.from({ length: t.rating }).map((_, j) => (
                     <svg key={j} width="12" height="12" viewBox="0 0 12 12" fill="#2C3E2D" aria-hidden="true">
                       <path d="M6 0l1.35 4.15H12L8.32 6.72 9.67 10.88 6 8.3 2.33 10.88 3.68 6.72 0 4.15h4.65z" />
                     </svg>
                   ))}
                 </div>
-                <p className="text-[#2E2E2E] text-base leading-relaxed flex-1 mb-8">
+                <p className="text-[#2E2E2E] text-base leading-[1.85] flex-1 mb-10">
                   "{isEnglish ? t.textEn : t.text}"
                 </p>
                 <footer className="flex items-center justify-between">

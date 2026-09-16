@@ -61,18 +61,18 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="py-32 px-6 bg-[#F4F2EE]">
+    <section id="nos-chevaux" className="py-48 px-6 bg-[#F4F2EE]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-20 max-w-2xl">
+        <div className="mb-24 max-w-2xl">
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
+            <p className="text-[#2C3E2D] tracking-[0.35em] text-xs font-medium uppercase mb-8">
               {isEnglish ? "Our horses" : "Nos chevaux"}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
             <h2
-              className="text-[clamp(2rem,4.5vw,4rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.02em] mb-6"
+              className="text-[clamp(2.2rem,4.5vw,4.2rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.025em] mb-8"
               style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
             >
               {isEnglish
@@ -81,7 +81,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
             </h2>
           </RevealOnScroll>
           <RevealOnScroll delay={2}>
-            <p className="text-[#6B6B5F] text-base leading-relaxed">
+            <p className="text-[#6B6B5F] text-lg leading-[1.8]">
               {isEnglish
                 ? "Each horse is matched to your experience level and group. You will be introduced before departure."
                 : "Chaque cheval est associé à votre niveau et à votre groupe. Vous ferez connaissance avant le départ."}
@@ -90,12 +90,12 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {horses.map((horse, i) => (
             <RevealOnScroll key={horse.name} delay={(i % 4) as 0 | 1 | 2 | 3 | 4}>
               <article className="group">
                 {/* Photo or elegant placeholder */}
-                <div className="aspect-[3/4] overflow-hidden mb-5 relative">
+                <div className="aspect-[3/4] overflow-hidden mb-7 relative">
                   <div
                     className="w-full h-full flex items-center justify-center"
                     style={{ backgroundColor: horse.fallbackBg }}

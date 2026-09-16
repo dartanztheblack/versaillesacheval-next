@@ -41,7 +41,7 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-32 px-6 bg-[#FAFAF8]">
+    <section className="py-48 px-6 bg-[#FAFAF8]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left: text block */}
@@ -91,18 +91,18 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
           </div>
 
           {/* Right: principles */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {principles.map((p, i) => (
               <RevealOnScroll key={p.number} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-                <div className="border-t border-[#2C3E2D]/12 pt-8">
+                <div className="border-t border-[#2C3E2D]/12 pt-10">
                   <span className="text-xs text-[#8B7355] tracking-[0.2em] font-medium">{p.number}</span>
                   <h3
-                    className="text-2xl text-[#1A1A1A] mt-2 mb-4"
+                    className="text-2xl text-[#1A1A1A] mt-3 mb-5"
                     style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }}
                   >
                     {isEnglish ? p.titleEn : p.title}
                   </h3>
-                  <p className="text-[#6B6B5F] text-sm leading-relaxed">
+                  <p className="text-[#6B6B5F] text-base leading-[1.85]">
                     {isEnglish ? p.textEn : p.text}
                   </p>
                 </div>

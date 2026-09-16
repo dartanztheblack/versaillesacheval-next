@@ -65,9 +65,9 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
   const faq = isEnglish ? faqEn : faqFr;
 
   return (
-    <section className="py-32 px-6 bg-[#F4F2EE]">
+    <section className="py-48 px-6 bg-[#F4F2EE]">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-16 text-center">
+        <div className="mb-20 text-center">
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
               {isEnglish ? "Practical information" : "Informations pratiques"}
@@ -86,7 +86,7 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
         <div className="space-y-0">
           {faq.map((item, i) => (
             <RevealOnScroll key={i} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <details className="group border-t border-[#2C3E2D]/12 py-6">
+              <details className="group border-t border-[#2C3E2D]/12 py-8">
                 <summary className="flex items-start justify-between cursor-pointer list-none gap-6">
                   <h3
                     className="text-base md:text-lg text-[#1A1A1A] leading-snug flex-1"
@@ -101,7 +101,7 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
                     +
                   </span>
                 </summary>
-                <p className="mt-4 text-[#6B6B5F] text-sm leading-relaxed pr-8">
+                <p className="mt-5 text-[#6B6B5F] text-base leading-[1.85] pr-8">
                   {item.a}
                 </p>
               </details>
