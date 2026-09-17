@@ -88,7 +88,7 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
             <RevealOnScroll key={i} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
               <details style={{ borderTop: "1px solid rgba(44,62,45,0.12)" }}>
                 <summary style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", cursor: "pointer", listStyle: "none", padding: "36px 0", gap: "24px" }}>
-                  <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "1.15rem", color: "#1A1A1A", lineHeight: 1.4, flex: 1, textAlign: "left" }}>
+                  <h3 style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "1rem", color: "#1A1A1A", lineHeight: 1.5, flex: 1, textAlign: "left" }}>
                     {item.q}
                   </h3>
                   <span style={{ color: "#2C3E2D", fontSize: "1.25rem", flexShrink: 0, marginTop: "2px" }} aria-hidden="true">+</span>

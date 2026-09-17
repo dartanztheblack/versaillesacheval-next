@@ -23,76 +23,64 @@ export function Hero({ lang = "fr" }: HeroProps) {
       setTimeout(() => {
         el.style.opacity = "1";
         el.style.transform = "translateY(0)";
-      }, 120 * i);
+      }, 150 * i);
     });
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#FAFAF8]">
-      {/* Nav */}
-      <nav className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-8 py-6">
-        <span
-          className="text-[#1A1A1A] text-lg tracking-wide"
-          style={{ fontFamily: "var(--font-serif)" }}
-        >
+    <section style={{ position: "relative", width: "100%", minHeight: "100vh", overflow: "hidden", background: "#1A1A1A" }}>
+
+      {/* Navbar */}
+      <nav style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 30, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "28px 40px" }}>
+        <span style={{ fontFamily: "var(--font-serif)", color: "rgba(255,255,255,0.95)", fontSize: "1.15rem", letterSpacing: "0.04em", fontWeight: 300 }}>
           Versailles à Cheval
         </span>
-        <div className="flex items-center gap-6 text-sm">
-          <Link href={`/blog?lang=${lang}`} className="text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide">
+        <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+          <Link href={`/blog?lang=${lang}`} style={{ color: "rgba(255,255,255,0.65)", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 0.2s" }}>
             Journal
           </Link>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <Link href="?lang=fr" style={{ color: !isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: !isEnglish ? 500 : 400 }}>FR</Link>
+            <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "11px" }}>|</span>
+            <Link href="?lang=en" style={{ color: isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: isEnglish ? 500 : 400 }}>EN</Link>
+          </div>
           <Link
-            href="?lang=fr"
-            className={`transition-colors tracking-wide ${!isEnglish ? "text-[#2C3E2D] font-medium" : "text-[#6B6B5F] hover:text-[#1A1A1A]"}`}
-          >FR</Link>
-          <Link
-            href="?lang=en"
-            className={`transition-colors tracking-wide ${isEnglish ? "text-[#2C3E2D] font-medium" : "text-[#6B6B5F] hover:text-[#1A1A1A]"}`}
-          >EN</Link>
+            href={`/reservation?lang=${lang}`}
+            style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.3)", color: "rgba(255,255,255,0.9)", padding: "10px 20px", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", backdropFilter: "blur(8px)", transition: "background 0.2s" }}
+          >
+            {isEnglish ? "Book" : "Réserver"}
+          </Link>
         </div>
       </nav>
 
       {/* Image plein écran */}
-      <div className="absolute inset-0" aria-hidden="true">
+      <div style={{ position: "absolute", inset: 0 }} aria-hidden="true">
         <img
           src={config.backgroundImage}
           alt={config.backgroundAlt}
-          className="w-full h-full object-cover object-center"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
           fetchPriority="high"
         />
-        {/* voile sombre pour lisibilité du texte blanc */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.55) 100%)" }}
-        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.65) 100%)" }} />
       </div>
 
-      {/* Texte centré sur la photo */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+      {/* Contenu centré */}
+      <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "120px 32px 80px", textAlign: "center" }}>
         <p
           ref={eyebrowRef}
-          className="text-white/70 tracking-[0.3em] text-xs font-medium uppercase mb-6"
-          style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          style={{ color: "rgba(255,255,255,0.6)", letterSpacing: "0.35em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "24px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {config.subtitle}
         </p>
         <h1
           ref={titleRef}
-          className="text-[clamp(3.5rem,10vw,9rem)] text-white leading-[0.9] tracking-[-0.02em] mb-6"
-          style={{
-            fontFamily: "var(--font-serif)",
-            fontWeight: 300,
-            opacity: 0,
-            transform: "translateY(20px)",
-            transition: "opacity 0.7s ease, transform 0.7s ease",
-          }}
+          style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(3.5rem, 10vw, 9rem)", color: "white", lineHeight: 0.92, letterSpacing: "-0.02em", marginBottom: "28px", opacity: 0, transform: "translateY(20px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}
         >
           {config.title}
         </h1>
         <p
           ref={subRef}
-          className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl mb-10"
-          style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "500px", marginBottom: "48px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {isEnglish
             ? "Two hours through the royal gardens of Versailles. Horses, history, and open sky."
@@ -100,22 +88,27 @@ export function Hero({ lang = "fr" }: HeroProps) {
         </p>
         <div
           ref={ctaRef}
-          className="flex flex-col sm:flex-row items-center gap-4"
-          style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", opacity: 0, transform: "translateY(12px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           <Link
             href={`/reservation?lang=${lang}`}
-            className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-[#1A1A1A] px-8 py-3.5 text-sm tracking-[0.12em] uppercase transition-colors duration-200"
+            style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "white", color: "#1A1A1A", padding: "16px 40px", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500 }}
           >
             {isEnglish ? "Book the experience" : "Réserver l'expérience"}
+            <span aria-hidden="true">→</span>
           </Link>
           <a
             href="#nos-chevaux"
-            className="text-sm text-white/70 hover:text-white transition-colors tracking-wide underline underline-offset-4"
+            style={{ color: "rgba(255,255,255,0.55)", fontSize: "12px", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "4px", transition: "color 0.2s" }}
           >
-            {isEnglish ? "Meet our horses" : "Rencontrer nos chevaux"}
+            {isEnglish ? "Meet our horses ↓" : "Rencontrer nos chevaux ↓"}
           </a>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div style={{ position: "absolute", bottom: "32px", left: "50%", transform: "translateX(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+        <div style={{ width: "1px", height: "40px", background: "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.4))", animation: "fadeInDown 2s ease infinite" }} />
       </div>
     </section>
   );
