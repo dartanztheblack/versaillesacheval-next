@@ -61,8 +61,8 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+    <section id="nos-chevaux" style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "1000px", margin: "0 auto", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header centré */}
         <div style={{ textAlign: "center", marginBottom: "100px" }}>

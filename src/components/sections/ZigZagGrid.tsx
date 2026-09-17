@@ -65,8 +65,8 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
   const faq = isEnglish ? faqEn : faqFr;
 
   return (
-    <section style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "740px", margin: "0 auto" }}>
+    <section style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "700px", margin: "0 auto", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header centré */}
         <div style={{ textAlign: "center", marginBottom: "80px" }}>

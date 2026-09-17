@@ -11,7 +11,7 @@ export function BreathSection({ lang = "fr" }: BreathSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section style={{ position: "relative", overflow: "hidden", paddingTop: "200px", paddingBottom: "200px", paddingLeft: "24px", paddingRight: "24px" }}>
+    <section style={{ position: "relative", overflow: "hidden", paddingTop: "200px", paddingBottom: "200px" }}>
       {/* Background */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }} aria-hidden="true">
         <img

@@ -41,8 +41,8 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
+    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header */}
         <RevealOnScroll>

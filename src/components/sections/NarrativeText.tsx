@@ -10,8 +10,8 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="bg-[#FAFAF8]" style={{ paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
+    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center", paddingLeft: "32px", paddingRight: "32px" }}>
         <RevealOnScroll>
           <p style={{ color: "#2C3E2D", letterSpacing: "0.4em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "48px" }}>
             {isEnglish ? "Since 2018 · Versailles" : "Depuis 2018 · Versailles"}

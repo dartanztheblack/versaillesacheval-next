@@ -31,8 +31,8 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
+    <section style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header */}
         <RevealOnScroll>

@@ -13,8 +13,8 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header centré */}
         <div style={{ textAlign: "center", marginBottom: "100px" }}>
