@@ -79,7 +79,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
             style={{ display: "block", marginBottom: "80px" }}
           >
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", border: "1px solid rgba(44,62,45,0.1)", overflow: "hidden" }}>
-              <div style={{ aspectRatio: "4/3", overflow: "hidden", position: "relative" }}>
+              <div style={{ aspectRatio: "3/2", overflow: "hidden", position: "relative" }}>
                 <img
                   src={featured.image}
                   alt={isEnglish ? featured.titleEn : featured.title}
@@ -124,7 +124,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
         )}
 
         {/* Article grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
           {rest.map((post) => (
             <Link
               key={post.id}

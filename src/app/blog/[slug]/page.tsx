@@ -91,12 +91,20 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
           >
             Versailles à Cheval
           </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
           <Link
             href={`/blog?lang=${lang}`}
             style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#6B6B5F" }}
           >
             ← Journal
           </Link>
+          <Link
+            href={`/blog?lang=${isEnglish ? "fr" : "en"}`}
+            style={{ fontSize: "11px", letterSpacing: "0.15em", color: "#6B6B5F" }}
+          >
+            {isEnglish ? "FR" : "EN"}
+          </Link>
+          </div>
         </div>
       </nav>
 

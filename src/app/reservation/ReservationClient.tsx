@@ -116,7 +116,7 @@ export function ReservationClient({ searchParams }: Props) {
       </nav>
 
       {/* Page intro band */}
-      <div style={{ background: "#F4F2EE", borderBottom: "1px solid rgba(44,62,45,0.08)", textAlign: "center", padding: "56px 32px 48px" }}>
+      <div style={{ background: "#F4F2EE", borderBottom: "1px solid rgba(44,62,45,0.15)", textAlign: "center", padding: "64px 32px 56px" }}>
         <p style={{ color: "#2C3E2D", letterSpacing: "0.3em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "16px" }}>
           {isEnglish ? "Royal experience" : "Expérience royale"}
         </p>
@@ -157,11 +157,10 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Steps 1 & 2 */}
       {step !== 3 && (
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "64px 40px 96px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "48px" }}>
+        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "64px 32px 96px" }}>
 
-            {/* Main form area — centered */}
-            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 600px) minmax(0, 380px)", gap: "64px", alignItems: "start", margin: "0 auto", width: "100%" }}>
+            {/* Main form area — 2 columns */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
 
               {/* Left: form */}
               <div>
@@ -461,7 +460,6 @@ export function ReservationClient({ searchParams }: Props) {
               </div>
 
             </div>
-          </div>
         </div>
       )}
     </div>
