@@ -41,7 +41,7 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-[280px] px-8 bg-[#FAFAF8]">
+    <section className="px-8 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left: text block */}

@@ -61,7 +61,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="py-[280px] px-8 bg-[#F4F2EE]">
+    <section id="nos-chevaux" className="px-8 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-28 max-w-xl">

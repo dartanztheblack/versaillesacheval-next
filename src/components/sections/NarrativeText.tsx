@@ -10,7 +10,7 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-[280px] px-8 bg-[#FAFAF8]">
+    <section className="px-8 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
       <div className="max-w-lg mx-auto text-center">
         <RevealOnScroll>
           <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-14">

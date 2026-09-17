@@ -53,7 +53,7 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-[280px] px-8 bg-[#F4F2EE]">
+    <section className="px-8 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-28">
@@ -94,34 +94,39 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
           </div>
         </RevealOnScroll>
 
-        {/* Testimonials grid */}
-        <div className="grid grid-cols-1 gap-8">
-          {testimonials.map((t, i) => (
+        {/* Testimonials — 2 featured quotes */}
+        <div className="flex flex-col gap-0">
+          {testimonials.slice(0, 2).map((t, i) => (
             <RevealOnScroll key={t.author} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <blockquote className="bg-[#FAFAF8] p-10 h-full flex flex-col">
-                {/* Stars */}
-                <div className="flex gap-1.5 mb-8" aria-label={`${t.rating} étoiles sur 5`}>
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <svg key={j} width="12" height="12" viewBox="0 0 12 12" fill="#2C3E2D" aria-hidden="true">
-                      <path d="M6 0l1.35 4.15H12L8.32 6.72 9.67 10.88 6 8.3 2.33 10.88 3.68 6.72 0 4.15h4.65z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-[#2E2E2E] text-base leading-[1.85] flex-1 mb-10">
-                  "{isEnglish ? t.textEn : t.text}"
+              <blockquote
+                className="border-t border-[#2C3E2D]/15"
+                style={{ paddingTop: "56px", paddingBottom: "56px" }}
+              >
+                {/* Giant quote mark */}
+                <span
+                  className="block text-[#2C3E2D]/15 mb-6 leading-none select-none"
+                  style={{ fontFamily: "var(--font-serif)", fontSize: "6rem", fontWeight: 300, lineHeight: 1 }}
+                  aria-hidden="true"
+                >"</span>
+                <p
+                  className="text-[#1A1A1A] mb-10"
+                  style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.3rem, 2.5vw, 2rem)", fontWeight: 300, lineHeight: 1.55 }}
+                >
+                  {isEnglish ? t.textEn : t.text}
                 </p>
                 <footer className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-[#1A1A1A]">{t.author}</p>
-                    <p className="text-xs text-[#6B6B5F]">{t.origin} · {isEnglish ? t.dateEn : t.date}</p>
+                    <p className="text-sm font-medium text-[#1A1A1A] tracking-wide">{t.author}</p>
+                    <p className="text-xs text-[#6B6B5F] mt-1">{t.origin} · {isEnglish ? t.dateEn : t.date}</p>
                   </div>
-                  <span className="text-xs text-[#8B7355] tracking-wide border border-[#8B7355]/30 px-2 py-1">
+                  <span className="text-[10px] text-[#8B7355] tracking-[0.2em] uppercase">
                     {t.platform}
                   </span>
                 </footer>
               </blockquote>
             </RevealOnScroll>
           ))}
+          <div className="border-t border-[#2C3E2D]/15" />
         </div>
       </div>
     </section>

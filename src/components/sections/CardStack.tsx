@@ -13,7 +13,7 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section className="py-[280px] px-8 bg-[#FAFAF8]">
+    <section className="px-8 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
       <div className="max-w-5xl mx-auto">
         <div className="mb-28">
           <RevealOnScroll>
