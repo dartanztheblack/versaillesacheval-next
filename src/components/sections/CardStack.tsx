@@ -13,8 +13,8 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section className="px-8 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
-      <div className="max-w-5xl mx-auto">
+    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+      <div className="max-w-4xl mx-auto">
         <div className="mb-28">
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
@@ -34,7 +34,7 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-0">
           {config.cards.map((card, i) => (
             <RevealOnScroll key={card.id} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <article className="group grid grid-cols-1 md:grid-cols-2 border-t border-[#2C3E2D]/12 py-20 gap-16 items-center">
+              <article className="group grid grid-cols-1 md:grid-cols-2 border-t border-[#2C3E2D]/12 py-20 gap-12 md:gap-20 items-center">
                 {/* Image */}
                 <div
                   className="overflow-hidden aspect-[16/9]"

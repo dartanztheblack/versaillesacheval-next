@@ -10,8 +10,8 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="px-8 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
-      <div className="max-w-lg mx-auto text-center">
+    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+      <div className="max-w-xl mx-auto text-center">
         <RevealOnScroll>
           <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-14">
             {isEnglish ? "Since 2018 · Versailles" : "Depuis 2018 · Versailles"}
@@ -28,7 +28,7 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
           </h2>
         </RevealOnScroll>
         <RevealOnScroll delay={2}>
-          <p className="text-[#6B6B5F] text-lg leading-[2]">
+          <p className="text-[#6B6B5F] text-lg leading-[2.1] mx-auto" style={{ maxWidth: "42ch" }}>
             {isEnglish
               ? "There is no better vantage point to understand Versailles than from horseback. The scale of Le Nôtre's allées, the silence between the fountains, the smell of old oak and cut grass — things a tour bus will never give you."
               : "Il n'existe pas de meilleur point de vue pour comprendre Versailles que depuis le dos d'un cheval. L'échelle des allées de Le Nôtre, le silence entre les fontaines, l'odeur du vieux chêne et de l'herbe fraîche — des sensations qu'aucun bus touristique ne peut vous offrir."}

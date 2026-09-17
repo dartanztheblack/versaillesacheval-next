@@ -53,8 +53,8 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="px-8 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
-      <div className="max-w-4xl mx-auto">
+    <section className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+      <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-28">
           <RevealOnScroll>
@@ -74,7 +74,7 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
 
         {/* Stats bar */}
         <RevealOnScroll>
-          <div className="flex flex-wrap justify-center gap-16 mb-24 py-12 border-t border-b border-[#2C3E2D]/12">
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-16 mb-24 py-12 border-t border-b border-[#2C3E2D]/12">
             {[
               { value: "4.9/5", label: isEnglish ? "Average rating" : "Note moyenne" },
               { value: "200+", label: isEnglish ? "Experiences in 2025" : "Expériences en 2025" },

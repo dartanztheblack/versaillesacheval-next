@@ -27,6 +27,7 @@ body {
   color: var(--charcoal);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Scroll reveal */

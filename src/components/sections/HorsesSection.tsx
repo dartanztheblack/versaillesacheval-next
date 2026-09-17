@@ -61,8 +61,8 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="px-8 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
-      <div className="max-w-6xl mx-auto">
+    <section id="nos-chevaux" className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-28 max-w-xl">
           <RevealOnScroll>
@@ -90,7 +90,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-20">
           {horses.map((horse, i) => (
             <RevealOnScroll key={horse.name} delay={(i % 4) as 0 | 1 | 2 | 3 | 4}>
               <article className="group">
