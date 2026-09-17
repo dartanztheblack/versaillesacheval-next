@@ -161,7 +161,7 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
               return (
                 <h3
                   key={i}
-                  style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem", color: "#1A1A1A", marginTop: "40px", marginBottom: "12px", letterSpacing: "0.03em", textTransform: "uppercase", fontSize: "0.85rem" }}
+                  style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "0.85rem", color: "#1A1A1A", marginTop: "40px", marginBottom: "12px", letterSpacing: "0.08em", textTransform: "uppercase" }}
                 >
                   {line.replace("### ", "")}
                 </h3>
