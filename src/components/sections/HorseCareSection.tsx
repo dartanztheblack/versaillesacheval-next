@@ -41,27 +41,30 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
       <div className="max-w-5xl mx-auto">
+        {/* Section header — centré */}
+        <div className="text-center mb-20">
+          <RevealOnScroll>
+            <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
+              {isEnglish ? "Our philosophy" : "Notre philosophie"}
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={1}>
+            <h2
+              className="text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.02em]"
+              style={{ fontFamily: "var(--font-serif)", fontWeight: 300, maxWidth: "640px", margin: "0 auto" }}
+            >
+              {isEnglish
+                ? "We believe in horses that are happy before they are useful."
+                : "Nous croyons en des chevaux heureux avant d'être utiles."}
+            </h2>
+          </RevealOnScroll>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Left: text block */}
+          {/* Left: image + intro text */}
           <div className="lg:sticky lg:top-24">
             <RevealOnScroll>
-              <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
-                {isEnglish ? "Our philosophy" : "Notre philosophie"}
-              </p>
-            </RevealOnScroll>
-            <RevealOnScroll delay={1}>
-              <h2
-                className="text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.02em] mb-8"
-                style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-              >
-                {isEnglish
-                  ? "We believe in horses that are happy before they are useful."
-                  : "Nous croyons en des chevaux heureux avant d'être utiles."}
-              </h2>
-            </RevealOnScroll>
-            <RevealOnScroll delay={2}>
               <p className="text-[#6B6B5F] text-base leading-relaxed mb-8">
                 {isEnglish
                   ? "A horse under stress transmits fear. A horse cared for with respect transmits grace. This is why every detail of our horses' daily lives matters — for them, and for the quality of your experience."

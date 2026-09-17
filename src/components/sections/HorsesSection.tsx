@@ -61,10 +61,10 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+    <section id="nos-chevaux" className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="mb-28 max-w-xl">
+        <div className="mb-28 text-center mx-auto" style={{ maxWidth: "600px" }}>
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
               {isEnglish ? "Our horses" : "Nos chevaux"}

@@ -13,9 +13,9 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
       <div className="max-w-4xl mx-auto">
-        <div className="mb-28">
+        <div className="mb-28 text-center mx-auto" style={{ maxWidth: "600px" }}>
           <RevealOnScroll>
             <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
               {isEnglish ? config.sectionSubtitleEn : config.sectionSubtitle}
@@ -23,7 +23,7 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
             <h2
-              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em] max-w-xl"
+              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
             >
               {isEnglish ? config.sectionTitleEn : config.sectionTitle}

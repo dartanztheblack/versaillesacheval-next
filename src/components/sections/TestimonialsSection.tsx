@@ -53,7 +53,7 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "200px", paddingBottom: "200px" }}>
+    <section className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-28">
