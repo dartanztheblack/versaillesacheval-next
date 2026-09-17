@@ -29,7 +29,7 @@ const faqFr = [
   },
   {
     q: "Comment se rendre aux écuries depuis Paris ?",
-    a: "Les écuries sont accessibles en RER C (gare Versailles-Rive-Gauche, 40 min depuis Paris). Nous proposons également un service de transport privé depuis votre hôtel parisien (supplément de 200€ pour 1-3 personnes, 300€ pour 4+).",
+    a: "Les écuries sont accessibles en RER C (gare Versailles-Rive-Gauche, 40 min depuis Paris). Nous proposons également un service de transport privé depuis votre hôtel parisien.",
   },
 ];
 
@@ -56,7 +56,7 @@ const faqEn = [
   },
   {
     q: "How do I get to the stables from Paris?",
-    a: "The stables are accessible by RER C (Versailles-Rive-Gauche station, 40 minutes from Paris). We also offer private transport from your Parisian hotel (supplement of €200 for 1-3 people, €300 for 4+).",
+    a: "The stables are accessible by RER C (Versailles-Rive-Gauche station, 40 minutes from Paris). We also offer private transport from your Parisian hotel.",
   },
 ];
 
@@ -65,50 +65,43 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
   const faq = isEnglish ? faqEn : faqFr;
 
   return (
-    <section className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-24 text-center">
+    <section style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
+      <div style={{ maxWidth: "740px", margin: "0 auto" }}>
+
+        {/* Header centré */}
+        <div style={{ textAlign: "center", marginBottom: "80px" }}>
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
+            <p style={{ color: "#2C3E2D", letterSpacing: "0.3em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "24px" }}>
               {isEnglish ? "Practical information" : "Informations pratiques"}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
-            <h2
-              className="text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.02em]"
-              style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-            >
+            <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#1A1A1A", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
               {isEnglish ? "Questions & answers" : "Questions fréquentes"}
             </h2>
           </RevealOnScroll>
         </div>
 
-        <div className="space-y-0">
+        {/* FAQ */}
+        <div>
           {faq.map((item, i) => (
             <RevealOnScroll key={i} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <details className="group border-t border-[#2C3E2D]/12 py-8">
-                <summary className="flex items-start justify-between cursor-pointer list-none gap-6">
-                  <h3
-                    className="text-base md:text-lg text-[#1A1A1A] leading-snug flex-1"
-                    style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }}
-                  >
+              <details style={{ borderTop: "1px solid rgba(44,62,45,0.12)" }}>
+                <summary style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", cursor: "pointer", listStyle: "none", padding: "36px 0", gap: "24px" }}>
+                  <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "1.15rem", color: "#1A1A1A", lineHeight: 1.4, flex: 1, textAlign: "left" }}>
                     {item.q}
                   </h3>
-                  <span
-                    className="text-[#2C3E2D] text-xl mt-0.5 flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
-                    aria-hidden="true"
-                  >
-                    +
-                  </span>
+                  <span style={{ color: "#2C3E2D", fontSize: "1.25rem", flexShrink: 0, marginTop: "2px" }} aria-hidden="true">+</span>
                 </summary>
-                <p className="mt-5 text-[#6B6B5F] text-base leading-[1.85] pr-8">
+                <p style={{ color: "#6B6B5F", fontSize: "1rem", lineHeight: 1.9, paddingBottom: "36px", paddingRight: "32px" }}>
                   {item.a}
                 </p>
               </details>
             </RevealOnScroll>
           ))}
-          <div className="border-t border-[#2C3E2D]/12" />
+          <div style={{ borderTop: "1px solid rgba(44,62,45,0.12)" }} />
         </div>
+
       </div>
     </section>
   );

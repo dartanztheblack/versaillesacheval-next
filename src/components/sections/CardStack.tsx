@@ -13,65 +13,57 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section className="px-5 sm:px-10 md:px-16 bg-[#FAFAF8]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-28 text-center mx-auto" style={{ maxWidth: "600px" }}>
+    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+
+        {/* Header centré */}
+        <div style={{ textAlign: "center", marginBottom: "100px" }}>
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
+            <p style={{ color: "#2C3E2D", letterSpacing: "0.4em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "32px" }}>
               {isEnglish ? config.sectionSubtitleEn : config.sectionSubtitle}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
-            <h2
-              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em]"
-              style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-            >
+            <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2.4rem, 4.5vw, 4.5rem)", color: "#1A1A1A", lineHeight: 1.1, letterSpacing: "-0.03em", maxWidth: "580px", margin: "0 auto" }}>
               {isEnglish ? config.sectionTitleEn : config.sectionTitle}
             </h2>
           </RevealOnScroll>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-0">
-          {config.cards.map((card, i) => (
-            <RevealOnScroll key={card.id} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-              <article className="group grid grid-cols-1 md:grid-cols-2 border-t border-[#2C3E2D]/12 py-20 gap-12 md:gap-20 items-center">
-                {/* Image */}
-                <div
-                  className="overflow-hidden aspect-[16/9]"
-                  style={{ order: i % 2 === 0 ? 0 : 1 }}
-                >
-                  <img
-                    src={card.image}
-                    alt={isEnglish ? card.titleEn : card.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex flex-col justify-center" style={{ order: i % 2 === 0 ? 1 : 0 }}>
-                  <span className="text-xs text-[#8B7355] tracking-[0.2em] uppercase mb-4">
-                    {isEnglish ? "From" : "À partir de"} {card.basePrice}€ / {isEnglish ? "person" : "pers."}
-                  </span>
-                  <h3
-                    className="text-[clamp(1.5rem,3vw,2.5rem)] text-[#1A1A1A] leading-tight mb-4"
-                    style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-                  >
-                    {isEnglish ? card.titleEn : card.title}
-                  </h3>
-                  <p className="text-[#6B6B5F] text-sm leading-relaxed mb-8 max-w-sm">
-                    {isEnglish ? card.descriptionEn : card.description}
-                  </p>
-                  <Link
-                    href={`/reservation?tour=${card.id}&lang=${lang}`}
-                    className="inline-flex items-center gap-3 bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] px-7 py-3 text-xs tracking-[0.15em] uppercase transition-colors duration-200 self-start"
-                  >
-                    {isEnglish ? "Reserve this experience" : "Réserver cette expérience"}
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </article>
-            </RevealOnScroll>
-          ))}
-        </div>
+        {/* Cards */}
+        {config.cards.map((card, i) => (
+          <RevealOnScroll key={card.id} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
+            <article style={{ borderTop: "1px solid rgba(44,62,45,0.12)", paddingTop: "72px", paddingBottom: "72px", textAlign: "center" }}>
+              {/* Image */}
+              <div style={{ overflow: "hidden", aspectRatio: "16/9", marginBottom: "48px" }}>
+                <img
+                  src={card.image}
+                  alt={isEnglish ? card.titleEn : card.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              {/* Contenu centré */}
+              <span style={{ fontSize: "11px", color: "#8B7355", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                {isEnglish ? "From" : "À partir de"} {card.basePrice}€ / {isEnglish ? "person" : "pers."}
+              </span>
+              <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(1.8rem, 3vw, 2.8rem)", color: "#1A1A1A", lineHeight: 1.15, marginTop: "16px", marginBottom: "20px" }}>
+                {isEnglish ? card.titleEn : card.title}
+              </h3>
+              <p style={{ color: "#6B6B5F", fontSize: "1rem", lineHeight: 1.9, maxWidth: "50ch", margin: "0 auto 36px" }}>
+                {isEnglish ? card.descriptionEn : card.description}
+              </p>
+              <Link
+                href={`/reservation?tour=${card.id}&lang=${lang}`}
+                style={{ display: "inline-flex", alignItems: "center", gap: "12px", background: "#2C3E2D", color: "#FAFAF8", padding: "14px 32px", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}
+              >
+                {isEnglish ? "Reserve this experience" : "Réserver cette expérience"}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </article>
+          </RevealOnScroll>
+        ))}
+        <div style={{ borderTop: "1px solid rgba(44,62,45,0.12)" }} />
+
       </div>
     </section>
   );

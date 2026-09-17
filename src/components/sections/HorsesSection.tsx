@@ -61,27 +61,25 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="px-5 sm:px-10 md:px-16 bg-[#F4F2EE]" style={{ paddingTop: "160px", paddingBottom: "160px" }}>
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="mb-28 text-center mx-auto" style={{ maxWidth: "600px" }}>
+    <section id="nos-chevaux" style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px", paddingLeft: "24px", paddingRight: "24px" }}>
+      <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+
+        {/* Header centré */}
+        <div style={{ textAlign: "center", marginBottom: "100px" }}>
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
+            <p style={{ color: "#2C3E2D", letterSpacing: "0.4em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "32px" }}>
               {isEnglish ? "Our horses" : "Nos chevaux"}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
-            <h2
-              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em] mb-10"
-              style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-            >
+            <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2.4rem, 4.5vw, 4.5rem)", color: "#1A1A1A", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "32px", maxWidth: "600px", margin: "0 auto 32px" }}>
               {isEnglish
                 ? "Four horses. Four characters. One shared love."
                 : "Quatre chevaux. Quatre caractères. Un amour commun."}
             </h2>
           </RevealOnScroll>
           <RevealOnScroll delay={2}>
-            <p className="text-[#6B6B5F] text-lg leading-[2]">
+            <p style={{ color: "#6B6B5F", fontSize: "1.1rem", lineHeight: 2, maxWidth: "48ch", margin: "0 auto" }}>
               {isEnglish
                 ? "Each horse is matched to your experience level and group. You will be introduced before departure."
                 : "Chaque cheval est associé à votre niveau et à votre groupe. Vous ferez connaissance avant le départ."}
@@ -89,59 +87,36 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
           </RevealOnScroll>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-20">
+        {/* Grille 2 colonnes */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "60px 48px" }}>
           {horses.map((horse, i) => (
             <RevealOnScroll key={horse.name} delay={(i % 4) as 0 | 1 | 2 | 3 | 4}>
-              <article className="group">
-                {/* Photo or elegant placeholder */}
-                <div className="aspect-[3/4] overflow-hidden mb-7 relative">
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: horse.fallbackBg }}
+              <article style={{ textAlign: "center" }}>
+                {/* Photo */}
+                <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "28px", position: "relative", background: horse.fallbackBg }}>
+                  <img
+                    src={horse.image}
+                    alt={`${horse.name} — ${isEnglish ? horse.breedEn : horse.breed}`}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease" }}
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  />
+                  <span
+                    style={{ fontFamily: "var(--font-serif)", fontSize: "5rem", fontWeight: 300, color: horse.name === "Apollon" ? "rgba(250,250,248,0.3)" : "rgba(26,26,26,0.15)", position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+                    aria-hidden="true"
                   >
-                    <img
-                      src={horse.image}
-                      alt={`${horse.name} — ${isEnglish ? horse.breedEn : horse.breed}, ${isEnglish ? horse.colorEn : horse.color}`}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                    />
-                    {/* Fallback monogram */}
-                    <span
-                      className="text-6xl select-none"
-                      style={{
-                        fontFamily: "var(--font-serif)",
-                        color: horse.name === "Apollon" ? "rgba(250,250,248,0.35)" : "rgba(26,26,26,0.2)",
-                        fontWeight: 300,
-                      }}
-                      aria-hidden="true"
-                    >
-                      {horse.initial}
-                    </span>
-                    {/* gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
+                    {horse.initial}
+                  </span>
                 </div>
-                {/* Info */}
-                <div>
-                  <div className="flex items-baseline justify-between mb-1">
-                    <h3
-                      className="text-2xl text-[#1A1A1A]"
-                      style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }}
-                    >
-                      {horse.name}
-                    </h3>
-                    <span className="text-xs text-[#8B7355] tracking-wide">
-                      {isEnglish ? horse.colorEn : horse.color}
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-[#6B6B5F] uppercase tracking-[0.2em] mb-4">
-                    {isEnglish ? horse.breedEn : horse.breed}
-                  </p>
-                  <p className="text-sm text-[#6B6B5F] leading-[1.9]">
-                    {isEnglish ? horse.characterEn : horse.character}
-                  </p>
-                </div>
+                {/* Infos centrées */}
+                <p style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "1.5rem", color: "#1A1A1A", marginBottom: "8px" }}>
+                  {horse.name}
+                </p>
+                <p style={{ fontSize: "10px", color: "#8B7355", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "16px" }}>
+                  {isEnglish ? horse.breedEn : horse.breed} · {isEnglish ? horse.colorEn : horse.color}
+                </p>
+                <p style={{ fontSize: "0.9rem", color: "#6B6B5F", lineHeight: 1.9, maxWidth: "30ch", margin: "0 auto" }}>
+                  {isEnglish ? horse.characterEn : horse.character}
+                </p>
               </article>
             </RevealOnScroll>
           ))}
