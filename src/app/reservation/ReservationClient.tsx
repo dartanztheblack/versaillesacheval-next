@@ -87,340 +87,383 @@ export function ReservationClient({ searchParams }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
-      {/* Header */}
-      <header className="border-b border-[#2C3E2D]/10">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div style={{ minHeight: "100vh", background: "#FAFAF8" }}>
+
+      {/* Navbar */}
+      <nav style={{ borderBottom: "1px solid rgba(44,62,45,0.1)", background: "#FAFAF8" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link
             href={`/?lang=${lang}`}
-            className="text-xl text-[#1A1A1A] hover:text-[#2C3E2D] transition-colors"
-            style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.1rem", color: "#1A1A1A", letterSpacing: "0.03em" }}
           >
             Versailles à Cheval
           </Link>
-          <Link
-            href={`/reservation?tour=${tour?.id}&lang=${isEnglish ? "fr" : "en"}`}
-            className="text-sm text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide"
-          >
-            {isEnglish ? "FR" : "EN"}
-          </Link>
-        </div>
-      </header>
-
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        {/* Step 3: Confirmation */}
-        {step === 3 && (
-          <div className="max-w-xl mx-auto text-center py-24">
-            <div className="w-14 h-14 border border-[#2C3E2D] rounded-full flex items-center justify-center mx-auto mb-10">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2C3E2D" strokeWidth="1.5" strokeLinecap="round">
-                <polyline points="4 10 8 14 16 6" />
-              </svg>
-            </div>
-            <h1
-              className="text-4xl text-[#1A1A1A] mb-4"
-              style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-            >
-              {isEnglish ? "Booking confirmed." : "Réservation confirmée."}
-            </h1>
-            <p className="text-[#6B6B5F] mb-10 leading-relaxed">
-              {isEnglish
-                ? "A confirmation email will be sent to you shortly. We look forward to welcoming you."
-                : "Un email de confirmation vous sera envoyé prochainement. Nous avons hâte de vous accueillir."}
-            </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             <Link
-              href={`/?lang=${lang}`}
-              className="inline-flex items-center gap-2 text-sm text-[#2C3E2D] tracking-wide underline underline-offset-4 hover:text-[#1A1A1A] transition-colors"
+              href={`/blog?lang=${lang}`}
+              style={{ color: "#6B6B5F", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}
             >
-              {isEnglish ? "← Back to home" : "← Retour à l'accueil"}
+              Journal
+            </Link>
+            <Link
+              href={`/reservation?tour=${tour?.id}&lang=${isEnglish ? "fr" : "en"}`}
+              style={{ color: "#6B6B5F", fontSize: "11px", letterSpacing: "0.15em" }}
+            >
+              {isEnglish ? "FR" : "EN"}
             </Link>
           </div>
-        )}
+        </div>
+      </nav>
 
-        {/* Steps 1 & 2 */}
-        {step !== 3 && (
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-            {/* Left: form */}
-            <div className="lg:col-span-3">
-              {/* Step indicator */}
-              <div className="flex items-center gap-3 mb-12">
-                {[1, 2].map((s) => (
-                  <div key={s} className="flex items-center gap-3">
-                    <div
-                      className={cn(
-                        "w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors",
-                        step >= s
-                          ? "bg-[#2C3E2D] border-[#2C3E2D] text-[#FAFAF8]"
-                          : "border-[#2C3E2D]/30 text-[#6B6B5F]"
-                      )}
-                    >
-                      {step > s ? (
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                          <polyline points="2 6 5 9 10 3" />
-                        </svg>
-                      ) : (
-                        s
-                      )}
-                    </div>
-                    {s === 1 && <div className="h-px w-10 bg-[#2C3E2D]/20" />}
-                  </div>
-                ))}
-                <span className="text-xs text-[#6B6B5F] ml-1">
-                  {step === 1
-                    ? (isEnglish ? "Date & travelers" : "Date & participants")
-                    : (isEnglish ? "Options" : "Options")}
-                </span>
-              </div>
+      {/* Page intro band */}
+      <div style={{ background: "#F4F2EE", borderBottom: "1px solid rgba(44,62,45,0.08)", textAlign: "center", padding: "56px 32px 48px" }}>
+        <p style={{ color: "#2C3E2D", letterSpacing: "0.3em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "16px" }}>
+          {isEnglish ? "Royal experience" : "Expérience royale"}
+        </p>
+        <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#1A1A1A", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "12px" }}>
+          {isEnglish ? "Book your experience" : "Réservez votre expérience"}
+        </h1>
+        <p style={{ color: "#6B6B5F", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto" }}>
+          {isEnglish
+            ? "Two hours through the royal gardens. Secure booking, free cancellation up to 48 hours before."
+            : "Deux heures dans les jardins royaux. Réservation sécurisée, annulation gratuite jusqu'à 48h avant."}
+        </p>
+      </div>
 
-              {canceled && (
-                <div className="mb-8 px-5 py-4 border border-[#8B7355]/30 bg-[#8B7355]/5 text-sm text-[#8B7355]">
-                  {isEnglish
-                    ? "Payment was canceled. You can try again below."
-                    : "Le paiement a été annulé. Vous pouvez réessayer ci-dessous."}
-                </div>
-              )}
+      {/* Confirmation */}
+      {step === 3 && (
+        <div style={{ maxWidth: "560px", margin: "0 auto", textAlign: "center", padding: "96px 32px" }}>
+          <div style={{ width: "56px", height: "56px", border: "1px solid #2C3E2D", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 40px" }}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2C3E2D" strokeWidth="1.5" strokeLinecap="round">
+              <polyline points="4 10 8 14 16 6" />
+            </svg>
+          </div>
+          <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "#1A1A1A", marginBottom: "16px" }}>
+            {isEnglish ? "Booking confirmed." : "Réservation confirmée."}
+          </h2>
+          <p style={{ color: "#6B6B5F", lineHeight: 1.8, marginBottom: "48px", fontSize: "1rem" }}>
+            {isEnglish
+              ? "A confirmation email will be sent to you shortly. We look forward to welcoming you."
+              : "Un email de confirmation vous sera envoyé prochainement. Nous avons hâte de vous accueillir."}
+          </p>
+          <Link
+            href={`/?lang=${lang}`}
+            style={{ color: "#2C3E2D", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase" }}
+          >
+            ← {isEnglish ? "Back to home" : "Retour à l'accueil"}
+          </Link>
+        </div>
+      )}
 
-              {/* STEP 1 */}
-              {step === 1 && (
-                <div>
-                  <h1
-                    className="text-3xl md:text-4xl text-[#1A1A1A] mb-2"
-                    style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-                  >
-                    {isEnglish ? "Choose your date" : "Choisissez votre date"}
-                  </h1>
-                  <p className="text-[#6B6B5F] text-sm mb-10">
-                    {isEnglish ? tour?.descriptionEn : tour?.description}
-                  </p>
+      {/* Steps 1 & 2 */}
+      {step !== 3 && (
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "64px 40px 96px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "48px" }}>
 
-                  <div className="space-y-8">
-                    {/* Date picker */}
-                    <div>
-                      <label className="block text-xs tracking-[0.15em] uppercase text-[#6B6B5F] mb-3">
-                        {isEnglish ? "Date" : "Date"}
-                      </label>
-                      <Popover>
-                        <PopoverTrigger
-                          className={cn(
-                            "w-full flex items-center justify-between px-4 py-3 border text-sm transition-colors text-left",
-                            date
-                              ? "border-[#2C3E2D] text-[#1A1A1A]"
-                              : "border-[#2C3E2D]/25 text-[#6B6B5F] hover:border-[#2C3E2D]/50"
-                          )}
-                        >
-                          {date
-                            ? format(date, "EEEE d MMMM yyyy", { locale: dateLocale })
-                            : (isEnglish ? "Select a date" : "Sélectionnez une date")}
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.5">
-                            <rect x="1" y="2" width="14" height="13" rx="1" />
-                            <line x1="1" y1="6" x2="15" y2="6" />
-                            <line x1="5" y1="1" x2="5" y2="4" />
-                            <line x1="11" y1="1" x2="11" y2="4" />
+            {/* Main form area — centered */}
+            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 600px) minmax(0, 380px)", gap: "64px", alignItems: "start", margin: "0 auto", width: "100%" }}>
+
+              {/* Left: form */}
+              <div>
+                {/* Step indicator */}
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "48px" }}>
+                  {[1, 2].map((s) => (
+                    <div key={s} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                      <div
+                        style={{
+                          width: "28px",
+                          height: "28px",
+                          borderRadius: "50%",
+                          border: step >= s ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.25)",
+                          background: step >= s ? "#2C3E2D" : "transparent",
+                          color: step >= s ? "#FAFAF8" : "#6B6B5F",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "12px",
+                          fontWeight: 500,
+                          flexShrink: 0,
+                        }}
+                      >
+                        {step > s ? (
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                            <polyline points="2 6 5 9 10 3" />
                           </svg>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            disabled={(d) => d < new Date()}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                    </div>
-
-                    {/* Participants */}
-                    <div>
-                      <label className="block text-xs tracking-[0.15em] uppercase text-[#6B6B5F] mb-3">
-                        {isEnglish ? "Travelers" : "Participants"}
-                      </label>
-                      <div className="flex items-center gap-5">
-                        <button
-                          onClick={() => setParticipants(Math.max(1, participants - 1))}
-                          disabled={participants <= 1}
-                          className="w-10 h-10 border border-[#2C3E2D]/25 hover:border-[#2C3E2D] text-[#1A1A1A] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                        >
-                          −
-                        </button>
-                        <span className="text-2xl text-[#1A1A1A] w-8 text-center" style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}>
-                          {participants}
-                        </span>
-                        <button
-                          onClick={() => setParticipants(Math.min(10, participants + 1))}
-                          disabled={participants >= 10}
-                          className="w-10 h-10 border border-[#2C3E2D]/25 hover:border-[#2C3E2D] text-[#1A1A1A] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                        >
-                          +
-                        </button>
-                        <span className="text-sm text-[#6B6B5F]">
-                          × {tour?.basePrice || 490}€ = {baseAmount}€
-                        </span>
+                        ) : s}
                       </div>
+                      {s === 1 && <div style={{ height: "1px", width: "40px", background: "rgba(44,62,45,0.2)" }} />}
                     </div>
-
-                    <button
-                      onClick={() => setStep(2)}
-                      disabled={!date}
-                      className="w-full bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] py-4 text-sm tracking-[0.15em] uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      {isEnglish ? "Continue" : "Continuer"} →
-                    </button>
-                  </div>
+                  ))}
+                  <span style={{ fontSize: "11px", color: "#6B6B5F", letterSpacing: "0.1em", textTransform: "uppercase", marginLeft: "4px" }}>
+                    {step === 1
+                      ? (isEnglish ? "Date & travelers" : "Date & participants")
+                      : (isEnglish ? "Options" : "Options")}
+                  </span>
                 </div>
-              )}
 
-              {/* STEP 2 */}
-              {step === 2 && (
-                <div>
-                  <button
-                    onClick={() => setStep(1)}
-                    className="flex items-center gap-2 text-xs text-[#6B6B5F] hover:text-[#1A1A1A] transition-colors tracking-wide mb-10"
-                  >
-                    ← {isEnglish ? "Back" : "Retour"}
-                  </button>
-
-                  <h2
-                    className="text-3xl md:text-4xl text-[#1A1A1A] mb-2"
-                    style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-                  >
-                    {isEnglish ? "Complete your experience" : "Complétez votre expérience"}
-                  </h2>
-                  <p className="text-[#6B6B5F] text-sm mb-10">
+                {canceled && (
+                  <div style={{ marginBottom: "32px", padding: "16px 20px", border: "1px solid rgba(139,115,85,0.3)", background: "rgba(139,115,85,0.05)", fontSize: "14px", color: "#8B7355" }}>
                     {isEnglish
-                      ? "Each option can be added or removed — nothing is mandatory."
-                      : "Chaque option peut être ajoutée ou retirée — rien n'est obligatoire."}
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    {addOnOptions.map((addOn) => {
-                      const active = selectedAddOns.includes(addOn.id);
-                      return (
-                        <button
-                          key={addOn.id}
-                          type="button"
-                          onClick={() => toggleAddOn(addOn.id)}
-                          className={cn(
-                            "w-full text-left px-5 py-5 border transition-colors",
-                            active
-                              ? "border-[#2C3E2D] bg-[#2C3E2D]/4"
-                              : "border-[#2C3E2D]/20 hover:border-[#2C3E2D]/50"
-                          )}
-                        >
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex items-start gap-4 flex-1">
-                              <div
-                                className={cn(
-                                  "mt-0.5 w-4 h-4 border flex-shrink-0 flex items-center justify-center transition-colors",
-                                  active ? "bg-[#2C3E2D] border-[#2C3E2D]" : "border-[#2C3E2D]/30"
-                                )}
-                              >
-                                {active && (
-                                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#FAFAF8" strokeWidth="1.5" strokeLinecap="round">
-                                    <polyline points="2 5 4 7 8 3" />
-                                  </svg>
-                                )}
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-[#1A1A1A] mb-1">
-                                  {isEnglish ? addOn.nameEn : addOn.name}
-                                </p>
-                                <p className="text-xs text-[#6B6B5F] leading-relaxed">
-                                  {isEnglish ? addOn.descriptionEn : addOn.description}
-                                </p>
-                              </div>
-                            </div>
-                            <span className="text-sm text-[#2C3E2D] font-medium whitespace-nowrap flex-shrink-0">
-                              {getAddOnPriceLabel(addOn.id, participants, isEnglish)}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
+                      ? "Payment was canceled. You can try again below."
+                      : "Le paiement a été annulé. Vous pouvez réessayer ci-dessous."}
                   </div>
-
-                  {error && (
-                    <div className="mb-6 px-5 py-4 border border-red-200 bg-red-50 text-sm text-red-600">
-                      {error}
-                    </div>
-                  )}
-
-                  <button
-                    onClick={handleProceedToPayment}
-                    disabled={isLoading}
-                    className="w-full bg-[#2C3E2D] hover:bg-[#3D5C3E] text-[#FAFAF8] py-4 text-sm tracking-[0.15em] uppercase transition-colors disabled:opacity-50"
-                  >
-                    {isLoading
-                      ? (isEnglish ? "Loading…" : "Chargement…")
-                      : `${isEnglish ? "Pay" : "Payer"} ${totalAmount}€ →`}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Right: Summary */}
-            <div className="lg:col-span-2 lg:sticky lg:top-8">
-              <div className="border border-[#2C3E2D]/12 p-7">
-                <p className="text-xs tracking-[0.2em] uppercase text-[#6B6B5F] mb-5">
-                  {isEnglish ? "Your experience" : "Votre expérience"}
-                </p>
-
-                {/* Tour image */}
-                <div className="aspect-[16/10] overflow-hidden mb-6">
-                  <img
-                    src={tour?.image}
-                    alt={isEnglish ? tour?.titleEn : tour?.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <h3
-                  className="text-xl text-[#1A1A1A] mb-1"
-                  style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-                >
-                  {isEnglish ? tour?.titleEn : tour?.title}
-                </h3>
-                {date && (
-                  <p className="text-sm text-[#6B6B5F] mb-6">
-                    {format(date, "d MMMM yyyy", { locale: dateLocale })} · {participants}{" "}
-                    {participants === 1 ? (isEnglish ? "person" : "personne") : (isEnglish ? "people" : "personnes")}
-                  </p>
                 )}
 
-                <div className="space-y-2 border-t border-[#2C3E2D]/10 pt-5 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-[#6B6B5F]">{(tour?.basePrice || 490)}€ × {participants}</span>
-                    <span className="text-[#1A1A1A]">{baseAmount}€</span>
-                  </div>
-                  {selectedAddOns.map((id) => {
-                    const a = addOnOptions.find((x) => x.id === id);
-                    if (!a) return null;
-                    return (
-                      <div key={id} className="flex justify-between">
-                        <span className="text-[#6B6B5F]">{isEnglish ? a.nameEn : a.name}</span>
-                        <span className="text-[#1A1A1A]">+{getAddOnPrice(id, participants)}€</span>
+                {/* STEP 1 */}
+                {step === 1 && (
+                  <div>
+                    <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#1A1A1A", marginBottom: "8px", letterSpacing: "-0.01em" }}>
+                      {isEnglish ? "Choose your date" : "Choisissez votre date"}
+                    </h2>
+                    <p style={{ color: "#6B6B5F", fontSize: "0.9rem", marginBottom: "48px", lineHeight: 1.7 }}>
+                      {isEnglish ? tour?.descriptionEn : tour?.description}
+                    </p>
+
+                    <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
+                      {/* Date picker */}
+                      <div>
+                        <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                          {isEnglish ? "Date" : "Date"}
+                        </label>
+                        <Popover>
+                          <PopoverTrigger
+                            className={cn(
+                              "w-full flex items-center justify-between px-4 py-4 border text-sm transition-colors text-left",
+                              date
+                                ? "border-[#2C3E2D] text-[#1A1A1A]"
+                                : "border-[#2C3E2D]/25 text-[#6B6B5F] hover:border-[#2C3E2D]/50"
+                            )}
+                          >
+                            {date
+                              ? format(date, "EEEE d MMMM yyyy", { locale: dateLocale })
+                              : (isEnglish ? "Select a date" : "Sélectionnez une date")}
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4">
+                              <rect x="1" y="2" width="14" height="13" rx="1" />
+                              <line x1="1" y1="6" x2="15" y2="6" />
+                              <line x1="5" y1="1" x2="5" y2="4" />
+                              <line x1="11" y1="1" x2="11" y2="4" />
+                            </svg>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={date}
+                              onSelect={setDate}
+                              disabled={(d) => d < new Date()}
+                            />
+                          </PopoverContent>
+                        </Popover>
                       </div>
-                    );
-                  })}
-                  <div className="flex justify-between pt-4 border-t border-[#2C3E2D]/10">
-                    <span className="font-medium text-[#1A1A1A]">Total</span>
-                    <span
-                      className="text-xl text-[#1A1A1A]"
-                      style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
-                    >
-                      {totalAmount}€
-                    </span>
+
+                      {/* Participants */}
+                      <div>
+                        <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                          {isEnglish ? "Travelers" : "Participants"}
+                        </label>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0" }}>
+                          <button
+                            onClick={() => setParticipants(Math.max(1, participants - 1))}
+                            disabled={participants <= 1}
+                            style={{ width: "48px", height: "48px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", color: "#1A1A1A", fontSize: "1.2rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", opacity: participants <= 1 ? 0.3 : 1 }}
+                          >
+                            −
+                          </button>
+                          <div style={{ width: "64px", height: "48px", border: "1px solid rgba(44,62,45,0.25)", borderLeft: "none", borderRight: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <span style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.4rem", color: "#1A1A1A" }}>
+                              {participants}
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => setParticipants(Math.min(10, participants + 1))}
+                            disabled={participants >= 10}
+                            style={{ width: "48px", height: "48px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", color: "#1A1A1A", fontSize: "1.2rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", opacity: participants >= 10 ? 0.3 : 1 }}
+                          >
+                            +
+                          </button>
+                          <span style={{ marginLeft: "20px", fontSize: "14px", color: "#6B6B5F" }}>
+                            × {tour?.basePrice || 490}€ = <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>{baseAmount}€</strong>
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setStep(2)}
+                        disabled={!date}
+                        style={{ width: "100%", background: date ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "18px 32px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: date ? "pointer" : "not-allowed" }}
+                      >
+                        {isEnglish ? "Continue" : "Continuer"} →
+                      </button>
+                    </div>
                   </div>
+                )}
+
+                {/* STEP 2 */}
+                {step === 2 && (
+                  <div>
+                    <button
+                      onClick={() => setStep(1)}
+                      style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "11px", color: "#6B6B5F", letterSpacing: "0.12em", textTransform: "uppercase", background: "none", border: "none", cursor: "pointer", marginBottom: "40px" }}
+                    >
+                      ← {isEnglish ? "Back" : "Retour"}
+                    </button>
+
+                    <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#1A1A1A", marginBottom: "8px", letterSpacing: "-0.01em" }}>
+                      {isEnglish ? "Complete your experience" : "Complétez votre expérience"}
+                    </h2>
+                    <p style={{ color: "#6B6B5F", fontSize: "0.9rem", marginBottom: "40px", lineHeight: 1.7 }}>
+                      {isEnglish
+                        ? "Each option can be added or removed — nothing is mandatory."
+                        : "Chaque option peut être ajoutée ou retirée — rien n'est obligatoire."}
+                    </p>
+
+                    <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+                      {addOnOptions.map((addOn) => {
+                        const active = selectedAddOns.includes(addOn.id);
+                        return (
+                          <button
+                            key={addOn.id}
+                            type="button"
+                            onClick={() => toggleAddOn(addOn.id)}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "20px 24px",
+                              border: active ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.2)",
+                              background: active ? "rgba(44,62,45,0.03)" : "transparent",
+                              cursor: "pointer",
+                            }}
+                          >
+                            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "16px" }}>
+                              <div style={{ display: "flex", alignItems: "flex-start", gap: "16px", flex: 1 }}>
+                                <div
+                                  style={{
+                                    marginTop: "2px",
+                                    width: "16px",
+                                    height: "16px",
+                                    border: active ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.3)",
+                                    background: active ? "#2C3E2D" : "transparent",
+                                    flexShrink: 0,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {active && (
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#FAFAF8" strokeWidth="1.5" strokeLinecap="round">
+                                      <polyline points="2 5 4 7 8 3" />
+                                    </svg>
+                                  )}
+                                </div>
+                                <div>
+                                  <p style={{ fontSize: "14px", fontWeight: 500, color: "#1A1A1A", marginBottom: "4px" }}>
+                                    {isEnglish ? addOn.nameEn : addOn.name}
+                                  </p>
+                                  <p style={{ fontSize: "13px", color: "#6B6B5F", lineHeight: 1.7 }}>
+                                    {isEnglish ? addOn.descriptionEn : addOn.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <span style={{ fontSize: "13px", color: "#2C3E2D", fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0 }}>
+                                {getAddOnPriceLabel(addOn.id, participants, isEnglish)}
+                              </span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {error && (
+                      <div style={{ marginBottom: "24px", padding: "16px 20px", border: "1px solid #fecaca", background: "#fef2f2", fontSize: "14px", color: "#dc2626" }}>
+                        {error}
+                      </div>
+                    )}
+
+                    <button
+                      onClick={handleProceedToPayment}
+                      disabled={isLoading}
+                      style={{ width: "100%", background: "#2C3E2D", color: "#FAFAF8", padding: "18px 32px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: isLoading ? "not-allowed" : "pointer", opacity: isLoading ? 0.6 : 1 }}
+                    >
+                      {isLoading
+                        ? (isEnglish ? "Loading…" : "Chargement…")
+                        : `${isEnglish ? "Pay" : "Payer"} ${totalAmount}€ →`}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Right: Summary */}
+              <div style={{ position: "sticky", top: "24px" }}>
+                <div style={{ border: "1px solid rgba(44,62,45,0.12)", background: "#fff", padding: "32px" }}>
+                  <p style={{ fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "24px" }}>
+                    {isEnglish ? "Your experience" : "Votre expérience"}
+                  </p>
+
+                  {/* Tour image */}
+                  <div style={{ aspectRatio: "16/9", overflow: "hidden", marginBottom: "24px" }}>
+                    <img
+                      src={tour?.image}
+                      alt={isEnglish ? tour?.titleEn : tour?.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
+
+                  <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.25rem", color: "#1A1A1A", marginBottom: "4px", lineHeight: 1.3 }}>
+                    {isEnglish ? tour?.titleEn : tour?.title}
+                  </h3>
+                  {date && (
+                    <p style={{ fontSize: "13px", color: "#6B6B5F", marginBottom: "24px", lineHeight: 1.6 }}>
+                      {format(date, "d MMMM yyyy", { locale: dateLocale })} · {participants}{" "}
+                      {participants === 1 ? (isEnglish ? "person" : "personne") : (isEnglish ? "people" : "personnes")}
+                    </p>
+                  )}
+
+                  <div style={{ borderTop: "1px solid rgba(44,62,45,0.1)", paddingTop: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                      <span style={{ color: "#6B6B5F" }}>{(tour?.basePrice || 490)}€ × {participants}</span>
+                      <span style={{ color: "#1A1A1A" }}>{baseAmount}€</span>
+                    </div>
+                    {selectedAddOns.map((id) => {
+                      const a = addOnOptions.find((x) => x.id === id);
+                      if (!a) return null;
+                      return (
+                        <div key={id} style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                          <span style={{ color: "#6B6B5F" }}>{isEnglish ? a.nameEn : a.name}</span>
+                          <span style={{ color: "#1A1A1A" }}>+{getAddOnPrice(id, participants)}€</span>
+                        </div>
+                      );
+                    })}
+                    <div style={{ display: "flex", justifyContent: "space-between", paddingTop: "16px", borderTop: "1px solid rgba(44,62,45,0.1)", marginTop: "4px" }}>
+                      <span style={{ fontSize: "13px", fontWeight: 500, color: "#1A1A1A" }}>Total</span>
+                      <span style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.4rem", color: "#1A1A1A" }}>
+                        {totalAmount}€
+                      </span>
+                    </div>
+                  </div>
+
+                  <p style={{ fontSize: "12px", color: "#6B6B5F", marginTop: "20px", lineHeight: 1.8, borderTop: "1px solid rgba(44,62,45,0.08)", paddingTop: "16px" }}>
+                    {isEnglish
+                      ? "Secure payment via Stripe. Free cancellation up to 48h before the experience."
+                      : "Paiement sécurisé via Stripe. Annulation gratuite jusqu'à 48h avant l'expérience."}
+                  </p>
                 </div>
 
-                <p className="text-xs text-[#6B6B5F] mt-5 leading-relaxed">
-                  {isEnglish
-                    ? "Secure payment via Stripe. Free cancellation up to 48h before the experience."
-                    : "Paiement sécurisé via Stripe. Annulation gratuite jusqu'à 48h avant l'expérience."}
-                </p>
+                {/* Trust badges */}
+                <div style={{ marginTop: "16px", display: "flex", gap: "8px" }}>
+                  {[
+                    isEnglish ? "🔒 Secure" : "🔒 Sécurisé",
+                    isEnglish ? "✓ Free cancellation" : "✓ Annulation gratuite",
+                  ].map((badge) => (
+                    <span key={badge} style={{ flex: 1, textAlign: "center", fontSize: "11px", color: "#6B6B5F", background: "rgba(44,62,45,0.04)", border: "1px solid rgba(44,62,45,0.1)", padding: "8px 4px", letterSpacing: "0.04em" }}>
+                      {badge}
+                    </span>
+                  ))}
+                </div>
               </div>
+
             </div>
           </div>
-        )}
-      </main>
+        </div>
+      )}
     </div>
   );
 }
