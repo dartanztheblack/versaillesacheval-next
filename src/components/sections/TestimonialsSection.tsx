@@ -53,8 +53,8 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-[180px] px-8 bg-[#F4F2EE]">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-[280px] px-8 bg-[#F4F2EE]">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-28">
           <RevealOnScroll>
@@ -95,7 +95,7 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
         </RevealOnScroll>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {testimonials.map((t, i) => (
             <RevealOnScroll key={t.author} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
               <blockquote className="bg-[#FAFAF8] p-10 h-full flex flex-col">

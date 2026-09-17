@@ -61,7 +61,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="py-[180px] px-8 bg-[#F4F2EE]">
+    <section id="nos-chevaux" className="py-[280px] px-8 bg-[#F4F2EE]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-28 max-w-xl">
@@ -90,7 +90,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
           {horses.map((horse, i) => (
             <RevealOnScroll key={horse.name} delay={(i % 4) as 0 | 1 | 2 | 3 | 4}>
               <article className="group">

@@ -65,7 +65,7 @@ export function ZigZagGrid({ lang = "fr" }: ZigZagGridProps) {
   const faq = isEnglish ? faqEn : faqFr;
 
   return (
-    <section className="py-[180px] px-8 bg-[#F4F2EE]">
+    <section className="py-[280px] px-8 bg-[#F4F2EE]">
       <div className="max-w-3xl mx-auto">
         <div className="mb-24 text-center">
           <RevealOnScroll>
