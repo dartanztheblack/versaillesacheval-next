@@ -157,13 +157,13 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Steps 1 & 2 */}
       {step !== 3 && (
-        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "64px 32px 96px" }}>
+        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "96px 32px 120px" }}>
 
             {/* Main form area — 2 columns */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
 
-              {/* Left: form */}
-              <div>
+              {/* Left: form — centré dans sa colonne */}
+              <div style={{ maxWidth: "480px", margin: "0 auto", width: "100%" }}>
                 {/* Step indicator */}
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "48px" }}>
                   {[1, 2].map((s) => (
@@ -285,13 +285,15 @@ export function ReservationClient({ searchParams }: Props) {
                         </div>
                       </div>
 
-                      <button
-                        onClick={() => setStep(2)}
-                        disabled={!date}
-                        style={{ width: "100%", background: date ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "18px 32px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: date ? "pointer" : "not-allowed" }}
-                      >
-                        {isEnglish ? "Continue" : "Continuer"} →
-                      </button>
+                      <div style={{ textAlign: "center", marginTop: "8px" }}>
+                        <button
+                          onClick={() => setStep(2)}
+                          disabled={!date}
+                          style={{ display: "inline-block", background: date ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: date ? "pointer" : "not-allowed" }}
+                        >
+                          {isEnglish ? "Continue" : "Continuer"} →
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -377,15 +379,17 @@ export function ReservationClient({ searchParams }: Props) {
                       </div>
                     )}
 
-                    <button
-                      onClick={handleProceedToPayment}
-                      disabled={isLoading}
-                      style={{ width: "100%", background: "#2C3E2D", color: "#FAFAF8", padding: "18px 32px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: isLoading ? "not-allowed" : "pointer", opacity: isLoading ? 0.6 : 1 }}
-                    >
-                      {isLoading
-                        ? (isEnglish ? "Loading…" : "Chargement…")
-                        : `${isEnglish ? "Pay" : "Payer"} ${totalAmount}€ →`}
-                    </button>
+                    <div style={{ textAlign: "center", marginTop: "8px" }}>
+                      <button
+                        onClick={handleProceedToPayment}
+                        disabled={isLoading}
+                        style={{ display: "inline-block", background: "#2C3E2D", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: isLoading ? "not-allowed" : "pointer", opacity: isLoading ? 0.6 : 1 }}
+                      >
+                        {isLoading
+                          ? (isEnglish ? "Loading…" : "Chargement…")
+                          : `${isEnglish ? "Pay" : "Payer"} ${totalAmount}€ →`}
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
