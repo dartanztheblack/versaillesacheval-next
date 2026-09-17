@@ -61,18 +61,18 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section id="nos-chevaux" className="py-48 px-6 bg-[#F4F2EE]">
+    <section id="nos-chevaux" className="py-[180px] px-8 bg-[#F4F2EE]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-24 max-w-2xl">
+        <div className="mb-28 max-w-xl">
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.35em] text-xs font-medium uppercase mb-8">
+            <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-10">
               {isEnglish ? "Our horses" : "Nos chevaux"}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
             <h2
-              className="text-[clamp(2.2rem,4.5vw,4.2rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.025em] mb-8"
+              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em] mb-10"
               style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
             >
               {isEnglish
@@ -81,7 +81,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
             </h2>
           </RevealOnScroll>
           <RevealOnScroll delay={2}>
-            <p className="text-[#6B6B5F] text-lg leading-[1.8]">
+            <p className="text-[#6B6B5F] text-lg leading-[2]">
               {isEnglish
                 ? "Each horse is matched to your experience level and group. You will be introduced before departure."
                 : "Chaque cheval est associé à votre niveau et à votre groupe. Vous ferez connaissance avant le départ."}
@@ -90,7 +90,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {horses.map((horse, i) => (
             <RevealOnScroll key={horse.name} delay={(i % 4) as 0 | 1 | 2 | 3 | 4}>
               <article className="group">
@@ -126,7 +126,7 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
                 <div>
                   <div className="flex items-baseline justify-between mb-1">
                     <h3
-                      className="text-xl text-[#1A1A1A]"
+                      className="text-2xl text-[#1A1A1A]"
                       style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }}
                     >
                       {horse.name}
@@ -135,10 +135,10 @@ export function HorsesSection({ lang = "fr" }: HorsesSectionProps) {
                       {isEnglish ? horse.colorEn : horse.color}
                     </span>
                   </div>
-                  <p className="text-xs text-[#6B6B5F] uppercase tracking-[0.15em] mb-3">
+                  <p className="text-[10px] text-[#6B6B5F] uppercase tracking-[0.2em] mb-4">
                     {isEnglish ? horse.breedEn : horse.breed}
                   </p>
-                  <p className="text-sm text-[#6B6B5F] leading-relaxed">
+                  <p className="text-sm text-[#6B6B5F] leading-[1.9]">
                     {isEnglish ? horse.characterEn : horse.character}
                   </p>
                 </div>

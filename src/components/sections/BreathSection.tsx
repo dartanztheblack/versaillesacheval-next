@@ -11,7 +11,7 @@ export function BreathSection({ lang = "fr" }: BreathSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="relative py-56 px-6 overflow-hidden">
+    <section className="relative py-[200px] px-8 overflow-hidden">
       {/* Background image with white fade */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <img

@@ -53,18 +53,18 @@ export function TestimonialsSection({ lang = "fr" }: TestimonialsSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section className="py-48 px-6 bg-[#F4F2EE]">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-[180px] px-8 bg-[#F4F2EE]">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-28">
           <RevealOnScroll>
-            <p className="text-[#2C3E2D] tracking-[0.3em] text-xs font-medium uppercase mb-6">
+            <p className="text-[#2C3E2D] tracking-[0.4em] text-[10px] font-medium uppercase mb-12">
               {isEnglish ? "Those who have lived it" : "Ceux qui l'ont vécu"}
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1}>
             <h2
-              className="text-[clamp(2rem,4.5vw,4rem)] text-[#1A1A1A] leading-[1.05] tracking-[-0.02em]"
+              className="text-[clamp(2.4rem,4.5vw,4.5rem)] text-[#1A1A1A] leading-[1.1] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-serif)", fontWeight: 300 }}
             >
               {isEnglish ? "They came as tourists.\nThey left as something else." : "Ils sont arrivés comme touristes.\nIls sont repartis différemment."}
