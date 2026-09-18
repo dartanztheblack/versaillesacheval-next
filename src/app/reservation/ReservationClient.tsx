@@ -46,6 +46,14 @@ export function ReservationClient({ searchParams }: Props) {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [participantDetails, setParticipantDetails] = useState<Array<{ name: string; weight: string; height: string; level: string }>>([]);
+
+  const riderLevels = isEnglish
+    ? ["Beginner", "Intermediate", "Experienced"]
+    : ["Débutant", "Intermédiaire", "Expérimenté"];
 
   const baseAmount = (tour?.basePrice || 490) * participants;
   const addOnsAmount = selectedAddOns.reduce((sum, id) => sum + getAddOnPrice(id, participants), 0);
@@ -53,6 +61,19 @@ export function ReservationClient({ searchParams }: Props) {
 
   const toggleAddOn = (id: string) =>
     setSelectedAddOns((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+
+  const canContinueStep1 = !!date && firstName.trim().length > 0 && email.trim().includes("@");
+
+  const initParticipantDetails = () => {
+    const current = participantDetails;
+    const updated = Array.from({ length: participants }, (_, i) => current[i] || { name: "", weight: "", height: "", level: "" });
+    setParticipantDetails(updated);
+  };
+
+  const handleGoToStep2 = () => {
+    initParticipantDetails();
+    setStep(2);
+  };
 
   const handleProceedToPayment = async () => {
     if (!date || !tour) return;
@@ -68,6 +89,10 @@ export function ReservationClient({ searchParams }: Props) {
           addOns: selectedAddOns,
           date: format(date, "PPP", { locale: dateLocale }),
           lang,
+          customerEmail: email,
+          customerName: firstName,
+          customerPhone: phone,
+          participantDetails,
         }),
       });
       if (!res.ok) {
@@ -143,8 +168,8 @@ export function ReservationClient({ searchParams }: Props) {
           </h2>
           <p style={{ color: "#6B6B5F", lineHeight: 1.8, marginBottom: "48px", fontSize: "1rem" }}>
             {isEnglish
-              ? "A confirmation email will be sent to you shortly. We look forward to welcoming you."
-              : "Un email de confirmation vous sera envoyé prochainement. Nous avons hâte de vous accueillir."}
+              ? `A confirmation email has been sent to ${email || "your address"}. We look forward to welcoming you.`
+              : `Un email de confirmation a été envoyé à ${email || "votre adresse"}. Nous avons hâte de vous accueillir.`}
           </p>
           <Link
             href={`/?lang=${lang}`}
@@ -195,8 +220,8 @@ export function ReservationClient({ searchParams }: Props) {
                   ))}
                   <span style={{ fontSize: "11px", color: "#6B6B5F", letterSpacing: "0.1em", textTransform: "uppercase", marginLeft: "4px" }}>
                     {step === 1
-                      ? (isEnglish ? "Date & travelers" : "Date & participants")
-                      : (isEnglish ? "Options" : "Options")}
+                      ? (isEnglish ? "Date & contact" : "Date & contact")
+                      : (isEnglish ? "Options & riders" : "Options & cavaliers")}
                   </span>
                 </div>
 
@@ -243,7 +268,7 @@ export function ReservationClient({ searchParams }: Props) {
                               <line x1="11" y1="1" x2="11" y2="4" />
                             </svg>
                           </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start">
+                          <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start" style={{ zIndex: 9999 }}>
                             <Calendar
                               mode="single"
                               selected={date}
@@ -285,14 +310,59 @@ export function ReservationClient({ searchParams }: Props) {
                         </div>
                       </div>
 
+                      {/* Contact info */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                        <div>
+                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                            {isEnglish ? "First name" : "Prénom"} *
+                          </label>
+                          <input
+                            type="text"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            placeholder={isEnglish ? "Your first name" : "Votre prénom"}
+                            style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                          />
+                        </div>
+                        <div>
+                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                            {isEnglish ? "Email" : "Email"} *
+                          </label>
+                          <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder={isEnglish ? "your@email.com" : "votre@email.com"}
+                            style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                          />
+                        </div>
+                        <div>
+                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                            {isEnglish ? "Phone (optional)" : "Téléphone (optionnel)"}
+                          </label>
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder={isEnglish ? "+33 6 00 00 00 00" : "+33 6 00 00 00 00"}
+                            style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                          />
+                        </div>
+                      </div>
+
                       <div style={{ textAlign: "center", marginTop: "8px" }}>
                         <button
-                          onClick={() => setStep(2)}
-                          disabled={!date}
-                          style={{ display: "inline-block", background: date ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: date ? "pointer" : "not-allowed" }}
+                          onClick={handleGoToStep2}
+                          disabled={!canContinueStep1}
+                          style={{ display: "inline-block", background: canContinueStep1 ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: canContinueStep1 ? "pointer" : "not-allowed" }}
                         >
                           {isEnglish ? "Continue" : "Continuer"} →
                         </button>
+                        {(!firstName.trim() || !email.trim().includes("@")) && date && (
+                          <p style={{ marginTop: "10px", fontSize: "12px", color: "#8B7355" }}>
+                            {isEnglish ? "Please enter your name and email to continue." : "Merci de renseigner prénom et email pour continuer."}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -371,6 +441,81 @@ export function ReservationClient({ searchParams }: Props) {
                           </button>
                         );
                       })}
+                    </div>
+
+                    {/* Participant details */}
+                    <div style={{ marginBottom: "32px" }}>
+                      <p style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "16px" }}>
+                        {isEnglish ? "Rider details (for horse assignment)" : "Informations cavaliers (pour attribution du cheval)"}
+                      </p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                        {participantDetails.map((p, i) => (
+                          <div key={i} style={{ border: "1px solid rgba(44,62,45,0.15)", padding: "16px 20px" }}>
+                            <p style={{ fontSize: "12px", fontWeight: 500, color: "#1A1A1A", marginBottom: "12px", letterSpacing: "0.05em" }}>
+                              {isEnglish ? `Rider ${i + 1}` : `Cavalier ${i + 1}`}
+                              {i === 0 && firstName ? ` — ${firstName}` : ""}
+                            </p>
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px" }}>
+                              <div>
+                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
+                                  {isEnglish ? "Weight (kg)" : "Poids (kg)"}
+                                </label>
+                                <input
+                                  type="number"
+                                  min="20"
+                                  max="130"
+                                  value={p.weight}
+                                  onChange={(e) => {
+                                    const updated = [...participantDetails];
+                                    updated[i] = { ...updated[i], weight: e.target.value };
+                                    setParticipantDetails(updated);
+                                  }}
+                                  placeholder="70"
+                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "transparent", fontSize: "13px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                                />
+                              </div>
+                              <div>
+                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
+                                  {isEnglish ? "Height (cm)" : "Taille (cm)"}
+                                </label>
+                                <input
+                                  type="number"
+                                  min="100"
+                                  max="220"
+                                  value={p.height}
+                                  onChange={(e) => {
+                                    const updated = [...participantDetails];
+                                    updated[i] = { ...updated[i], height: e.target.value };
+                                    setParticipantDetails(updated);
+                                  }}
+                                  placeholder="170"
+                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "transparent", fontSize: "13px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                                />
+                              </div>
+                              <div>
+                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
+                                  {isEnglish ? "Level" : "Niveau"}
+                                </label>
+                                <select
+                                  value={p.level}
+                                  onChange={(e) => {
+                                    const updated = [...participantDetails];
+                                    updated[i] = { ...updated[i], level: e.target.value };
+                                    setParticipantDetails(updated);
+                                  }}
+                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "#FAFAF8", fontSize: "13px", color: p.level ? "#1A1A1A" : "#6B6B5F", outline: "none", boxSizing: "border-box", appearance: "none" }}
+                                >
+                                  <option value="">—</option>
+                                  {riderLevels.map((l) => <option key={l} value={l}>{l}</option>)}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p style={{ fontSize: "11px", color: "rgba(107,107,95,0.6)", marginTop: "10px" }}>
+                        {isEnglish ? "These details help us assign the most suitable horse. Optional but recommended." : "Ces informations nous permettent d'attribuer le cheval le plus adapté. Facultatif mais recommandé."}
+                      </p>
                     </div>
 
                     {error && (

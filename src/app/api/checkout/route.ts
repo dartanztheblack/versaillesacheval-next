@@ -25,7 +25,17 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { productId = "royal_complete", participants = 1, addOns = [], date, lang = "fr" } = body;
+  const {
+    productId = "royal_complete",
+    participants = 1,
+    addOns = [],
+    date,
+    lang = "fr",
+    customerEmail,
+    customerName,
+    customerPhone,
+    participantDetails = [],
+  } = body;
 
   const validParticipants = Math.max(1, Math.min(10, parseInt(participants) || 1));
   const isEnglish = lang === "en";
@@ -60,6 +70,12 @@ export async function POST(request: NextRequest) {
 
   const origin = request.headers.get("origin") || SITE_URL;
 
+  const ridersInfo = participantDetails
+    .map((r: { name?: string; weight?: string; height?: string; level?: string }, i: number) =>
+      `R${i + 1}: ${r.weight || "?"}kg ${r.height || "?"}cm ${r.level || "?"}`
+    )
+    .join(" | ");
+
   const params = new URLSearchParams({
     "payment_method_types[0]": "card",
     "line_items[0][price_data][currency]": "eur",
@@ -73,7 +89,14 @@ export async function POST(request: NextRequest) {
     "metadata[product_id]": productId,
     "metadata[participants]": validParticipants.toString(),
     "metadata[addons]": addOns.join(","),
+    "metadata[customer_name]": customerName || "",
+    "metadata[customer_phone]": customerPhone || "",
+    "metadata[riders]": ridersInfo,
   });
+
+  if (customerEmail) {
+    params.set("customer_email", customerEmail);
+  }
 
   const stripeRes = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
