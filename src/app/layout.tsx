@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CookieBanner } from "@/components/CookieBanner";
 import "./globals.css";
 import { SITE_URL, SITE_NAME } from "@/config";
 
@@ -55,12 +58,24 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
     languages: { fr: SITE_URL, en: `${SITE_URL}?lang=en` },
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${inter.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieBanner />
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

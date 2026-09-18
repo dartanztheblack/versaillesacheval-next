@@ -9,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${SITE_URL}/reservation`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/confidentialite`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },
+    { url: `${SITE_URL}/cgu`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },
   ];
 
   const blogRoutes: MetadataRoute.Sitemap = blogPostsData

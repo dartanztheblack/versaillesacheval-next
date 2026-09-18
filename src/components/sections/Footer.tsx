@@ -89,12 +89,20 @@ export function Footer({ lang = "fr" }: FooterProps) {
           <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>
             © {new Date().getFullYear()} Versailles à Cheval — {isEnglish ? "All rights reserved." : "Tous droits réservés."}
           </p>
-          <Link
-            href={`/?lang=${lang === "fr" ? "en" : "fr"}`}
-            style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}
-          >
-            {isEnglish ? "Version française" : "English version"}
-          </Link>
+          <div style={{ display: "flex", gap: "20px", alignItems: "center", flexWrap: "wrap" }}>
+            <Link href="/confidentialite" style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em" }}>
+              {isEnglish ? "Privacy policy" : "Confidentialité"}
+            </Link>
+            <Link href="/cgu" style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em" }}>
+              CGU
+            </Link>
+            <Link
+              href={`/?lang=${lang === "fr" ? "en" : "fr"}`}
+              style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}
+            >
+              {isEnglish ? "Version française" : "English version"}
+            </Link>
+          </div>
         </div>
       </div>
 
