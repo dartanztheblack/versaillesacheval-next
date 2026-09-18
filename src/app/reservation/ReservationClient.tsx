@@ -62,7 +62,7 @@ export function ReservationClient({ searchParams }: Props) {
   const toggleAddOn = (id: string) =>
     setSelectedAddOns((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
-  const canContinueStep1 = !!date && firstName.trim().length > 0 && email.trim().includes("@");
+  const canContinueStep1 = !!date && phone.trim().length >= 8;
 
   const initParticipantDetails = () => {
     const current = participantDetails;
@@ -166,14 +166,33 @@ export function ReservationClient({ searchParams }: Props) {
           <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "#1A1A1A", marginBottom: "16px" }}>
             {isEnglish ? "Booking confirmed." : "Réservation confirmée."}
           </h2>
-          <p style={{ color: "#6B6B5F", lineHeight: 1.8, marginBottom: "48px", fontSize: "1rem" }}>
+          <p style={{ color: "#6B6B5F", lineHeight: 1.8, marginBottom: "40px", fontSize: "1rem" }}>
             {isEnglish
-              ? `A confirmation email has been sent to ${email || "your address"}. We look forward to welcoming you.`
-              : `Un email de confirmation a été envoyé à ${email || "votre adresse"}. Nous avons hâte de vous accueillir.`}
+              ? "Your booking is confirmed. To complete it, please send us each rider's details via WhatsApp — we'll assign the perfect horse for everyone."
+              : "Votre réservation est confirmée. Pour la finaliser, envoyez-nous les informations de chaque cavalier via WhatsApp — nous attribuerons le cheval idéal pour chacun."}
           </p>
+
+          {/* WhatsApp CTA */}
+          <a
+            href={`https://wa.me/33625757995?text=${encodeURIComponent(
+              isEnglish
+                ? `Hello! I just booked a ride for ${participants} person${participants > 1 ? "s" : ""}. Here are the rider details:\n\nRider 1: weight _kg, height _cm, level (beginner/intermediate/experienced)\n${participants > 1 ? `Rider 2: weight _kg, height _cm, level _\n` : ""}Thank you!`
+                : `Bonjour ! Je viens de réserver une balade pour ${participants} cavalier${participants > 1 ? "s" : ""}. Voici les informations :\n\nCavalier 1 : poids _kg, taille _cm, niveau (débutant/intermédiaire/expérimenté)\n${participants > 1 ? `Cavalier 2 : poids _kg, taille _cm, niveau _\n` : ""}Merci !`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#25D366", color: "#fff", padding: "18px 40px", fontSize: "13px", letterSpacing: "0.08em", fontWeight: 500, textDecoration: "none", marginBottom: "40px" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            {isEnglish ? "Send rider details on WhatsApp" : "Envoyer les infos cavaliers sur WhatsApp"}
+          </a>
+
+          <br />
           <Link
             href={`/?lang=${lang}`}
-            style={{ color: "#2C3E2D", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase" }}
+            style={{ color: "#6B6B5F", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             ← {isEnglish ? "Back to home" : "Retour à l'accueil"}
           </Link>
@@ -313,38 +332,46 @@ export function ReservationClient({ searchParams }: Props) {
                       {/* Contact info */}
                       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                         <div>
+                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "8px" }}>
+                            {isEnglish ? "WhatsApp / Phone" : "WhatsApp / Téléphone"} *
+                          </label>
+                          <p style={{ fontSize: "11px", color: "rgba(107,107,95,0.7)", marginBottom: "10px", lineHeight: 1.5 }}>
+                            {isEnglish
+                              ? "We will send you booking details and coordinate via WhatsApp."
+                              : "Nous vous enverrons les détails et coordinerons via WhatsApp."}
+                          </p>
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="+33 6 00 00 00 00"
+                            autoComplete="tel"
+                            style={{ width: "100%", padding: "14px 16px", border: `1px solid ${phone.trim().length >= 8 ? "#2C3E2D" : "rgba(44,62,45,0.25)"}`, background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
+                          />
+                        </div>
+                        <div>
                           <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
-                            {isEnglish ? "First name" : "Prénom"} *
+                            {isEnglish ? "First name" : "Prénom"}
                           </label>
                           <input
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             placeholder={isEnglish ? "Your first name" : "Votre prénom"}
+                            autoComplete="given-name"
                             style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
                           />
                         </div>
                         <div>
                           <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
-                            {isEnglish ? "Email" : "Email"} *
+                            {isEnglish ? "Email (optional)" : "Email (optionnel)"}
                           </label>
                           <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder={isEnglish ? "your@email.com" : "votre@email.com"}
-                            style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
-                            {isEnglish ? "Phone (optional)" : "Téléphone (optionnel)"}
-                          </label>
-                          <input
-                            type="tel"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            placeholder={isEnglish ? "+33 6 00 00 00 00" : "+33 6 00 00 00 00"}
+                            autoComplete="email"
                             style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
                           />
                         </div>
@@ -358,9 +385,9 @@ export function ReservationClient({ searchParams }: Props) {
                         >
                           {isEnglish ? "Continue" : "Continuer"} →
                         </button>
-                        {(!firstName.trim() || !email.trim().includes("@")) && date && (
+                        {phone.trim().length < 8 && date && (
                           <p style={{ marginTop: "10px", fontSize: "12px", color: "#8B7355" }}>
-                            {isEnglish ? "Please enter your name and email to continue." : "Merci de renseigner prénom et email pour continuer."}
+                            {isEnglish ? "Please enter your phone number to continue." : "Merci de renseigner votre numéro de téléphone pour continuer."}
                           </p>
                         )}
                       </div>
@@ -443,79 +470,21 @@ export function ReservationClient({ searchParams }: Props) {
                       })}
                     </div>
 
-                    {/* Participant details */}
-                    <div style={{ marginBottom: "32px" }}>
-                      <p style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "16px" }}>
-                        {isEnglish ? "Rider details (for horse assignment)" : "Informations cavaliers (pour attribution du cheval)"}
-                      </p>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        {participantDetails.map((p, i) => (
-                          <div key={i} style={{ border: "1px solid rgba(44,62,45,0.15)", padding: "16px 20px" }}>
-                            <p style={{ fontSize: "12px", fontWeight: 500, color: "#1A1A1A", marginBottom: "12px", letterSpacing: "0.05em" }}>
-                              {isEnglish ? `Rider ${i + 1}` : `Cavalier ${i + 1}`}
-                              {i === 0 && firstName ? ` — ${firstName}` : ""}
-                            </p>
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px" }}>
-                              <div>
-                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
-                                  {isEnglish ? "Weight (kg)" : "Poids (kg)"}
-                                </label>
-                                <input
-                                  type="number"
-                                  min="20"
-                                  max="130"
-                                  value={p.weight}
-                                  onChange={(e) => {
-                                    const updated = [...participantDetails];
-                                    updated[i] = { ...updated[i], weight: e.target.value };
-                                    setParticipantDetails(updated);
-                                  }}
-                                  placeholder="70"
-                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "transparent", fontSize: "13px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
-                                />
-                              </div>
-                              <div>
-                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
-                                  {isEnglish ? "Height (cm)" : "Taille (cm)"}
-                                </label>
-                                <input
-                                  type="number"
-                                  min="100"
-                                  max="220"
-                                  value={p.height}
-                                  onChange={(e) => {
-                                    const updated = [...participantDetails];
-                                    updated[i] = { ...updated[i], height: e.target.value };
-                                    setParticipantDetails(updated);
-                                  }}
-                                  placeholder="170"
-                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "transparent", fontSize: "13px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
-                                />
-                              </div>
-                              <div>
-                                <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "6px" }}>
-                                  {isEnglish ? "Level" : "Niveau"}
-                                </label>
-                                <select
-                                  value={p.level}
-                                  onChange={(e) => {
-                                    const updated = [...participantDetails];
-                                    updated[i] = { ...updated[i], level: e.target.value };
-                                    setParticipantDetails(updated);
-                                  }}
-                                  style={{ width: "100%", padding: "10px 12px", border: "1px solid rgba(44,62,45,0.2)", background: "#FAFAF8", fontSize: "13px", color: p.level ? "#1A1A1A" : "#6B6B5F", outline: "none", boxSizing: "border-box", appearance: "none" }}
-                                >
-                                  <option value="">—</option>
-                                  {riderLevels.map((l) => <option key={l} value={l}>{l}</option>)}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                    {/* WhatsApp note */}
+                    <div style={{ marginBottom: "32px", padding: "16px 20px", background: "rgba(44,62,45,0.04)", border: "1px solid rgba(44,62,45,0.12)", display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#2C3E2D" style={{ flexShrink: 0, marginTop: "2px", opacity: 0.7 }}>
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                      <div>
+                        <p style={{ fontSize: "13px", fontWeight: 500, color: "#1A1A1A", marginBottom: "4px" }}>
+                          {isEnglish ? "After payment, we coordinate via WhatsApp" : "Après le paiement, on coordonne via WhatsApp"}
+                        </p>
+                        <p style={{ fontSize: "12px", color: "#6B6B5F", lineHeight: 1.6 }}>
+                          {isEnglish
+                            ? "We will contact you to collect each rider's details (weight, height, level) and assign the perfect horse."
+                            : "Nous vous contacterons pour recueillir les infos de chaque cavalier (poids, taille, niveau) et attribuer le cheval idéal."}
+                        </p>
                       </div>
-                      <p style={{ fontSize: "11px", color: "rgba(107,107,95,0.6)", marginTop: "10px" }}>
-                        {isEnglish ? "These details help us assign the most suitable horse. Optional but recommended." : "Ces informations nous permettent d'attribuer le cheval le plus adapté. Facultatif mais recommandé."}
-                      </p>
                     </div>
 
                     {error && (

@@ -21,6 +21,11 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 a { text-decoration: none; color: inherit; }
 
+/* Ensure calendar/popover always renders above page content */
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
