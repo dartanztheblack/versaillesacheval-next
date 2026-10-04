@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     participants = 1,
     addOns = [],
     date,
+    dateIso,
     lang = "fr",
     customerEmail,
     customerName,
@@ -92,6 +93,12 @@ export async function POST(request: NextRequest) {
     "metadata[customer_name]": customerName || "",
     "metadata[customer_phone]": customerPhone || "",
     "metadata[riders]": ridersInfo,
+    // Lus par le Cockpit Louis 21 (webhook Stripe) pour créer le dossier automatiquement.
+    "metadata[date]": typeof dateIso === "string" && /^\d{4}-\d{2}-\d{2}$/.test(dateIso) ? dateIso : "",
+    "metadata[lang]": isEnglish ? "en" : "fr",
+    "metadata[rider_names]": participantDetails
+      .map((r: { name?: string }) => (r.name || "").replace(/\|/g, " ").trim().slice(0, 60))
+      .join("|"),
   });
 
   if (customerEmail) {

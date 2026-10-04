@@ -88,6 +88,7 @@ export function ReservationClient({ searchParams }: Props) {
           participants,
           addOns: selectedAddOns,
           date: format(date, "PPP", { locale: dateLocale }),
+          dateIso: format(date, "yyyy-MM-dd"), // lu par le Cockpit Louis 21 (webhook Stripe)
           lang,
           customerEmail: email,
           customerName: firstName,
