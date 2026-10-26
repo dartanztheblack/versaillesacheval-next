@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { NarrativeText } from "@/components/sections/NarrativeText";
-import { HorsesSection } from "@/components/sections/HorsesSection";
+import { ProgrammeSection } from "@/components/sections/ProgrammeSection";
 import { HorseCareSection } from "@/components/sections/HorseCareSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { CardStack } from "@/components/sections/CardStack";
@@ -13,10 +13,9 @@ import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_EMAIL } from "@/config";
 export const metadata: Metadata = {
   title: "Balade à Cheval Versailles | Expérience Royale dans les Jardins du Château",
   description:
-    "Balade à cheval à Versailles dans les jardins royaux — 2h avec guide expert, chevaux dressés, tickets Château inclus. Débutants bienvenus. À partir de 490€/pers. Réservation en ligne.",
+    "Balade à cheval à Versailles dans les jardins royaux — 2h avec guide expert, chevaux dressés, tickets Château inclus. Débutants bienvenus. À partir de 550€/pers. Réservation en ligne.",
   alternates: {
     canonical: SITE_URL,
-    languages: { fr: SITE_URL, en: `${SITE_URL}?lang=en`, "x-default": SITE_URL },
   },
 };
 
@@ -67,12 +66,19 @@ const jsonLd = [
     geo: { "@type": "GeoCoordinates", latitude: 48.8044, longitude: 2.123 },
     priceRange: "€€€",
     image: `${SITE_URL}/hero-real.jpg`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "200",
-      bestRating: "5",
-    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+    areaServed: [
+      { "@type": "City", name: "Versailles" },
+      { "@type": "City", name: "Paris" },
+      { "@type": "AdministrativeArea", name: "Île-de-France" },
+    ],
     sameAs: [
       "https://www.instagram.com/versaillesacheval",
       "https://www.facebook.com/versaillesacheval",
@@ -86,7 +92,7 @@ const jsonLd = [
           name: "L'Expérience Royale Complète — Balade à cheval Versailles",
           description:
             "2h de balade à cheval dans les jardins royaux de Versailles. Tickets d'accès au Château inclus. Guide expert. Chevaux adaptés à tous niveaux.",
-          price: "490",
+          price: "550",
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
           url: `${SITE_URL}/reservation`,
@@ -119,7 +125,7 @@ const jsonLd = [
         name: "Combien coûte une balade à cheval à Versailles ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "L'Expérience Royale Complète (2h de balade à cheval + tickets d'accès au Château de Versailles) est proposée à partir de 490€ par personne. Des options sont disponibles : visite guidée privée du Château (120€), déjeuner gastronomique Alain Ducasse (200€), transport depuis votre hôtel parisien (200-300€).",
+          text: "L'Expérience Royale Complète (2h de balade à cheval + tickets d'accès au Château de Versailles) est proposée à partir de 550€ par personne. Des options sont disponibles : visite guidée privée du Château (120€), déjeuner gastronomique Alain Ducasse (200€), transport depuis votre hôtel parisien (200-300€).",
         },
       },
       {
@@ -160,7 +166,7 @@ export default async function HomePage({ searchParams }: PageProps) {
       ))}
       <Hero lang={lang} />
       <NarrativeText lang={lang} />
-      <HorsesSection lang={lang} />
+      <ProgrammeSection lang={lang} />
       <HorseCareSection lang={lang} />
       <TestimonialsSection lang={lang} />
       <CardStack lang={lang} />
