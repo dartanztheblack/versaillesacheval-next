@@ -6,7 +6,17 @@ interface ProgrammeSectionProps {
   lang?: string;
 }
 
-const programmeFr = [
+interface ProgrammeStep {
+  time: string;
+  label: string;
+  icon: string;
+  items: string[];
+  included: boolean;
+  option?: string;
+  images?: { src: string; alt: string }[];
+}
+
+const programmeFr: ProgrammeStep[] = [
   {
     time: "Matin",
     label: "Découverte du Château",
@@ -60,10 +70,18 @@ const programmeFr = [
     ],
     included: false,
     option: "Sur demande",
+    images: [
+      { src: "/avion-cessna.webp", alt: "Cessna 177 sur l'aérodrome" },
+      { src: "/survol-versailles-aerial.webp", alt: "Vue aérienne du Château de Versailles" },
+      { src: "/survol-vue-cockpit.webp", alt: "Vue depuis le cockpit en vol" },
+      { src: "/survol-tableau-bord.webp", alt: "Tableau de bord Cessna en vol" },
+      { src: "/survol-domaine.webp", alt: "Survol du domaine de Versailles" },
+      { src: "/survol-chateau-panorama.webp", alt: "Panorama du Château depuis les airs" },
+    ],
   },
 ];
 
-const programmeEn = [
+const programmeEn: ProgrammeStep[] = [
   {
     time: "Morning",
     label: "Château Discovery",
@@ -117,6 +135,14 @@ const programmeEn = [
     ],
     included: false,
     option: "On request",
+    images: [
+      { src: "/avion-cessna.webp", alt: "Cessna 177 at the airfield" },
+      { src: "/survol-versailles-aerial.webp", alt: "Aerial view of the Palace of Versailles" },
+      { src: "/survol-vue-cockpit.webp", alt: "Cockpit view in flight" },
+      { src: "/survol-tableau-bord.webp", alt: "Cessna instrument panel in flight" },
+      { src: "/survol-domaine.webp", alt: "Versailles estate from above" },
+      { src: "/survol-chateau-panorama.webp", alt: "Panorama of the Château from the air" },
+    ],
   },
 ];
 
@@ -197,6 +223,21 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
                         </li>
                       ))}
                     </ul>
+                    {step.images && (
+                      <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
+                        {step.images.map((img, j) => (
+                          <div key={j} style={{ aspectRatio: "4/3", overflow: "hidden", background: "#E8E4DC" }}>
+                            <img
+                              src={img.src}
+                              alt={img.alt}
+                              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease" }}
+                              onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)"; }}
+                              onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </RevealOnScroll>
