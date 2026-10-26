@@ -6,6 +6,7 @@ import { HorseCareSection } from "@/components/sections/HorseCareSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { CardStack } from "@/components/sections/CardStack";
 import { BreathSection } from "@/components/sections/BreathSection";
+import { GallerySection } from "@/components/sections/GallerySection";
 import { ZigZagGrid } from "@/components/sections/ZigZagGrid";
 import { Footer } from "@/components/sections/Footer";
 import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_EMAIL } from "@/config";
@@ -171,6 +172,7 @@ export default async function HomePage({ searchParams }: PageProps) {
       <TestimonialsSection lang={lang} />
       <CardStack lang={lang} />
       <BreathSection lang={lang} />
+      <GallerySection lang={lang} />
       <ZigZagGrid lang={lang} />
       <Footer lang={lang} />
     </main>
