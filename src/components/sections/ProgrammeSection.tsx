@@ -59,6 +59,11 @@ const programmeFr: ProgrammeStep[] = [
       "Temps dédié aux photos en fin de parcours.",
     ],
     included: true,
+    images: [
+      { src: "/cavaliers-allees-automne.webp", alt: "Deux cavaliers dans les allées du parc en automne" },
+      { src: "/cavaliers-dos-bois.webp", alt: "Cavaliers de dos dans les bois dorés" },
+      { src: "/cavaliers-parc-automne.webp", alt: "Cavaliers dans le parc de Versailles en automne" },
+    ],
   },
   {
     time: "Fin de journée",
@@ -134,6 +139,11 @@ const programmeEn: ProgrammeStep[] = [
       "Dedicated photography time at the end of the route.",
     ],
     included: true,
+    images: [
+      { src: "/cavaliers-allees-automne.webp", alt: "Two riders in the autumn park alleys" },
+      { src: "/cavaliers-dos-bois.webp", alt: "Riders heading into the golden woodland" },
+      { src: "/cavaliers-parc-automne.webp", alt: "Riders in the Versailles park in autumn" },
+    ],
   },
   {
     time: "Late afternoon",
@@ -200,15 +210,15 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "100px" }}>
             <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
               <img
-                src="/versailles-aerial-day.jpg"
-                alt="Vue aérienne du domaine de Versailles"
+                src="/equestre-bw-herbes.webp"
+                alt="Femme et cheval noir dans les herbes sauvages"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             </div>
             <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
               <img
-                src="/versailles-sunset.webp"
-                alt="Château de Versailles au coucher du soleil"
+                src="/versailles-aerial-day.jpg"
+                alt="Vue aérienne du domaine de Versailles"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             </div>

@@ -42,8 +42,8 @@ export const zigZagGridConfig = {
       title: "Tickets d'Accès au Château",
       subtitle: "INCLUS DANS LA FORMULE",
       description: "Vos tickets d'accès au Château de Versailles sont inclus dans votre réservation. Profitez librement de la Galerie des Glaces, des Grands Appartements et des jardins. En option, ajoutez une visite guidée privée de 1h30 avec un guide expert pour une immersion totale dans l'histoire de Louis XIV.",
-      image: "/grid-gardens.jpg",
-      imageAlt: "Jardins du Château de Versailles",
+      image: "/apollon-fountain.jpg",
+      imageAlt: "Fontaine d'Apollon dans les jardins du Château de Versailles",
       reverse: false,
     },
     {
@@ -51,8 +51,8 @@ export const zigZagGridConfig = {
       title: "Balade à Cheval dans les Jardins",
       subtitle: "2H • ÉQUIPEMENT FOURNI",
       description: "Les jardins royaux sont immenses et incroyablement beaux. Vous monterez à cheval et, accompagné d'un guide expérimenté, explorerez les bosquets cachés, les fontaines spectaculaires et les vastes paysages entourant le Grand Canal. C'est le meilleur moyen d'apprécier l'échelle et la tranquillité de ce domaine historique.",
-      image: "/grid-real-1.jpg",
-      imageAlt: "Cavaliers dans les allées bordées de haies du château",
+      image: "/balade-canal-chateau.webp",
+      imageAlt: "Deux cavaliers au bord du Grand Canal avec le Château en arrière-plan",
       reverse: true,
     },
     {
@@ -60,8 +60,8 @@ export const zigZagGridConfig = {
       title: "Service Conciergerie Dédié",
       subtitle: "SUR MESURE",
       description: "Profitez d'un service personnalisé tout au long de votre expérience. De la réservation à la fin de votre journée, notre équipe s'occupe de chaque détail pour vous offrir une expérience sans stress et mémorable.",
-      image: "/grid-real-2.jpg",
-      imageAlt: "Deux cavaliers dans la verdure du parc",
+      image: "/cavaliers-bois-lumiere.webp",
+      imageAlt: "Deux cavaliers dans les allées boisées lumineuses du domaine",
       reverse: false,
     },
   ],
@@ -76,8 +76,8 @@ export const zigZagGridConfigEn = {
       title: "Château Access Tickets",
       subtitle: "INCLUDED IN THE PACKAGE",
       description: "Your Château de Versailles access tickets are included in your booking. Enjoy the Hall of Mirrors, Grand Apartments, and gardens at your leisure. Optionally add a 1.5-hour private guided tour with an expert guide for total immersion in Louis XIV's history.",
-      image: "/grid-gardens.jpg",
-      imageAlt: "Gardens of Versailles Palace",
+      image: "/apollon-fountain.jpg",
+      imageAlt: "Apollo Fountain in the Gardens of Versailles",
       reverse: false,
     },
     {
@@ -85,8 +85,8 @@ export const zigZagGridConfigEn = {
       title: "Horseback Ride in the Gardens",
       subtitle: "2H • EQUIPMENT PROVIDED",
       description: "The Royal Gardens are immense and incredibly beautiful. You will mount a noble steed and, accompanied by an experienced guide, explore the hidden groves, spectacular fountains, and vast landscapes surrounding the Grand Canal.",
-      image: "/grid-real-1.jpg",
-      imageAlt: "Riders in the château hedge-lined alleys",
+      image: "/balade-canal-chateau.webp",
+      imageAlt: "Two riders by the Grand Canal with the Château in the background",
       reverse: true,
     },
     {
@@ -94,8 +94,8 @@ export const zigZagGridConfigEn = {
       title: "Dedicated Concierge Service",
       subtitle: "TAILOR-MADE",
       description: "Enjoy personalized service throughout your experience. From booking to the end of your day, our team takes care of every detail to offer you a stress-free and memorable experience.",
-      image: "/grid-real-2.jpg",
-      imageAlt: "Two riders in the park greenery",
+      image: "/cavaliers-bois-lumiere.webp",
+      imageAlt: "Two riders in the sunlit woodland alleys of the estate",
       reverse: false,
     },
   ],
@@ -103,7 +103,7 @@ export const zigZagGridConfigEn = {
 
 // ─── Breath Section ────────────────────────────────────────────────────────────
 export const breathSectionConfig = {
-  backgroundImage: "/breath-real.jpg",
+  backgroundImage: "/cavalier-grand-canal.webp",
   backgroundAlt: "Cavalier au bord du Grand Canal de Versailles",
   title: "Versailles",
   subtitle: "COMME VOUS NE L'AVEZ JAMAIS VU",
@@ -111,7 +111,7 @@ export const breathSectionConfig = {
 };
 
 export const breathSectionConfigEn = {
-  backgroundImage: "/breath-real.jpg",
+  backgroundImage: "/cavalier-grand-canal.webp",
   backgroundAlt: "Rider by the Grand Canal of Versailles",
   title: "Versailles",
   subtitle: "LIKE YOU'VE NEVER SEEN IT",
@@ -127,7 +127,7 @@ export const cardStackConfig = {
   cards: [
     {
       id: 1,
-      image: "/card-real-1.jpg",
+      image: "/equestre-bw-robe.webp",
       title: "L'Expérience Royale Complète",
       titleEn: "The Complete Royal Experience",
       description: "2h de balade à cheval dans les jardins royaux. Tickets d'accès au Château inclus. À partir de 550€ par personne.",

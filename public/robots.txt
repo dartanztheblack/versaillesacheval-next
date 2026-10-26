@@ -7,6 +7,12 @@ Allow: /
 # Sitemap
 Sitemap: https://www.versaillesacheval.fr/sitemap.xml
 
+# Interdiction des paramètres de query (évite les pages en double)
+Disallow: /*?lang=*
+Disallow: /*?success=*
+Disallow: /*?canceled=*
+Disallow: /*?tour=*
+
 # Interdiction des pages admin
 Disallow: /admin
 Disallow: /login
