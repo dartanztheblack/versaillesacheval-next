@@ -83,8 +83,8 @@ export function Hero({ lang = "fr" }: HeroProps) {
           style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "500px", marginBottom: "48px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {isEnglish
-            ? "Two hours through the royal gardens of Versailles. Horses, history, and open sky."
-            : "Deux heures dans les jardins royaux de Versailles. Des chevaux, de l'histoire, et le ciel ouvert."}
+            ? "A complete royal experience — horseback riding through Versailles, gourmet dining, and the grandeur of Trianon. All in one unforgettable day."
+            : "Une expérience royale complète — balade à cheval dans Versailles, gastronomie française, et la splendeur de Trianon. Tout en une seule journée inoubliable."}
         </p>
         <div
           ref={ctaRef}
