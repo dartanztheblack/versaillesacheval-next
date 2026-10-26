@@ -6,15 +6,15 @@ export const SITE_EMAIL = "parisdreamhunt@gmail.com";
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 export const heroConfig = {
-  backgroundImage: "/hero-real.jpg",
-  backgroundAlt: "Deux cavaliers dans les allées du parc de Versailles",
+  backgroundImage: "/versailles-sunset.webp",
+  backgroundAlt: "Vue aérienne du Château de Versailles au coucher du soleil",
   title: "Versailles à Cheval",
   subtitle: "L'EXPÉRIENCE ROYALE UNIQUE",
 };
 
 export const heroConfigEn = {
-  backgroundImage: "/hero-real.jpg",
-  backgroundAlt: "Two riders in the Versailles park alleys",
+  backgroundImage: "/versailles-sunset.webp",
+  backgroundAlt: "Aerial view of the Palace of Versailles at sunset",
   title: "Versailles Horse Riding",
   subtitle: "THE UNIQUE ROYAL EXPERIENCE",
 };
@@ -130,10 +130,10 @@ export const cardStackConfig = {
       image: "/card-real-1.jpg",
       title: "L'Expérience Royale Complète",
       titleEn: "The Complete Royal Experience",
-      description: "2h de balade à cheval dans les jardins royaux. Tickets d'accès au Château inclus. À partir de 490€ par personne.",
-      descriptionEn: "2-hour horseback ride in the Royal Gardens. Château access tickets included. From €490 per person.",
+      description: "2h de balade à cheval dans les jardins royaux. Tickets d'accès au Château inclus. À partir de 550€ par personne.",
+      descriptionEn: "2-hour horseback ride in the Royal Gardens. Château access tickets included. From €550 per person.",
       rotation: -2,
-      basePrice: 490,
+      basePrice: 550,
     },
   ],
 };

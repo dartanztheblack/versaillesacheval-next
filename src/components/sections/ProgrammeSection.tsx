@@ -12,18 +12,29 @@ interface ProgrammeStep {
   icon: string;
   items: string[];
   included: boolean;
-  option?: string;
+  isOption?: boolean;
   images?: { src: string; alt: string }[];
 }
 
 const programmeFr: ProgrammeStep[] = [
+  {
+    time: "Option",
+    label: "Transfert privé",
+    icon: "🚗",
+    items: [
+      "Pick-up depuis votre hôtel parisien le matin.",
+      "Retour en véhicule privé en fin de journée — Paris · Versailles · Paris.",
+    ],
+    included: false,
+    isOption: true,
+  },
   {
     time: "Matin",
     label: "Découverte du Château",
     icon: "🏰",
     items: [
       "Arrivée libre en matinée. Présentez vos billets PDF directement à l'entrée.",
-      "Visite guidée exclusive de 1h30 — immersion dans l'histoire des grands appartements royaux (sous réserve de disponibilité).",
+      "Visite guidée exclusive de 1h30 — immersion dans l'histoire des grands appartements royaux.",
     ],
     included: true,
   },
@@ -34,21 +45,9 @@ const programmeFr: ProgrammeStep[] = [
     items: [
       "Déjeuner dans un cadre idyllique au bord de l'eau.",
       "Formule tout inclus : Entrée · Plat · Dessert · Eau · Café.",
-      "Recommandation du chef : Canard à l'orange suivi de profiteroles artisanales.",
     ],
     included: false,
-    option: "Option — +75 € / pers.",
-  },
-  {
-    time: "Option",
-    label: "Transfert privé",
-    icon: "🚗",
-    items: [
-      "Pick-up depuis votre hôtel parisien et retour en véhicule privé.",
-      "Chauffeur dédié pour la journée — Paris · Versailles · Paris.",
-    ],
-    included: false,
-    option: "Option — Sur devis",
+    isOption: true,
   },
   {
     time: "Après-midi",
@@ -66,21 +65,21 @@ const programmeFr: ProgrammeStep[] = [
     label: "Domaine de Trianon & Hameau",
     icon: "🌿",
     items: [
-      "Grand Trianon · Petit Trianon — accès inclus dans votre journée.",
+      "Grand Trianon · Petit Trianon — accès inclus.",
       "Théâtre de la Reine · Hameau de la Reine.",
     ],
     included: true,
   },
   {
     time: "Option",
-    label: "Survol aérien",
+    label: "Survol aérien en Cessna 177",
     icon: "✈",
     items: [
-      "Clôturez votre journée par un survol en Cessna 177 depuis l'aérodrome à proximité.",
+      "Clôturez votre journée par un survol depuis l'aérodrome à proximité.",
       "Selon disponibilités et conditions météorologiques.",
     ],
     included: false,
-    option: "Sur demande",
+    isOption: true,
     images: [
       { src: "/avion-cessna.webp", alt: "Cessna 177 sur l'aérodrome" },
       { src: "/survol-versailles-aerial.webp", alt: "Vue aérienne du Château de Versailles" },
@@ -94,12 +93,23 @@ const programmeFr: ProgrammeStep[] = [
 
 const programmeEn: ProgrammeStep[] = [
   {
+    time: "Option",
+    label: "Private transfer",
+    icon: "🚗",
+    items: [
+      "Pick-up from your Parisian hotel in the morning.",
+      "Return by private vehicle at the end of the day — Paris · Versailles · Paris.",
+    ],
+    included: false,
+    isOption: true,
+  },
+  {
     time: "Morning",
     label: "Château Discovery",
     icon: "🏰",
     items: [
       "Free arrival in the morning. Present your PDF tickets directly at the entrance.",
-      "Exclusive 1.5-hour guided tour — immersive journey through the royal apartments (subject to availability).",
+      "Exclusive 1.5-hour guided tour — immersive journey through the royal apartments.",
     ],
     included: true,
   },
@@ -110,21 +120,9 @@ const programmeEn: ProgrammeStep[] = [
     items: [
       "Lunch in an idyllic waterside setting.",
       "All-inclusive menu: Starter · Main · Dessert · Water · Coffee.",
-      "Chef's recommendation: Duck à l'orange followed by artisan profiteroles.",
     ],
     included: false,
-    option: "Option — +€75 / person",
-  },
-  {
-    time: "Option",
-    label: "Private transfer",
-    icon: "🚗",
-    items: [
-      "Pick-up from your Parisian hotel and return by private vehicle.",
-      "Dedicated chauffeur for the day — Paris · Versailles · Paris.",
-    ],
-    included: false,
-    option: "Option — On quote",
+    isOption: true,
   },
   {
     time: "Afternoon",
@@ -149,14 +147,14 @@ const programmeEn: ProgrammeStep[] = [
   },
   {
     time: "Option",
-    label: "Aerial flight",
+    label: "Aerial flight in Cessna 177",
     icon: "✈",
     items: [
-      "End your day with a Cessna 177 flight over the estate from the nearby airfield.",
+      "End your day with a flight from the nearby airfield.",
       "Subject to availability and weather conditions.",
     ],
     included: false,
-    option: "On request",
+    isOption: true,
     images: [
       { src: "/avion-cessna.webp", alt: "Cessna 177 at the airfield" },
       { src: "/survol-versailles-aerial.webp", alt: "Aerial view of the Palace of Versailles" },
@@ -197,6 +195,26 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
           </RevealOnScroll>
         </div>
 
+        {/* Photo showcase — two new aerial photos */}
+        <RevealOnScroll>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "100px" }}>
+            <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+              <img
+                src="/versailles-aerial-day.jpg"
+                alt="Vue aérienne du domaine de Versailles"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+            <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+              <img
+                src="/versailles-sunset.webp"
+                alt="Château de Versailles au coucher du soleil"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          </div>
+        </RevealOnScroll>
+
         {/* Timeline */}
         <div style={{ position: "relative" }}>
           {/* Ligne verticale */}
@@ -205,10 +223,10 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
             {programme.map((step, i) => (
               <RevealOnScroll key={i} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-                <div style={{ display: "flex", gap: "48px", paddingBottom: i < programme.length - 1 ? "72px" : "0" }}>
+                <div style={{ display: "flex", gap: "48px", paddingBottom: i < programme.length - 1 ? "80px" : "0" }}>
                   {/* Colonne gauche : horaire + point */}
-                  <div style={{ width: "80px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px", paddingTop: "4px", position: "relative" }}>
-                    <span style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8B7355", fontWeight: 500, textAlign: "right", lineHeight: 1.4 }}>
+                  <div style={{ width: "80px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "flex-end", paddingTop: "4px", position: "relative" }}>
+                    <span style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: step.isOption ? "#C9B99A" : "#8B7355", fontWeight: 500, textAlign: "right", lineHeight: 1.4 }}>
                       {step.time}
                     </span>
                     {/* Point sur la ligne */}
@@ -233,7 +251,7 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
                         </span>
                       ) : (
                         <span style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8B7355", fontWeight: 500, background: "rgba(139,115,85,0.1)", padding: "3px 10px" }}>
-                          {step.option}
+                          {isEnglish ? "Option" : "Option"}
                         </span>
                       )}
                     </div>
