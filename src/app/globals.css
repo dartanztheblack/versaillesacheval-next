@@ -66,6 +66,75 @@ body {
   .site-nav-links { gap: 14px !important; }
   .site-nav-secondary { display: none !important; }
   .site-nav-cta { padding: 9px 14px !important; }
+  .site-nav-logo { font-size: 1rem !important; gap: 7px !important; letter-spacing: 0.01em !important; }
+  .site-nav-links { gap: 12px !important; }
+  .site-nav-links > div { gap: 8px !important; }
   .cookie-banner { bottom: 12px !important; padding: 14px 16px !important; gap: 12px !important; }
   .cookie-banner p { font-size: 12px !important; line-height: 1.5 !important; }
+}
+
+/* ── Animations d'accueil ── */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-12px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-bg { animation: heroZoom 14s var(--ease-out-quart) both; will-change: transform; }
+.trust-item { animation: riseIn 0.7s var(--ease-out-quart) both; }
+
+/* Boutons de réservation : légère élévation, flèche qui avance */
+.cta { transition: transform 0.25s var(--ease-out-quart), box-shadow 0.25s var(--ease-out-quart); }
+.cta span[aria-hidden] { display: inline-block; transition: transform 0.25s var(--ease-out-quart); }
+.cta:hover, .cta:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.18); }
+.cta:hover span[aria-hidden], .cta:focus-visible span[aria-hidden] { transform: translateX(5px); }
+
+/* Petits dessins : le trait se trace quand l'élément apparaît */
+.ornament .draw { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease-out-quart) 0.2s; }
+.ornament .draw-late { transition-delay: 0.9s; }
+.reveal.visible .ornament .draw { stroke-dashoffset: 0; }
+
+/* FAQ */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus { transition: transform 0.3s var(--ease-out-quart); }
+.faq-item[open] .faq-plus { transform: rotate(45deg); }
+.faq-item[open] > p { animation: riseIn 0.4s var(--ease-out-quart) both; }
+
+/* Barre de réservation mobile */
+.sticky-book { display: none; }
+
+@media (max-width: 860px) {
+  .trust-bar { grid-template-columns: repeat(2, 1fr) !important; gap: 18px 12px !important; padding: 22px 20px !important; }
+  .trust-item { justify-content: flex-start !important; }
+}
+@media (max-width: 640px) {
+  .section-pad { padding-top: 96px !important; padding-bottom: 96px !important; }
+  .prog-row { gap: 22px !important; padding-bottom: 56px !important; }
+  .prog-time { width: 54px !important; }
+  .prog-line { left: 54px !important; }
+  .prog-photos { grid-template-columns: repeat(2, 1fr) !important; }
+  .sticky-book {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(26,26,26,0.96); backdrop-filter: blur(8px);
+    transform: translateY(110%); transition: transform 0.35s var(--ease-out-quart);
+  }
+  .sticky-book.is-shown { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .trust-item, .faq-item[open] > p { animation: none; }
+  .cta, .cta span[aria-hidden], .faq-plus, .sticky-book { transition: none; }
+  .ornament .draw { stroke-dashoffset: 0; transition: none; }
 }

@@ -55,13 +55,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [`${SITE_URL}/hero-real.jpg`],
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -18,6 +18,7 @@ export function Footer({ lang = "fr" }: FooterProps) {
           {isEnglish ? "Ready to experience Versailles?" : "Prêt à vivre Versailles autrement ?"}
         </p>
         <Link
+          className="cta"
           href={`/reservation?lang=${lang}`}
           style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "#FAFAF8", color: "#1A1A1A", padding: "16px 40px", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600 }}
         >

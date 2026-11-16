@@ -10,7 +10,9 @@ import { GallerySection } from "@/components/sections/GallerySection";
 import { ZigZagGrid } from "@/components/sections/ZigZagGrid";
 import { Footer } from "@/components/sections/Footer";
 import { SITE_URL } from "@/config";
-import { jsonLd } from "@/data/homeJsonLd";
+import { buildHomeJsonLd } from "@/data/homeJsonLd";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { StickyBookBar } from "@/components/StickyBookBar";
 
 const EN_URL = `${SITE_URL}/en`;
 const title = "Horseback Riding in Versailles | Private Ride in the Palace Gardens";
@@ -34,8 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Données structurées : on garde l'établissement et l'offre (la FAQ structurée est en français)
-const jsonLdEn = jsonLd.filter((schema) => schema["@type"] !== "FAQPage");
+const jsonLdEn = buildHomeJsonLd("en");
 
 export default function HomePageEn() {
   const lang = "en";
@@ -50,6 +51,7 @@ export default function HomePageEn() {
         />
       ))}
       <Hero lang={lang} />
+      <TrustBar lang={lang} />
       <NarrativeText lang={lang} />
       <ProgrammeSection lang={lang} />
       <HorseCareSection lang={lang} />
@@ -59,6 +61,7 @@ export default function HomePageEn() {
       <GallerySection lang={lang} />
       <ZigZagGrid lang={lang} />
       <Footer lang={lang} />
+      <StickyBookBar lang={lang} />
     </main>
   );
 }

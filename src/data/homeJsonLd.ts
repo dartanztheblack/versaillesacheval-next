@@ -1,6 +1,17 @@
-import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_EMAIL } from "@/config";
+import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_EMAIL, cardStackConfig } from "@/config";
+import { faqFr, faqEn } from "@/data/faq";
+import { allGalleryPhotos } from "@/data/gallery";
 
-export const jsonLd = [
+const galleryImageUrls = allGalleryPhotos.map((photo) => `${SITE_URL}${photo.src}`);
+const basePrice = cardStackConfig.cards[0].basePrice;
+
+/** Données structurées de la page d'accueil, en français ou en anglais. */
+export function buildHomeJsonLd(lang: "fr" | "en") {
+  const isEnglish = lang === "en";
+  const pageUrl = isEnglish ? `${SITE_URL}/en` : SITE_URL;
+  const faq = isEnglish ? faqEn : faqFr;
+
+  return [
   {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
@@ -46,7 +57,8 @@ export const jsonLd = [
     },
     geo: { "@type": "GeoCoordinates", latitude: 48.8044, longitude: 2.123 },
     priceRange: "€€€",
-    image: `${SITE_URL}/hero-real.jpg`,
+    image: galleryImageUrls,
+    logo: `${SITE_URL}/apple-icon.png`,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -73,7 +85,7 @@ export const jsonLd = [
           name: "L'Expérience Royale Complète — Balade à cheval Versailles",
           description:
             "2h de balade à cheval dans les jardins royaux de Versailles. Tickets d'accès au Château inclus. Guide expert. Chevaux adaptés à tous niveaux.",
-          price: "550",
+          price: String(basePrice),
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
           url: `${SITE_URL}/reservation`,
@@ -83,48 +95,51 @@ export const jsonLd = [
   },
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Où faire une balade à cheval à Versailles ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Versailles à Cheval propose des balades à cheval dans les jardins du Château de Versailles. Nos promenades équestres de 2 heures traversent le Grand Canal, les bosquets et les allées royales dessinées par Le Nôtre.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Faut-il savoir monter à cheval pour une balade à Versailles ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Non, aucune expérience équestre n'est nécessaire. Nos chevaux sont dressés pour accueillir des débutants. Un briefing de sécurité complet et une présentation individuelle avec votre cheval sont effectués avant chaque sortie.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Combien coûte une balade à cheval à Versailles ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "L'Expérience Royale Complète (2h de balade à cheval + tickets d'accès au Château de Versailles) est proposée à partir de 550€ par personne. Des options sont disponibles : visite guidée privée du Château (120€), déjeuner gastronomique Alain Ducasse (200€), transport depuis votre hôtel parisien (200-300€).",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Les enfants peuvent-ils faire une balade à cheval à Versailles ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Oui, à partir de 8 ans. Les enfants montent sur Marquise, notre jument Selle Français la plus douce. Pour les enfants de 5 à 7 ans, des balades en main accompagnées par un palefrenier sont disponibles en option.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Comment réserver une balade à cheval à Versailles ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "La réservation se fait directement en ligne sur versaillesacheval.fr/reservation : choisissez votre date, le nombre de participants, vos options, et confirmez par paiement sécurisé Stripe. Confirmation immédiate par email.",
-        },
-      },
-    ],
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: ["fr", "en"],
   },
-];
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: isEnglish
+      ? "Private horseback ride in the park of the Palace of Versailles"
+      : "Balade à cheval privée dans le parc du Château de Versailles",
+    description: isEnglish
+      ? "Private 2-hour horseback ride in the park of the Palace of Versailles with a dedicated guide. Palace access tickets included. Beginners welcome."
+      : "Balade à cheval privée de 2 heures dans le parc du Château de Versailles avec un guide dédié. Billets d'accès au Château inclus. Débutants bienvenus.",
+    image: galleryImageUrls.slice(0, 6),
+    brand: { "@type": "Brand", name: SITE_NAME },
+    offers: {
+      "@type": "Offer",
+      price: String(basePrice),
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_URL}/reservation${isEnglish ? "?lang=en" : ""}`,
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: isEnglish ? "Horseback riding in Versailles — photos" : "Balade à cheval à Versailles — photos",
+    url: pageUrl,
+    image: allGalleryPhotos.map((photo) => ({
+      "@type": "ImageObject",
+      contentUrl: `${SITE_URL}${photo.src}`,
+      name: isEnglish ? photo.altEn : photo.alt,
+      caption: isEnglish ? photo.altEn : photo.alt,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: lang,
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  },
+  ];
+}

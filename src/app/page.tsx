@@ -11,7 +11,9 @@ import { ZigZagGrid } from "@/components/sections/ZigZagGrid";
 import { Footer } from "@/components/sections/Footer";
 import { permanentRedirect } from "next/navigation";
 import { SITE_URL } from "@/config";
-import { jsonLd } from "@/data/homeJsonLd";
+import { buildHomeJsonLd } from "@/data/homeJsonLd";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { StickyBookBar } from "@/components/StickyBookBar";
 
 export const metadata: Metadata = {
   title: "Balade à Cheval Versailles | Expérience Royale dans les Jardins du Château",
@@ -32,6 +34,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   // L'ancienne URL ?lang=en redirige vers la vraie page anglaise, indexable
   if (langParam === "en") permanentRedirect("/en");
   const lang = "fr";
+  const jsonLd = buildHomeJsonLd(lang);
 
   return (
     <main className="bg-[#FAFAF8]">
@@ -43,6 +46,7 @@ export default async function HomePage({ searchParams }: PageProps) {
         />
       ))}
       <Hero lang={lang} />
+      <TrustBar lang={lang} />
       <NarrativeText lang={lang} />
       <ProgrammeSection lang={lang} />
       <HorseCareSection lang={lang} />
@@ -52,6 +56,7 @@ export default async function HomePage({ searchParams }: PageProps) {
       <GallerySection lang={lang} />
       <ZigZagGrid lang={lang} />
       <Footer lang={lang} />
+      <StickyBookBar lang={lang} />
     </main>
   );
 }
