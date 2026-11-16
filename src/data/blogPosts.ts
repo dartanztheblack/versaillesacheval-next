@@ -22,8 +22,8 @@ export interface BlogPost {
 export const blogPostsData: BlogPost[] = [
   {
     id: "1",
-    title: "Les 10 Activités Immanquables à Paris en 2024",
-    titleEn: "Top 10 Unmissable Activities in Paris 2024",
+    title: "Les 10 Activités Immanquables à Paris en 2026",
+    titleEn: "Top 10 Unmissable Activities in Paris 2026",
     slug: "activites-immanquables-paris",
     excerpt: "Découvrez les expériences incontournables à Paris : de la Tour Eiffel à Versailles à cheval, voici ce que vous ne devez absolument pas manquer.",
     excerptEn: "Discover the must-do experiences in Paris: from the Eiffel Tower to Versailles horseback riding, here's what you absolutely cannot miss.",
@@ -124,8 +124,8 @@ If you could only choose one activity in Paris, trust the thousands of travelers
   },
   {
     id: "3",
-    title: "Choses Immanquables à Paris : Le Guide Ultime 2024",
-    titleEn: "Unmissable Things in Paris: The Ultimate 2024 Guide",
+    title: "Choses Immanquables à Paris : Le Guide Ultime 2026",
+    titleEn: "Unmissable Things in Paris: The Ultimate 2026 Guide",
     slug: "choses-immanquables-paris-guide",
     excerpt: "Paris regorge de trésors à découvrir. Voici notre guide complet des expériences absolument immanquables lors de votre séjour dans la capitale.",
     excerptEn: "Paris is full of treasures to discover. Here is our complete guide to absolutely unmissable experiences during your stay in the capital.",
@@ -202,7 +202,7 @@ Paris est la capitale mondiale du luxe. Voici comment vivre des expériences d'e
    - Visite privée du Château
    - Balade de 2h à cheval dans les jardins
    - Service conciergerie dédié
-   - À partir de 490€ par personne
+   - À partir de 550€ par personne
 
 2. **Dîner 3 étoiles avec vue sur la Tour Eiffel**
 
@@ -227,7 +227,7 @@ Paris is the world capital of luxury. Here's how to live exceptional experiences
    - Private Château visit
    - 2-hour horseback ride in the gardens
    - Dedicated concierge service
-   - From €490 per person
+   - From €550 per person
 
 2. **3-star dinner with Eiffel Tower view**
 
@@ -297,7 +297,7 @@ The **Versailles horseback riding** is the perfect activity for a weekend becaus
 - A unique experience to share
 
 [Book your royal weekend]`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+    image: "/cavalier-grand-canal.webp",
     category: "Week-end",
     categoryEn: "Weekend",
     published: true,
@@ -427,7 +427,7 @@ Imaginez le scénario : vous montez à cheval avec votre bien-aimée dans les ja
 
 Vous arrivez au bord du Grand Canal, vous descendez de cheval, vous mettez à genoux...
 
-### Notre Package "Demande en Mariage" - 399€
+### Notre formule "Demande en Mariage" — sur devis, à partir de 550€ par personne
 - 🐴 Balade privée 2h pour 2 personnes
 - 🌅 Timing coucher de soleil
 - 🥂 Champagne et macarons
@@ -444,7 +444,7 @@ Imagine the scenario: you ride horseback with your loved one in the gardens of t
 
 You arrive at the edge of the Grand Canal, you dismount, you get down on one knee...
 
-### Our "Marriage Proposal" Package - €399
+### Our "Marriage Proposal" package — on request, from €550 per person
 - 🐴 Private 2h ride for 2 people
 - 🌅 Sunset timing
 - 🥂 Champagne and macarons
@@ -477,7 +477,7 @@ You arrive at the edge of the Grand Canal, you dismount, you get down on one kne
 ### 🥇 1. Versailles à Cheval (4.9/5)
 **L'EXPERIENCE UNIQUE**
 - Seul centre dans le domaine royal
-- Prix : 89-249€
+- Prix : à partir de 550€ par personne, billets du Château inclus
 - Accès privilégié au Château
 
 ### 🥈 2. Fontainebleau (4.5/5)
@@ -497,7 +497,7 @@ Pour une **expérience inoubliable**, choisissez Versailles. Nulle part ailleurs
 ### 🥇 1. Versailles Horse Riding (4.9/5)
 **THE UNIQUE EXPERIENCE**
 - Only center in the royal estate
-- Price: €89-249
+- Price: from €550 per person, Palace tickets included
 - Privileged access to the Palace
 
 ### 🥈 2. Fontainebleau (4.5/5)
@@ -524,62 +524,64 @@ For an **unforgettable experience**, choose Versailles. Nowhere else can you rid
   },
   {
     id: "10",
-    title: "Prix Balade Cheval Versailles 2025 | Tarifs & Promotions",
-    titleEn: "Versailles Horse Riding Prices 2025 | Rates & Promotions",
+    title: "Prix Balade Cheval Versailles 2026 | Tarifs & Options",
+    titleEn: "Versailles Horse Riding Prices 2026 | Rates & Options",
     slug: "prix-balade-cheval-versailles",
-    excerpt: "Combien coûte une balade à cheval à Versailles ? Découvrez nos tarifs 2025 : Découverte 89€, Prestige 129€, Royal 249€. Réductions famille et groupes.",
-    excerptEn: "How much does a horseback ride at Versailles cost? Discover our 2025 rates: Discovery €89, Prestige €129, Royal €249. Family and group discounts.",
-    content: `## Tarifs des Balades à Cheval à Versailles (2025)
+    excerpt: "Combien coûte une balade à cheval à Versailles ? 550€ par personne : 2h de balade privée et billets du Château inclus. Options : visite guidée, déjeuner, transport.",
+    excerptEn: "How much does a horseback ride at Versailles cost? €550 per person: 2-hour private ride and Palace tickets included. Options: guided tour, lunch, transfer.",
+    content: `## Tarifs des Balades à Cheval à Versailles (2026)
 
-### Nos Formules
+### Notre formule
 
-**🌟 Découverte - 89€ (1h30)**
-- Cheval adapté
-- Guide professionnel
-- Équipement fourni
+**L'Expérience Royale Complète — à partir de 550€ par personne**
+- Balade privée de 2h dans le parc du Château
+- Billets d'accès au Château inclus
+- Cheval choisi selon votre niveau, équipement fourni
+- Guide dédié, débutants bienvenus
 
-**⭐ Prestige - 129€ (2h)** - POPULAIRE
-- Photos souvenirs OFFERTES
-- Rafraîchissements
-- Diplôme souvenir
+### Les options
 
-**👑 Royal - 249€ (demi-journée)**
-- Déjeuner panoramique
-- Champagne
-- Album photo professionnel
+- **Visite guidée privée du Château (1h30)** : 120€ pour une personne, 240€ pour le groupe à partir de 2
+- **Déjeuner gastronomique** : 200€ par personne
+- **Déjeuner bistro dans un restaurant du Château** : 100€ par personne
+- **Transport privé depuis votre hôtel parisien** : 200€ jusqu'à 3 personnes, 300€ au-delà
 
-### Réductions
-- 👨‍👩‍👧‍👦 Famille : -10% dès 4 pers
-- 🎂 Anniversaire : -15%
-- 💑 Couples : -5%
+### Combien de temps prévoir ?
 
-**Réservez au meilleur prix !**`,
-    contentEn: `## Versailles Horse Riding Prices (2025)
+La balade à cheval dure 2 heures. Avec la visite guidée du Château (1h30), le déjeuner et le domaine de Trianon, comptez la journée : la durée dépend des options choisies.
 
-### Our Packages
+### Annulation
 
-**🌟 Discovery - €89 (1h30)**
-- Suitable horse
-- Professional guide
-- Equipment provided
+Annulation gratuite jusqu'à 48h avant l'expérience.
 
-**⭐ Prestige - €129 (2h)** - POPULAR
-- FREE souvenir photos
-- Refreshments
-- Certificate
+**Réservez votre date en ligne.**`,
+    contentEn: `## Versailles Horse Riding Prices (2026)
 
-**👑 Royal - €249 (half-day)**
-- Panoramic lunch
-- Champagne
-- Professional photo album
+### Our package
 
-### Discounts
-- 👨‍👩‍👧‍👦 Family: -10% from 4 people
-- 🎂 Birthday: -15%
-- 💑 Couples: -5%
+**The Complete Royal Experience — from €550 per person**
+- Private 2-hour ride in the park of the Palace
+- Palace access tickets included
+- Horse matched to your level, equipment provided
+- Dedicated guide, beginners welcome
 
-**Book at the best price!**`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+### Options
+
+- **Private guided tour of the Palace (1.5 hours)**: €120 for one person, €240 for the group from 2 people
+- **Gastronomic lunch**: €200 per person
+- **Bistro lunch in one of the Palace restaurants**: €100 per person
+- **Private transfer from your Paris hotel**: €200 up to 3 people, €300 beyond
+
+### How long should you plan?
+
+The horseback ride lasts 2 hours. With the guided Palace tour (1.5 hours), lunch and the Trianon estate, plan a full day: the duration depends on the options you choose.
+
+### Cancellation
+
+Free cancellation up to 48 hours before the experience.
+
+**Book your date online.**`,
+    image: "/cavalier-grand-canal.webp",
     category: "Tarifs",
     categoryEn: "Pricing",
     published: true,
@@ -594,13 +596,13 @@ For an **unforgettable experience**, choose Versailles. Nowhere else can you rid
     title: "EVJF Versailles à Cheval | Enterrement Vie Jeune Fille Original",
     titleEn: "Bachelorette Party Versailles Horseback | Original Hen Do",
     slug: "evjf-versailles-cheval",
-    excerpt: "Organisez un EVJF inoubliable à Versailles à cheval. Moment magique entre copines dans les jardins du Château. Devis personnalisé dès 79€/pers.",
-    excerptEn: "Organize an unforgettable bachelorette party at Versailles on horseback. Magical moment with friends in the Palace gardens. Custom quote from €79/person.",
+    excerpt: "Organisez un EVJF inoubliable à Versailles à cheval. Moment magique entre copines dans les jardins du Château. Devis sur mesure, à partir de 550€ par personne.",
+    excerptEn: "Organize an unforgettable bachelorette party at Versailles on horseback. Magical moment with friends in the Palace gardens. Tailor-made quote, from €550 per person.",
     content: `## Le Meilleur EVJF de votre vie !
 
 Marre des EVJF classiques ? Offrez à votre meilleure amie une **expérience royale** qu'elle n'oubliera jamais !
 
-### Forfait EVJF Spécial - 79€/personne (groupe 6+)
+### Formule EVJF — devis sur mesure, à partir de 550€ par personne
 - 🐴 Balade à cheval 2h
 - 🥂 Champagne et macarons
 - 📸 Photoshoot groupe
@@ -620,7 +622,7 @@ Marre des EVJF classiques ? Offrez à votre meilleure amie une **expérience roy
 
 Tired of classic bachelorette parties? Treat your best friend to a **royal experience** she'll never forget!
 
-### Special Bachelorette Package - €79/person (group of 6+)
+### Bachelorette package — tailor-made quote, from €550 per person
 - 🐴 2-hour horseback ride
 - 🥂 Champagne and macarons
 - 📸 Group photoshoot
@@ -804,7 +806,6 @@ The **Versailles horseback ride** because it's:
 - ✅ Chevaux adaptés aux enfants
 - ✅ À partir de 8 ans
 - ✅ Guides pédagogues
-- ✅ Réduction famille -10%
 
 ### Ce que les enfants adorent :
 - 🐴 Leur "propre" cheval
@@ -828,7 +829,6 @@ The **Versailles horseback ride** because it's:
 - ✅ Horses adapted for children
 - ✅ From 8 years old
 - ✅ Pedagogical guides
-- ✅ Family discount -10%
 
 ### What children love:
 - 🐴 Their "own" horse
@@ -1424,7 +1424,7 @@ After the classic interior visit of the Palace, discover the exterior on horseba
 2. **Afternoon**: Horseback ride in the gardens
 
 **See everything at the Palace!**`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+    image: "/cavalier-grand-canal.webp",
     category: "Château de Versailles",
     categoryEn: "Palace of Versailles",
     published: true,

@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieBanner } from "@/components/CookieBanner";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 import { SITE_URL, SITE_NAME } from "@/config";
 
@@ -54,35 +55,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [`${SITE_URL}/hero-real.jpg`],
   },
-  alternates: {
-    canonical: SITE_URL,
-    languages: { fr: SITE_URL, en: `${SITE_URL}?lang=en` },
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
 };
-
-const GA_ID = "G-9KKLX053HJ";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${inter.variable} ${cormorant.variable}`}>
-      <head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`,
-          }}
-        />
-      </head>
       <body>
         {children}
         <CookieBanner />
+        <GoogleAnalytics />
         <Analytics />
         <SpeedInsights />
       </body>

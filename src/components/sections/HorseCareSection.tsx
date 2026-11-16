@@ -41,7 +41,7 @@ export function HorseCareSection({ lang = "fr" }: HorseCareSectionProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+    <section id="nos-chevaux" className="section-pad" style={{ background: "#FAFAF8", scrollMarginTop: "24px", paddingTop: "180px", paddingBottom: "180px" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header */}

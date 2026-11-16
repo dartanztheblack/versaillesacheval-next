@@ -50,7 +50,8 @@ export function BreathSection({ lang = "fr" }: BreathSectionProps) {
         </RevealOnScroll>
         <RevealOnScroll delay={2}>
           <Link
-            href={`/reservation?lang=${lang}`}
+            className="cta"
+          href={`/reservation?lang=${lang}`}
             style={{
               display: "inline-flex",
               alignItems: "center",

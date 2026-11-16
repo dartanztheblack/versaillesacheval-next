@@ -1,6 +1,7 @@
 "use client";
 
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { LineIcon, type LineIconName } from "@/components/Ornaments";
 
 interface ProgrammeSectionProps {
   lang?: string;
@@ -9,7 +10,7 @@ interface ProgrammeSectionProps {
 interface ProgrammeStep {
   time: string;
   label: string;
-  icon: string;
+  icon: LineIconName;
   items: string[];
   included: boolean;
   isOption?: boolean;
@@ -20,7 +21,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Option",
     label: "Transfert privé",
-    icon: "🚗",
+    icon: "car",
     items: [
       "Pick-up depuis votre hôtel parisien le matin.",
       "Retour en véhicule privé en fin de journée — Paris · Versailles · Paris.",
@@ -31,7 +32,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Matin",
     label: "Découverte du Château",
-    icon: "🏰",
+    icon: "chateau",
     items: [
       "Arrivée libre en matinée. Présentez vos billets PDF directement à l'entrée.",
       "Visite guidée exclusive de 1h30 — immersion dans l'histoire des grands appartements royaux.",
@@ -41,7 +42,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Midi",
     label: "Gastronomie française",
-    icon: "🍽",
+    icon: "cloche",
     items: [
       "Déjeuner dans un cadre idyllique au bord de l'eau.",
       "Formule tout inclus : Entrée · Plat · Dessert · Eau · Café.",
@@ -52,7 +53,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Après-midi",
     label: "Randonnée équestre royale",
-    icon: "🐴",
+    icon: "horse",
     items: [
       "Balade privée de 2 heures à travers les jardins et les sentiers secrets du domaine.",
       "Attribution d'un cheval selon votre niveau (débutant au confirmé) et votre morphologie.",
@@ -68,7 +69,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Fin de journée",
     label: "Domaine de Trianon & Hameau",
-    icon: "🌿",
+    icon: "trianon",
     items: [
       "Grand Trianon · Petit Trianon — accès inclus.",
       "Théâtre de la Reine · Hameau de la Reine.",
@@ -78,7 +79,7 @@ const programmeFr: ProgrammeStep[] = [
   {
     time: "Option",
     label: "Survol aérien en Cessna 177",
-    icon: "✈",
+    icon: "plane",
     items: [
       "Clôturez votre journée par un survol depuis l'aérodrome à proximité.",
       "Selon disponibilités et conditions météorologiques.",
@@ -100,7 +101,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Option",
     label: "Private transfer",
-    icon: "🚗",
+    icon: "car",
     items: [
       "Pick-up from your Parisian hotel in the morning.",
       "Return by private vehicle at the end of the day — Paris · Versailles · Paris.",
@@ -111,7 +112,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Morning",
     label: "Château Discovery",
-    icon: "🏰",
+    icon: "chateau",
     items: [
       "Free arrival in the morning. Present your PDF tickets directly at the entrance.",
       "Exclusive 1.5-hour guided tour — immersive journey through the royal apartments.",
@@ -121,7 +122,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Noon",
     label: "French Gastronomy",
-    icon: "🍽",
+    icon: "cloche",
     items: [
       "Lunch in an idyllic waterside setting.",
       "All-inclusive menu: Starter · Main · Dessert · Water · Coffee.",
@@ -132,7 +133,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Afternoon",
     label: "Royal Equestrian Ride",
-    icon: "🐴",
+    icon: "horse",
     items: [
       "Private 2-hour ride through the gardens and secret paths of the estate.",
       "Horse matched to your level (beginner to experienced) and build.",
@@ -148,7 +149,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Late afternoon",
     label: "Trianon Estate & Hamlet",
-    icon: "🌿",
+    icon: "trianon",
     items: [
       "Grand Trianon · Petit Trianon — included in your day.",
       "Queen's Theatre · Queen's Hamlet.",
@@ -158,7 +159,7 @@ const programmeEn: ProgrammeStep[] = [
   {
     time: "Option",
     label: "Aerial flight in Cessna 177",
-    icon: "✈",
+    icon: "plane",
     items: [
       "End your day with a flight from the nearby airfield.",
       "Subject to availability and weather conditions.",
@@ -181,7 +182,7 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
   const programme = isEnglish ? programmeEn : programmeFr;
 
   return (
-    <section id="programme" style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px" }}>
+    <section id="programme" className="section-pad" style={{ background: "#F4F2EE", paddingTop: "180px", paddingBottom: "180px" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header */}
@@ -228,15 +229,15 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
         {/* Timeline */}
         <div style={{ position: "relative" }}>
           {/* Ligne verticale */}
-          <div style={{ position: "absolute", left: "80px", top: "20px", bottom: "20px", width: "1px", background: "rgba(44,62,45,0.15)" }} aria-hidden="true" />
+          <div className="prog-line" style={{ position: "absolute", left: "80px", top: "20px", bottom: "20px", width: "1px", background: "rgba(44,62,45,0.15)" }} aria-hidden="true" />
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
             {programme.map((step, i) => (
               <RevealOnScroll key={i} delay={(i % 3) as 0 | 1 | 2 | 3 | 4}>
-                <div style={{ display: "flex", gap: "48px", paddingBottom: i < programme.length - 1 ? "80px" : "0" }}>
+                <div className="prog-row" style={{ display: "flex", gap: "48px", paddingBottom: i < programme.length - 1 ? "80px" : "0" }}>
                   {/* Colonne gauche : horaire + point */}
-                  <div style={{ width: "80px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "flex-end", paddingTop: "4px", position: "relative" }}>
-                    <span style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: step.isOption ? "#C9B99A" : "#8B7355", fontWeight: 500, textAlign: "right", lineHeight: 1.4 }}>
+                  <div className="prog-time" style={{ width: "80px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "flex-end", paddingTop: "4px", position: "relative" }}>
+                    <span style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: step.isOption ? "#C9B99A" : "#8B7355", fontWeight: 500, textAlign: "right", lineHeight: 1.4, paddingRight: "14px" }}>
                       {step.time}
                     </span>
                     {/* Point sur la ligne */}
@@ -251,6 +252,7 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
 
                   {/* Contenu */}
                   <div style={{ flex: 1, paddingTop: "0" }}>
+                    <LineIcon name={step.icon} size={34} color={step.isOption ? "#8B7355" : "#2C3E2D"} style={{ display: "block", marginBottom: "14px" }} />
                     <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "16px", flexWrap: "wrap" }}>
                       <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "1.4rem", color: "#1A1A1A", lineHeight: 1.2 }}>
                         {step.label}
@@ -274,7 +276,7 @@ export function ProgrammeSection({ lang = "fr" }: ProgrammeSectionProps) {
                       ))}
                     </ul>
                     {step.images && (
-                      <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
+                      <div className="prog-photos" style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
                         {step.images.map((img, j) => (
                           <div key={j} style={{ aspectRatio: "4/3", overflow: "hidden", background: "#E8E4DC" }}>
                             <img
