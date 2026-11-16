@@ -2,26 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { CONSENT_EVENT, CONSENT_KEY } from "@/lib/consent";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const [isEnglish, setIsEnglish] = useState(false);
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem("cookie_consent");
+      const consent = localStorage.getItem(CONSENT_KEY);
       if (!consent) setVisible(true);
+      setIsEnglish(
+        window.location.pathname.startsWith("/en") ||
+          new URLSearchParams(window.location.search).get("lang") === "en"
+      );
     } catch {
       // private browsing — don't show
     }
   }, []);
 
   const accept = () => {
-    try { localStorage.setItem("cookie_consent", "accepted"); } catch {}
+    try { localStorage.setItem(CONSENT_KEY, "accepted"); } catch {}
+    window.dispatchEvent(new Event(CONSENT_EVENT));
     setVisible(false);
   };
 
   const decline = () => {
-    try { localStorage.setItem("cookie_consent", "declined"); } catch {}
+    try { localStorage.setItem(CONSENT_KEY, "declined"); } catch {}
     setVisible(false);
   };
 
@@ -30,7 +37,8 @@ export function CookieBanner() {
   return (
     <div
       role="dialog"
-      aria-label="Consentement aux cookies"
+      className="cookie-banner"
+      aria-label={isEnglish ? "Cookie consent" : "Consentement aux cookies"}
       style={{
         position: "fixed",
         bottom: "24px",
@@ -49,9 +57,11 @@ export function CookieBanner() {
       }}
     >
       <p style={{ flex: 1, fontSize: "13px", lineHeight: 1.7, color: "rgba(255,255,255,0.8)", minWidth: "200px" }}>
-        Ce site utilise des analytics anonymisés (Vercel) pour améliorer votre expérience. Aucun cookie publicitaire.{" "}
+        {isEnglish
+          ? "We use audience measurement (Vercel, Google Analytics) to improve the site. No advertising cookies."
+          : "Ce site utilise des outils de mesure d'audience (Vercel, Google Analytics) pour s'améliorer. Aucun cookie publicitaire."}{" "}
         <Link href="/confidentialite" style={{ color: "#8B7355", textDecoration: "underline" }}>
-          En savoir plus
+          {isEnglish ? "Learn more" : "En savoir plus"}
         </Link>
       </p>
       <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
@@ -59,13 +69,13 @@ export function CookieBanner() {
           onClick={decline}
           style={{ padding: "10px 20px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: "rgba(255,255,255,0.6)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", cursor: "pointer" }}
         >
-          Refuser
+          {isEnglish ? "Decline" : "Refuser"}
         </button>
         <button
           onClick={accept}
           style={{ padding: "10px 24px", background: "#2C3E2D", border: "none", color: "#FAFAF8", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", cursor: "pointer", fontWeight: 500 }}
         >
-          Accepter
+          {isEnglish ? "Accept" : "Accepter"}
         </button>
       </div>
     </div>

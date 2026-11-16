@@ -8,6 +8,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cardStackConfig, addOnOptions } from "@/config";
 import { cn } from "@/lib/utils";
+import { homeHref } from "@/lib/i18n";
 
 interface Props {
   searchParams: { lang?: string; tour?: string; success?: string; canceled?: string };
@@ -55,7 +56,7 @@ export function ReservationClient({ searchParams }: Props) {
     ? ["Beginner", "Intermediate", "Experienced"]
     : ["Débutant", "Intermédiaire", "Expérimenté"];
 
-  const baseAmount = (tour?.basePrice || 490) * participants;
+  const baseAmount = (tour?.basePrice ?? 0) * participants;
   const addOnsAmount = selectedAddOns.reduce((sum, id) => sum + getAddOnPrice(id, participants), 0);
   const totalAmount = baseAmount + addOnsAmount;
 
@@ -116,9 +117,9 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Navbar */}
       <nav style={{ borderBottom: "1px solid rgba(44,62,45,0.1)", background: "#FAFAF8" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="booking-nav" style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link
-            href={`/?lang=${lang}`}
+            href={homeHref(lang)}
             style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.1rem", color: "#1A1A1A", letterSpacing: "0.03em" }}
           >
             Versailles à Cheval
@@ -191,7 +192,7 @@ export function ReservationClient({ searchParams }: Props) {
 
           <br />
           <Link
-            href={`/?lang=${lang}`}
+            href={homeHref(lang)}
             style={{ color: "#6B6B5F", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             ← {isEnglish ? "Back to home" : "Retour à l'accueil"}
@@ -201,10 +202,10 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Steps 1 & 2 */}
       {step !== 3 && (
-        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "96px 32px 120px" }}>
+        <div className="booking-wrap" style={{ maxWidth: "1060px", margin: "0 auto", padding: "96px 32px 120px" }}>
 
             {/* Main form area — 2 columns */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
+            <div className="booking-grid" style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
 
               {/* Left: form — centré dans sa colonne */}
               <div style={{ maxWidth: "480px", margin: "0 auto", width: "100%" }}>
@@ -324,7 +325,7 @@ export function ReservationClient({ searchParams }: Props) {
                             +
                           </button>
                           <span style={{ marginLeft: "20px", fontSize: "14px", color: "#6B6B5F" }}>
-                            × {tour?.basePrice || 490}€ = <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>{baseAmount}€</strong>
+                            × {tour?.basePrice ?? 0}€ = <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>{baseAmount}€</strong>
                           </span>
                         </div>
                       </div>
@@ -536,7 +537,7 @@ export function ReservationClient({ searchParams }: Props) {
 
                   <div style={{ borderTop: "1px solid rgba(44,62,45,0.1)", paddingTop: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
-                      <span style={{ color: "#6B6B5F" }}>{(tour?.basePrice || 490)}€ × {participants}</span>
+                      <span style={{ color: "#6B6B5F" }}>{(tour?.basePrice ?? 0)}€ × {participants}</span>
                       <span style={{ color: "#1A1A1A" }}>{baseAmount}€</span>
                     </div>
                     {selectedAddOns.map((id) => {

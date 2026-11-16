@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SITE_URL, ADDON_PRICES } from "@/config";
+import { SITE_URL, ADDON_PRICES, cardStackConfig } from "@/config";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
-const BASE_PRICE_PER_PERSON = 49000; // 490€ en centimes
+// Source unique : le prix affiché sur le site (config.ts), en centimes
+const BASE_PRICE_PER_PERSON = cardStackConfig.cards[0].basePrice * 100;
 
 const PRODUCT_NAMES: Record<string, { fr: string; en: string }> = {
   royal_complete: {
@@ -87,6 +88,7 @@ export async function POST(request: NextRequest) {
     success_url: `${origin}/reservation?success=true&lang=${lang}`,
     cancel_url: `${origin}/reservation?canceled=true&lang=${lang}`,
     "metadata[product_id]": productId,
+    "metadata[date]": typeof date === "string" ? date.slice(0, 100) : "",
     "metadata[participants]": validParticipants.toString(),
     "metadata[addons]": addOns.join(","),
     "metadata[customer_name]": customerName || "",

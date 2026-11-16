@@ -4,6 +4,7 @@ import Link from "next/link";
 import { blogPostsData } from "@/data/blogPosts";
 import { Footer } from "@/components/sections/Footer";
 import { SITE_URL, SITE_NAME } from "@/config";
+import { homeHref } from "@/lib/i18n";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -86,7 +87,7 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
       <nav style={{ borderBottom: "1px solid rgba(44,62,45,0.1)", background: "#FAFAF8" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link
-            href={`/?lang=${lang}`}
+            href={homeHref(lang)}
             style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.1rem", color: "#1A1A1A", letterSpacing: "0.03em" }}
           >
             Versailles à Cheval

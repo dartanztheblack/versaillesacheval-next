@@ -5,8 +5,11 @@ import { SITE_URL } from "@/config";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
 
+  const homeLanguages = { fr: SITE_URL, en: `${SITE_URL}/en` };
+
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0, alternates: { languages: homeLanguages } },
+    { url: `${SITE_URL}/en`, lastModified: now, changeFrequency: "weekly", priority: 0.9, alternates: { languages: homeLanguages } },
     { url: `${SITE_URL}/reservation`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/confidentialite`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE_PHONE, SITE_EMAIL } from "@/config";
+import { homeHref } from "@/lib/i18n";
 
 interface FooterProps {
   lang?: string;
@@ -48,7 +49,7 @@ export function Footer({ lang = "fr" }: FooterProps) {
             </p>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "14px" }}>
               {[
-                { href: `#nos-chevaux`, label: isEnglish ? "Our horses" : "Nos chevaux" },
+                { href: `${homeHref(lang)}#nos-chevaux`, label: isEnglish ? "Our horses" : "Nos chevaux" },
                 { href: `/reservation?lang=${lang}`, label: isEnglish ? "Book an experience" : "Réserver une expérience" },
                 { href: `/blog?lang=${lang}`, label: isEnglish ? "Journal" : "Journal" },
               ].map((link) => (
@@ -70,6 +71,11 @@ export function Footer({ lang = "fr" }: FooterProps) {
               <li>
                 <a href={`tel:${SITE_PHONE}`} style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", letterSpacing: "0.05em" }}>
                   {SITE_PHONE}
+                </a>
+              </li>
+              <li>
+                <a href={`https://wa.me/${SITE_PHONE.replace("+", "")}`} target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", letterSpacing: "0.05em" }}>
+                  WhatsApp
                 </a>
               </li>
               <li>
@@ -97,7 +103,8 @@ export function Footer({ lang = "fr" }: FooterProps) {
               CGU
             </Link>
             <Link
-              href={`/?lang=${lang === "fr" ? "en" : "fr"}`}
+              href={homeHref(isEnglish ? "fr" : "en")}
+              hrefLang={isEnglish ? "fr" : "en"}
               style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}
             >
               {isEnglish ? "Version française" : "English version"}

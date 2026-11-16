@@ -54,3 +54,18 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ── Mobile : les styles en ligne n'ont pas de media queries, on corrige ici ── */
+@media (max-width: 860px) {
+  .booking-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 40px !important; }
+  .booking-wrap { padding: 48px 20px 72px !important; }
+  .booking-nav { padding: 16px 20px !important; }
+}
+@media (max-width: 640px) {
+  .site-nav { padding: 18px 16px !important; }
+  .site-nav-links { gap: 14px !important; }
+  .site-nav-secondary { display: none !important; }
+  .site-nav-cta { padding: 9px 14px !important; }
+  .cookie-banner { bottom: 12px !important; padding: 14px 16px !important; gap: 12px !important; }
+  .cookie-banner p { font-size: 12px !important; line-height: 1.5 !important; }
+}
