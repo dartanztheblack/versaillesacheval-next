@@ -1,6 +1,7 @@
 "use client";
 
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { SunDivider } from "@/components/Ornaments";
 
 interface NarrativeTextProps {
   lang?: string;
@@ -10,7 +11,7 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
   const isEnglish = lang === "en";
 
   return (
-    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+    <section className="section-pad" style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
       <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center", paddingLeft: "32px", paddingRight: "32px" }}>
         <RevealOnScroll>
           <p style={{ color: "#2C3E2D", letterSpacing: "0.4em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "48px" }}>
@@ -30,6 +31,9 @@ export function NarrativeText({ lang = "fr" }: NarrativeTextProps) {
               ? "There is no better vantage point to understand Versailles than from horseback. The scale of Le Nôtre's allées, the silence between the fountains, the smell of old oak and cut grass — things a tour bus will never give you."
               : "Il n'existe pas de meilleur point de vue pour comprendre Versailles que depuis le dos d'un cheval. L'échelle des allées de Le Nôtre, le silence entre les fontaines, l'odeur du vieux chêne et de l'herbe fraîche — des sensations qu'aucun bus touristique ne peut vous offrir."}
           </p>
+        </RevealOnScroll>
+        <RevealOnScroll delay={3}>
+          <SunDivider style={{ marginTop: "72px" }} />
         </RevealOnScroll>
       </div>
     </section>

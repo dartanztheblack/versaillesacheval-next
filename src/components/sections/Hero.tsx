@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { heroConfig, heroConfigEn } from "@/config";
+import { homeHref } from "@/lib/i18n";
+import { HorseMark } from "@/components/Ornaments";
 
 interface HeroProps {
   lang?: string;
@@ -11,8 +13,8 @@ interface HeroProps {
 export function Hero({ lang = "fr" }: HeroProps) {
   const isEnglish = lang === "en";
   const config = isEnglish ? heroConfigEn : heroConfig;
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const eyebrowRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
@@ -31,25 +33,24 @@ export function Hero({ lang = "fr" }: HeroProps) {
     <section style={{ position: "relative", width: "100%", minHeight: "100vh", overflow: "hidden", background: "#1A1A1A" }}>
 
       {/* Navbar */}
-      <nav style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 30, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "28px 40px" }}>
-        <span style={{ fontFamily: "var(--font-serif)", color: "rgba(255,255,255,0.95)", fontSize: "1.15rem", letterSpacing: "0.04em", fontWeight: 300, display: "flex", alignItems: "center", gap: "10px" }}>
-          <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ opacity: 0.9, flexShrink: 0 }}>
-            <path d="M72 18c-3-1-6 0-8 2l-4 4c-4-2-9-3-14-2-8 1-15 6-19 13-3 5-4 11-3 17l-6 8c-2 3-2 6 0 8l2 2c2 2 5 2 7 0l5-6 3 1c2 5 6 9 11 11v8c0 3 2 5 5 5h2c3 0 5-2 5-5v-9c4-2 7-5 9-9l8 3c3 1 6 0 7-3l1-2c1-3 0-6-3-7l-8-3c0-4-1-8-3-11l4-5c2-2 3-5 2-8l-1-3c-1-3-4-5-7-5l-3 1c-1-4-4-7-7-8l-5-1 3-3c2-2 2-5 1-7l-1-3c-1-2-3-3-5-3z" fill="rgba(255,255,255,0.85)"/>
-          </svg>
+      <nav className="site-nav" style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 30, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "28px 40px" }}>
+        <span className="site-nav-logo" style={{ fontFamily: "var(--font-serif)", color: "rgba(255,255,255,0.95)", fontSize: "1.15rem", letterSpacing: "0.04em", fontWeight: 300, display: "flex", alignItems: "center", gap: "10px", whiteSpace: "nowrap" }}>
+          <HorseMark size={22} color="rgba(255,255,255,0.9)" />
           Versailles à Cheval
         </span>
-        <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
-          <Link href={`/blog?lang=${lang}`} style={{ color: "rgba(255,255,255,0.65)", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 0.2s" }}>
+        <div className="site-nav-links" style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+          <Link className="site-nav-secondary" href={`/blog?lang=${lang}`} style={{ color: "rgba(255,255,255,0.65)", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 0.2s" }}>
             Journal
           </Link>
           <div style={{ display: "flex", gap: "12px" }}>
-            <Link href="?lang=fr" style={{ color: !isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: !isEnglish ? 500 : 400 }}>FR</Link>
+            <Link href={homeHref("fr")} hrefLang="fr" style={{ color: !isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: !isEnglish ? 500 : 400 }}>FR</Link>
             <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "11px" }}>|</span>
-            <Link href="?lang=en" style={{ color: isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: isEnglish ? 500 : 400 }}>EN</Link>
+            <Link href={homeHref("en")} hrefLang="en" style={{ color: isEnglish ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "0.15em", fontWeight: isEnglish ? 500 : 400 }}>EN</Link>
           </div>
           <Link
+            className="site-nav-cta"
             href={`/reservation?lang=${lang}`}
-            style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.3)", color: "rgba(255,255,255,0.9)", padding: "10px 20px", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", backdropFilter: "blur(8px)", transition: "background 0.2s" }}
+            style={{ background: "rgba(255,255,255,0.12)", whiteSpace: "nowrap", border: "1px solid rgba(255,255,255,0.3)", color: "rgba(255,255,255,0.9)", padding: "10px 20px", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", backdropFilter: "blur(8px)", transition: "background 0.2s" }}
           >
             {isEnglish ? "Book" : "Réserver"}
           </Link>
@@ -59,6 +60,7 @@ export function Hero({ lang = "fr" }: HeroProps) {
       {/* Image plein écran */}
       <div style={{ position: "absolute", inset: 0 }} aria-hidden="true">
         <img
+          className="hero-bg"
           src={config.backgroundImage}
           alt={config.backgroundAlt}
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
@@ -69,32 +71,34 @@ export function Hero({ lang = "fr" }: HeroProps) {
 
       {/* Contenu centré */}
       <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "120px 32px 80px", textAlign: "center" }}>
-        <p
+        {/* Le titre principal (H1) décrit l'activité pour Google ; le nom de marque reste en grand juste dessous */}
+        <h1
           ref={eyebrowRef}
-          style={{ color: "rgba(255,255,255,0.6)", letterSpacing: "0.35em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "24px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          style={{ color: "rgba(255,255,255,0.78)", letterSpacing: "0.3em", fontSize: "11px", fontWeight: 500, textTransform: "uppercase", lineHeight: 1.7, maxWidth: "560px", marginBottom: "24px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {config.subtitle}
-        </p>
-        <h1
+        </h1>
+        <p
           ref={titleRef}
           style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(3.5rem, 10vw, 9rem)", color: "white", lineHeight: 0.92, letterSpacing: "-0.02em", marginBottom: "28px", opacity: 0, transform: "translateY(20px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}
         >
           {config.title}
-        </h1>
+        </p>
         <p
           ref={subRef}
           style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "500px", marginBottom: "48px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {isEnglish
-            ? "A complete royal experience — horseback riding through Versailles, gourmet dining, and the grandeur of Trianon. All in one unforgettable day."
-            : "Une expérience royale complète — balade à cheval dans Versailles, gastronomie française, et la splendeur de Trianon. Tout en une seule journée inoubliable."}
+            ? "A private 2-hour ride through the park of the Palace, tickets included. Guided Palace tour, lunch and transfer from Paris available as options."
+            : "Une balade privée de 2 heures dans le parc du Château, billets inclus. Visite guidée, déjeuner et transfert depuis Paris en option."}
         </p>
         <div
           ref={ctaRef}
           style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", opacity: 0, transform: "translateY(12px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           <Link
-            href={`/reservation?lang=${lang}`}
+            className="cta"
+          href={`/reservation?lang=${lang}`}
             style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "white", color: "#1A1A1A", padding: "16px 40px", fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500 }}
           >
             {isEnglish ? "Book the experience" : "Réserver l'expérience"}

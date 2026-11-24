@@ -54,3 +54,197 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ── Mobile : les styles en ligne n'ont pas de media queries, on corrige ici ── */
+@media (max-width: 860px) {
+  .booking-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 40px !important; }
+  .booking-wrap { padding: 48px 20px 72px !important; }
+  .booking-nav { padding: 16px 20px !important; }
+}
+@media (max-width: 640px) {
+  .site-nav { padding: 18px 16px !important; }
+  .site-nav-links { gap: 14px !important; }
+  .site-nav-secondary { display: none !important; }
+  .site-nav-cta { padding: 9px 14px !important; }
+  .site-nav-logo { font-size: 1rem !important; gap: 7px !important; letter-spacing: 0.01em !important; }
+  .site-nav-links { gap: 12px !important; }
+  .site-nav-links > div { gap: 8px !important; }
+  .cookie-banner { bottom: 12px !important; padding: 14px 16px !important; gap: 12px !important; }
+  .cookie-banner p { font-size: 12px !important; line-height: 1.5 !important; }
+}
+
+/* ── Animations d'accueil ── */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-12px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-bg { animation: heroZoom 14s var(--ease-out-quart) both; will-change: transform; }
+.trust-item { animation: riseIn 0.7s var(--ease-out-quart) both; }
+
+/* Boutons de réservation : légère élévation, flèche qui avance */
+.cta { transition: transform 0.25s var(--ease-out-quart), box-shadow 0.25s var(--ease-out-quart); }
+.cta span[aria-hidden] { display: inline-block; transition: transform 0.25s var(--ease-out-quart); }
+.cta:hover, .cta:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.18); }
+.cta:hover span[aria-hidden], .cta:focus-visible span[aria-hidden] { transform: translateX(5px); }
+
+/* Petits dessins : le trait se trace quand l'élément apparaît */
+.ornament .draw { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease-out-quart) 0.2s; }
+.ornament .draw-late { transition-delay: 0.9s; }
+.reveal.visible .ornament .draw { stroke-dashoffset: 0; }
+
+/* FAQ */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus { transition: transform 0.3s var(--ease-out-quart); }
+.faq-item[open] .faq-plus { transform: rotate(45deg); }
+.faq-item[open] > p { animation: riseIn 0.4s var(--ease-out-quart) both; }
+
+/* Barre de réservation mobile */
+.sticky-book { display: none; }
+
+@media (max-width: 860px) {
+  .trust-bar { grid-template-columns: repeat(2, 1fr) !important; gap: 18px 12px !important; padding: 22px 20px !important; }
+  .trust-item { justify-content: flex-start !important; }
+}
+@media (max-width: 640px) {
+  .section-pad { padding-top: 96px !important; padding-bottom: 96px !important; }
+  .prog-row { gap: 22px !important; padding-bottom: 56px !important; }
+  .prog-time { width: 54px !important; }
+  .prog-line { left: 54px !important; }
+  .prog-photos { grid-template-columns: repeat(2, 1fr) !important; }
+  .sticky-book {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(26,26,26,0.96); backdrop-filter: blur(8px);
+    transform: translateY(110%); transition: transform 0.35s var(--ease-out-quart);
+  }
+  .sticky-book.is-shown { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .trust-item, .faq-item[open] > p { animation: none; }
+  .cta, .cta span[aria-hidden], .faq-plus, .sticky-book { transition: none; }
+  .ornament .draw { stroke-dashoffset: 0; transition: none; }
+}
+
+/* ── Réservation : bandeau en couleur ── */
+.booking-banner {
+  background:
+    linear-gradient(180deg, rgba(20,30,22,0.62) 0%, rgba(20,30,22,0.78) 100%),
+    url("/cavaliers-bois-lumiere.webp") center 35% / cover no-repeat;
+  border-bottom: 3px solid #B08D57;
+}
+
+/* ── Réservation : calendrier dans la page ── */
+.bk-cal { border: 1px solid rgba(44,62,45,0.18); background: #fff; padding: 18px 16px 14px; max-width: 380px; }
+.bk-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.bk-cal-month { font-family: var(--font-serif); font-size: 1.25rem; color: #1A1A1A; text-transform: capitalize; }
+.bk-cal-nav { width: 40px; height: 40px; border: 1px solid rgba(44,62,45,0.2); background: transparent; color: #2C3E2D; font-size: 1.2rem; line-height: 1; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.bk-cal-nav:hover:not(:disabled) { background: #2C3E2D; color: #fff; }
+.bk-cal-nav:disabled { opacity: 0.25; cursor: default; }
+.bk-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.bk-cal-days { animation: riseIn 0.35s var(--ease-out-quart) both; }
+.bk-cal-weekday { text-align: center; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8B7355; padding: 6px 0; }
+.bk-cal-day { aspect-ratio: 1; min-height: 40px; border: 1px solid transparent; border-radius: 50%; background: transparent; color: #1A1A1A; font-size: 14px; cursor: pointer; transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s; }
+.bk-cal-day:hover:not(:disabled) { background: rgba(176,141,87,0.18); border-color: #B08D57; transform: scale(1.06); }
+.bk-cal-day:disabled { color: rgba(26,26,26,0.22); cursor: default; }
+.bk-cal-day.is-today { border-color: rgba(176,141,87,0.6); }
+.bk-cal-day.is-selected { background: #2C3E2D; color: #fff; border-color: #2C3E2D; transform: scale(1.06); box-shadow: 0 6px 16px rgba(44,62,45,0.3); }
+.bk-cal-day:focus-visible, .bk-cal-nav:focus-visible { outline: 2px solid #B08D57; outline-offset: 2px; }
+
+/* ── Réservation : laissez-passer en relief ── */
+@keyframes inviteFloat {
+  0%, 100% { transform: rotateX(4deg) rotateY(-9deg); }
+  50% { transform: rotateX(-3deg) rotateY(9deg); }
+}
+@keyframes invitePop {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  60% { transform: translateY(-2px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes inviteCaret { 50% { opacity: 0; } }
+.invite-scene { perspective: 900px; --rx: 0deg; --ry: 0deg; --mx: 30%; --my: 20%; }
+.invite-card {
+  position: relative; aspect-ratio: 1.58; border-radius: 14px; overflow: hidden; color: #fff;
+  transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.5s var(--ease-out-quart), box-shadow 0.5s var(--ease-out-quart);
+  box-shadow: 0 22px 44px -18px rgba(20,30,22,0.55), 0 0 0 1px rgba(233,216,180,0.35) inset;
+  animation: inviteFloat 9s ease-in-out infinite;
+}
+.invite-scene.is-tilting .invite-card { animation: none; transition: transform 0.08s linear; box-shadow: 0 32px 60px -20px rgba(20,30,22,0.6), 0 0 0 1px rgba(233,216,180,0.5) inset; }
+.invite-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.invite-shade { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(24,38,27,0.9) 0%, rgba(24,38,27,0.62) 48%, rgba(24,38,27,0.86) 100%); }
+.invite-sheen { position: absolute; inset: 0; background: radial-gradient(circle at var(--mx) var(--my), rgba(255,236,190,0.42) 0%, rgba(255,236,190,0.08) 38%, transparent 62%); mix-blend-mode: screen; transition: background 0.1s linear; }
+.invite-content { position: absolute; inset: 0; padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between; transform: translateZ(28px); }
+.invite-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.invite-brand { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-serif); font-size: 0.95rem; color: #F6EEDD; white-space: nowrap; }
+.invite-kind { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: #E9D8B4; border: 1px solid rgba(233,216,180,0.5); padding: 4px 7px; border-radius: 99px; white-space: nowrap; }
+.invite-label { display: block; font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(233,216,180,0.85); margin-bottom: 3px; }
+.invite-name { display: block; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.5rem, 2.6vw, 1.9rem); line-height: 1.1; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+.invite-name.is-empty { color: rgba(255,255,255,0.45); }
+.invite-caret { display: inline-block; width: 1px; height: 0.9em; margin-left: 3px; background: #E9D8B4; vertical-align: -0.08em; animation: inviteCaret 1s steps(1) infinite; }
+.invite-fields { display: grid; grid-template-columns: 1.4fr 1.3fr 0.6fr; gap: 10px; align-items: end; }
+.invite-value { display: block; font-size: 12px; font-weight: 500; color: #fff; white-space: nowrap; }
+.invite-value.is-empty { color: rgba(255,255,255,0.5); font-weight: 400; }
+.invite-riders { display: flex; flex-wrap: wrap; gap: 2px; }
+.invite-riders svg { animation: invitePop 0.4s var(--ease-out-quart) both; }
+.invite-options { position: absolute; left: 18px; right: 18px; top: 46px; display: flex; flex-wrap: wrap; gap: 4px; max-height: 17px; overflow: hidden; }
+.invite-chip { font-size: 8px; letter-spacing: 0.08em; color: #18261B; background: #E9D8B4; padding: 3px 7px; border-radius: 99px; }
+.invite-pop { animation: invitePop 0.45s var(--ease-out-quart) both; }
+
+/* Lettres du prénom : elles « s'écrivent » une à une */
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(0.35em) rotate(-6deg); filter: blur(3px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.invite-letter { display: inline-block; animation: letterIn 0.45s var(--ease-out-quart) both; }
+
+/* Cachet de cire quand la réservation est complète */
+@keyframes sealStamp {
+  0% { opacity: 0; transform: translateZ(40px) scale(2.4) rotate(-30deg); }
+  55% { opacity: 1; transform: translateZ(40px) scale(0.88) rotate(4deg); }
+  75% { transform: translateZ(40px) scale(1.06) rotate(-2deg); }
+  100% { opacity: 1; transform: translateZ(40px) scale(1) rotate(-8deg); }
+}
+.invite-seal { position: absolute; right: 14px; top: 50%; width: 58px; height: 58px; margin-top: -34px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.45)); animation: sealStamp 0.7s var(--ease-out-quart) both; }
+.invite-card.is-complete .invite-name { max-width: calc(100% - 70px); }
+.invite-card.is-complete { box-shadow: 0 26px 50px -18px rgba(20,30,22,0.6), 0 0 0 1px rgba(233,216,180,0.6) inset; }
+
+/* Options et boutons de réservation */
+.bk-option { transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease-out-quart), box-shadow 0.25s; }
+.bk-option:hover { border-color: #B08D57 !important; transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba(44,62,45,0.5); }
+.bk-option:focus-visible { outline: 2px solid #B08D57; outline-offset: 2px; }
+.bk-cta { position: relative; overflow: hidden; }
+.bk-cta:not(:disabled)::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(233,216,180,0.45), transparent);
+  transform: skewX(-20deg); animation: ctaSheen 3.6s ease-in-out 1s infinite;
+}
+@keyframes ctaSheen { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+.bk-cta:not(:disabled):hover { background: #B08D57 !important; }
+
+.invite-mobile { display: none; }
+@media (max-width: 860px) {
+  /* le récapitulatif passe après le formulaire ; la carte s'affiche dans le formulaire, sous le prénom */
+  .booking-aside { display: contents; }
+  .invite-desktop { display: none; }
+  .invite-mobile { display: block; margin-top: 24px; }
+  .invite-mobile .invite-scene { width: 100%; max-width: 380px; margin: 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invite-card, .invite-pop, .invite-riders svg, .invite-caret, .bk-cal-days, .invite-letter, .invite-seal, .bk-cta::after { animation: none !important; }
+  .invite-card { transition: none; }
+}
+.cap-first::first-letter { text-transform: uppercase; }

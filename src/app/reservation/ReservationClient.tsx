@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { BookingCalendar, firstBookableParis } from "@/components/booking/BookingCalendar";
+import { InvitationCard } from "@/components/booking/InvitationCard";
 import { cardStackConfig, addOnOptions } from "@/config";
-import { cn } from "@/lib/utils";
+import { homeHref } from "@/lib/i18n";
+import { HorseMark } from "@/components/Ornaments";
 
 interface Props {
   searchParams: { lang?: string; tour?: string; success?: string; canceled?: string };
 }
+
+const DRAFT_KEY = "vac_booking_draft";
 
 function getAddOnPrice(addOnId: string, count: number): number {
   if (addOnId === "transport") return count <= 3 ? 200 : 300;
@@ -55,14 +58,68 @@ export function ReservationClient({ searchParams }: Props) {
     ? ["Beginner", "Intermediate", "Experienced"]
     : ["Débutant", "Intermédiaire", "Expérimenté"];
 
-  const baseAmount = (tour?.basePrice || 490) * participants;
+  const baseAmount = (tour?.basePrice ?? 0) * participants;
   const addOnsAmount = selectedAddOns.reduce((sum, id) => sum + getAddOnPrice(id, participants), 0);
   const totalAmount = baseAmount + addOnsAmount;
 
+  const LUNCHES = ["lunch_ducasse", "lunch_bistro"];
   const toggleAddOn = (id: string) =>
-    setSelectedAddOns((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    setSelectedAddOns((prev) => {
+      if (prev.includes(id)) return prev.filter((x) => x !== id);
+      // un seul déjeuner à la fois
+      const rest = LUNCHES.includes(id) ? prev.filter((x) => !LUNCHES.includes(x)) : prev;
+      return [...rest, id];
+    });
 
   const canContinueStep1 = !!date && phone.trim().length >= 8;
+
+  // Le formulaire est gardé le temps de la visite : retour depuis Stripe, changement de langue, page de confirmation
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(DRAFT_KEY);
+      if (!saved) return;
+      const d = JSON.parse(saved);
+      /* eslint-disable react-hooks/set-state-in-effect -- restauration unique au chargement */
+      if (d.date) {
+        const restored = new Date(d.date + "T12:00:00");
+        if (success || restored >= firstBookableParis()) setDate(restored);
+      }
+      if (typeof d.participants === "number") setParticipants(Math.max(1, Math.min(10, d.participants)));
+      if (Array.isArray(d.addOns)) setSelectedAddOns(d.addOns);
+      if (typeof d.firstName === "string") setFirstName(d.firstName);
+      if (typeof d.email === "string") setEmail(d.email);
+      if (typeof d.phone === "string") setPhone(d.phone);
+      /* eslint-enable react-hooks/set-state-in-effect */
+    } catch {
+      // stockage indisponible : on repart d'un formulaire vide
+    }
+  }, [success]);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({ date: date ? format(date, "yyyy-MM-dd") : null, participants, addOns: selectedAddOns, firstName, email, phone })
+      );
+    } catch {
+      // stockage indisponible
+    }
+  }, [date, participants, selectedAddOns, firstName, email, phone]);
+
+  // Le laissez-passer : sur ordinateur à droite, sur téléphone juste sous le prénom (pour le voir s'écrire)
+  const passCard = (
+    <InvitationCard
+      name={firstName}
+      dateLabel={date ? format(date, "d MMM yyyy", { locale: dateLocale }) : null}
+      participants={participants}
+      options={selectedAddOns
+        .map((id) => addOnOptions.find((x) => x.id === id))
+        .filter((a) => !!a)
+        .map((a) => (isEnglish ? a.nameEn : a.name))}
+      complete={canContinueStep1 && firstName.trim().length > 0}
+      isEnglish={isEnglish}
+    />
+  );
 
   const initParticipantDetails = () => {
     const current = participantDetails;
@@ -73,6 +130,7 @@ export function ReservationClient({ searchParams }: Props) {
   const handleGoToStep2 = () => {
     initParticipantDetails();
     setStep(2);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleProceedToPayment = async () => {
@@ -87,7 +145,7 @@ export function ReservationClient({ searchParams }: Props) {
           productId: "royal_complete",
           participants,
           addOns: selectedAddOns,
-          date: format(date, "PPP", { locale: dateLocale }),
+          date: format(date, "yyyy-MM-dd"),
           lang,
           customerEmail: email,
           customerName: firstName,
@@ -116,11 +174,12 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Navbar */}
       <nav style={{ borderBottom: "1px solid rgba(44,62,45,0.1)", background: "#FAFAF8" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="booking-nav" style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link
-            href={`/?lang=${lang}`}
-            style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.1rem", color: "#1A1A1A", letterSpacing: "0.03em" }}
+            href={homeHref(lang)}
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.1rem", color: "#1A1A1A", letterSpacing: "0.03em", display: "inline-flex", alignItems: "center", gap: "10px" }}
           >
+            <HorseMark size={20} color="#2C3E2D" />
             Versailles à Cheval
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
@@ -141,14 +200,14 @@ export function ReservationClient({ searchParams }: Props) {
       </nav>
 
       {/* Page intro band */}
-      <div style={{ background: "#F4F2EE", borderBottom: "1px solid rgba(44,62,45,0.15)", textAlign: "center", padding: "64px 32px 56px" }}>
-        <p style={{ color: "#2C3E2D", letterSpacing: "0.3em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "16px" }}>
+      <div className="booking-banner" style={{ textAlign: "center", padding: "72px 32px 64px" }}>
+        <p style={{ color: "#E9D8B4", letterSpacing: "0.3em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "16px" }}>
           {isEnglish ? "Royal experience" : "Expérience royale"}
         </p>
-        <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#1A1A1A", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "12px" }}>
+        <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#fff", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "12px" }}>
           {isEnglish ? "Book your experience" : "Réservez votre expérience"}
         </h1>
-        <p style={{ color: "#6B6B5F", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto" }}>
+        <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto" }}>
           {isEnglish
             ? "Two hours through the royal gardens. Secure booking, free cancellation up to 48 hours before."
             : "Deux heures dans les jardins royaux. Réservation sécurisée, annulation gratuite jusqu'à 48h avant."}
@@ -191,7 +250,7 @@ export function ReservationClient({ searchParams }: Props) {
 
           <br />
           <Link
-            href={`/?lang=${lang}`}
+            href={homeHref(lang)}
             style={{ color: "#6B6B5F", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase" }}
           >
             ← {isEnglish ? "Back to home" : "Retour à l'accueil"}
@@ -201,10 +260,10 @@ export function ReservationClient({ searchParams }: Props) {
 
       {/* Steps 1 & 2 */}
       {step !== 3 && (
-        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "96px 32px 120px" }}>
+        <div className="booking-wrap" style={{ maxWidth: "1060px", margin: "0 auto", padding: "96px 32px 120px" }}>
 
             {/* Main form area — 2 columns */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
+            <div className="booking-grid" style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "56px", alignItems: "start" }}>
 
               {/* Left: form — centré dans sa colonne */}
               <div style={{ maxWidth: "480px", margin: "0 auto", width: "100%" }}>
@@ -217,7 +276,9 @@ export function ReservationClient({ searchParams }: Props) {
                           width: "28px",
                           height: "28px",
                           borderRadius: "50%",
-                          border: step >= s ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.25)",
+                          border: step === s ? "1px solid #B08D57" : step > s ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.25)",
+                          boxShadow: step === s ? "0 0 0 4px rgba(176,141,87,0.22)" : "none",
+                          transition: "box-shadow 0.3s, background 0.3s",
                           background: step >= s ? "#2C3E2D" : "transparent",
                           color: step >= s ? "#FAFAF8" : "#6B6B5F",
                           display: "flex",
@@ -268,34 +329,12 @@ export function ReservationClient({ searchParams }: Props) {
                         <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
                           {isEnglish ? "Date" : "Date"}
                         </label>
-                        <Popover>
-                          <PopoverTrigger
-                            className={cn(
-                              "w-full flex items-center justify-between px-4 py-4 border text-sm transition-colors text-left",
-                              date
-                                ? "border-[#2C3E2D] text-[#1A1A1A]"
-                                : "border-[#2C3E2D]/25 text-[#6B6B5F] hover:border-[#2C3E2D]/50"
-                            )}
-                          >
-                            {date
-                              ? format(date, "EEEE d MMMM yyyy", { locale: dateLocale })
-                              : (isEnglish ? "Select a date" : "Sélectionnez une date")}
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.4">
-                              <rect x="1" y="2" width="14" height="13" rx="1" />
-                              <line x1="1" y1="6" x2="15" y2="6" />
-                              <line x1="5" y1="1" x2="5" y2="4" />
-                              <line x1="11" y1="1" x2="11" y2="4" />
-                            </svg>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 border border-[#2C3E2D]/20" align="start" style={{ zIndex: 9999 }}>
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              onSelect={setDate}
-                              disabled={(d) => d < new Date()}
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        <BookingCalendar selected={date} onSelect={setDate} locale={dateLocale} isEnglish={isEnglish} />
+                        <p key={date ? date.toISOString() : "none"} className={date ? "invite-pop cap-first" : undefined} style={{ marginTop: "14px", fontSize: "14px", color: date ? "#2C3E2D" : "#6B6B5F", fontWeight: date ? 500 : 400 }}>
+                          {date
+                            ? format(date, "EEEE d MMMM yyyy", { locale: dateLocale })
+                            : (isEnglish ? "Select a date in the calendar" : "Sélectionnez une date dans le calendrier")}
+                        </p>
                       </div>
 
                       {/* Participants */}
@@ -306,6 +345,7 @@ export function ReservationClient({ searchParams }: Props) {
                         <div style={{ display: "flex", alignItems: "center", gap: "0" }}>
                           <button
                             onClick={() => setParticipants(Math.max(1, participants - 1))}
+                            aria-label={isEnglish ? "One rider fewer" : "Un cavalier de moins"}
                             disabled={participants <= 1}
                             style={{ width: "48px", height: "48px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", color: "#1A1A1A", fontSize: "1.2rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", opacity: participants <= 1 ? 0.3 : 1 }}
                           >
@@ -318,13 +358,14 @@ export function ReservationClient({ searchParams }: Props) {
                           </div>
                           <button
                             onClick={() => setParticipants(Math.min(10, participants + 1))}
+                            aria-label={isEnglish ? "One more rider" : "Un cavalier de plus"}
                             disabled={participants >= 10}
                             style={{ width: "48px", height: "48px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", color: "#1A1A1A", fontSize: "1.2rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", opacity: participants >= 10 ? 0.3 : 1 }}
                           >
                             +
                           </button>
                           <span style={{ marginLeft: "20px", fontSize: "14px", color: "#6B6B5F" }}>
-                            × {tour?.basePrice || 490}€ = <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>{baseAmount}€</strong>
+                            × {tour?.basePrice ?? 0}€ = <strong style={{ color: "#1A1A1A", fontWeight: 500 }}>{baseAmount}€</strong>
                           </span>
                         </div>
                       </div>
@@ -332,7 +373,7 @@ export function ReservationClient({ searchParams }: Props) {
                       {/* Contact info */}
                       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                         <div>
-                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "8px" }}>
+                          <label htmlFor="bk-phone" style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "8px" }}>
                             {isEnglish ? "WhatsApp / Phone" : "WhatsApp / Téléphone"} *
                           </label>
                           <p style={{ fontSize: "11px", color: "rgba(107,107,95,0.7)", marginBottom: "10px", lineHeight: 1.5 }}>
@@ -341,6 +382,7 @@ export function ReservationClient({ searchParams }: Props) {
                               : "Nous vous enverrons les détails et coordinerons via WhatsApp."}
                           </p>
                           <input
+                            id="bk-phone"
                             type="tel"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
@@ -350,10 +392,11 @@ export function ReservationClient({ searchParams }: Props) {
                           />
                         </div>
                         <div>
-                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                          <label htmlFor="bk-firstname" style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
                             {isEnglish ? "First name" : "Prénom"}
                           </label>
                           <input
+                            id="bk-firstname"
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
@@ -361,12 +404,14 @@ export function ReservationClient({ searchParams }: Props) {
                             autoComplete="given-name"
                             style={{ width: "100%", padding: "14px 16px", border: "1px solid rgba(44,62,45,0.25)", background: "transparent", fontSize: "14px", color: "#1A1A1A", outline: "none", boxSizing: "border-box" }}
                           />
+                          <div className="invite-mobile">{passCard}</div>
                         </div>
                         <div>
-                          <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
+                          <label htmlFor="bk-email" style={{ display: "block", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "12px" }}>
                             {isEnglish ? "Email (optional)" : "Email (optionnel)"}
                           </label>
                           <input
+                            id="bk-email"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -381,7 +426,8 @@ export function ReservationClient({ searchParams }: Props) {
                         <button
                           onClick={handleGoToStep2}
                           disabled={!canContinueStep1}
-                          style={{ display: "inline-block", background: canContinueStep1 ? "#2C3E2D" : "rgba(44,62,45,0.3)", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: canContinueStep1 ? "pointer" : "not-allowed" }}
+                          className="bk-cta"
+                          style={{ display: "inline-block", background: canContinueStep1 ? "#2C3E2D" : "rgba(44,62,45,0.3)", transition: "background 0.3s", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: canContinueStep1 ? "pointer" : "not-allowed" }}
                         >
                           {isEnglish ? "Continue" : "Continuer"} →
                         </button>
@@ -422,12 +468,14 @@ export function ReservationClient({ searchParams }: Props) {
                             key={addOn.id}
                             type="button"
                             onClick={() => toggleAddOn(addOn.id)}
+                            className={`bk-option${active ? " is-active" : ""}`}
+                            aria-pressed={active}
                             style={{
                               width: "100%",
                               textAlign: "left",
                               padding: "20px 24px",
-                              border: active ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.2)",
-                              background: active ? "rgba(44,62,45,0.03)" : "transparent",
+                              border: active ? "1px solid #B08D57" : "1px solid rgba(44,62,45,0.2)",
+                              background: active ? "#F7F0E3" : "#fff",
                               cursor: "pointer",
                             }}
                           >
@@ -438,8 +486,9 @@ export function ReservationClient({ searchParams }: Props) {
                                     marginTop: "2px",
                                     width: "16px",
                                     height: "16px",
-                                    border: active ? "1px solid #2C3E2D" : "1px solid rgba(44,62,45,0.3)",
-                                    background: active ? "#2C3E2D" : "transparent",
+                                    border: active ? "1px solid #B08D57" : "1px solid rgba(44,62,45,0.3)",
+                                    background: active ? "#B08D57" : "transparent",
+                                    transition: "background 0.25s, border-color 0.25s",
                                     flexShrink: 0,
                                     display: "flex",
                                     alignItems: "center",
@@ -461,7 +510,7 @@ export function ReservationClient({ searchParams }: Props) {
                                   </p>
                                 </div>
                               </div>
-                              <span style={{ fontSize: "13px", color: "#2C3E2D", fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0 }}>
+                              <span style={{ fontSize: "13px", color: active ? "#8B6A2E" : "#2C3E2D", fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0 }}>
                                 {getAddOnPriceLabel(addOn.id, participants, isEnglish)}
                               </span>
                             </div>
@@ -469,6 +518,8 @@ export function ReservationClient({ searchParams }: Props) {
                         );
                       })}
                     </div>
+
+                    <div className="invite-mobile" style={{ marginBottom: "32px" }}>{passCard}</div>
 
                     {/* WhatsApp note */}
                     <div style={{ marginBottom: "32px", padding: "16px 20px", background: "rgba(44,62,45,0.04)", border: "1px solid rgba(44,62,45,0.12)", display: "flex", gap: "14px", alignItems: "flex-start" }}>
@@ -497,6 +548,7 @@ export function ReservationClient({ searchParams }: Props) {
                       <button
                         onClick={handleProceedToPayment}
                         disabled={isLoading}
+                        className="bk-cta"
                         style={{ display: "inline-block", background: "#2C3E2D", color: "#FAFAF8", padding: "22px 64px", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500, border: "none", cursor: isLoading ? "not-allowed" : "pointer", opacity: isLoading ? 0.6 : 1 }}
                       >
                         {isLoading
@@ -509,20 +561,12 @@ export function ReservationClient({ searchParams }: Props) {
               </div>
 
               {/* Right: Summary */}
-              <div style={{ position: "sticky", top: "24px" }}>
-                <div style={{ border: "1px solid rgba(44,62,45,0.12)", background: "#fff", padding: "32px" }}>
+              <div className="booking-aside" style={{ position: "sticky", top: "24px" }}>
+                <div className="invite-desktop">{passCard}</div>
+                <div style={{ border: "1px solid rgba(44,62,45,0.12)", background: "#fff", padding: "32px", marginTop: "20px" }}>
                   <p style={{ fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B6B5F", marginBottom: "24px" }}>
                     {isEnglish ? "Your experience" : "Votre expérience"}
                   </p>
-
-                  {/* Tour image */}
-                  <div style={{ aspectRatio: "16/9", overflow: "hidden", marginBottom: "24px" }}>
-                    <img
-                      src={tour?.image}
-                      alt={isEnglish ? tour?.titleEn : tour?.title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
 
                   <h3 style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "1.25rem", color: "#1A1A1A", marginBottom: "4px", lineHeight: 1.3 }}>
                     {isEnglish ? tour?.titleEn : tour?.title}
@@ -536,7 +580,7 @@ export function ReservationClient({ searchParams }: Props) {
 
                   <div style={{ borderTop: "1px solid rgba(44,62,45,0.1)", paddingTop: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
-                      <span style={{ color: "#6B6B5F" }}>{(tour?.basePrice || 490)}€ × {participants}</span>
+                      <span style={{ color: "#6B6B5F" }}>{(tour?.basePrice ?? 0)}€ × {participants}</span>
                       <span style={{ color: "#1A1A1A" }}>{baseAmount}€</span>
                     </div>
                     {selectedAddOns.map((id) => {

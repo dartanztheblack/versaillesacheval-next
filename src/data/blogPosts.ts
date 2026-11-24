@@ -22,8 +22,8 @@ export interface BlogPost {
 export const blogPostsData: BlogPost[] = [
   {
     id: "1",
-    title: "Les 10 Activités Immanquables à Paris en 2024",
-    titleEn: "Top 10 Unmissable Activities in Paris 2024",
+    title: "Les 10 Activités Immanquables à Paris en 2026",
+    titleEn: "Top 10 Unmissable Activities in Paris 2026",
     slug: "activites-immanquables-paris",
     excerpt: "Découvrez les expériences incontournables à Paris : de la Tour Eiffel à Versailles à cheval, voici ce que vous ne devez absolument pas manquer.",
     excerptEn: "Discover the must-do experiences in Paris: from the Eiffel Tower to Versailles horseback riding, here's what you absolutely cannot miss.",
@@ -82,14 +82,14 @@ Imaginez-vous sur le dos d'un noble destrier, traversant les mêmes allées où 
 
 ### Ce qui rend cette expérience unique:
 
-- **Accès privilégié** aux zones habituellement fermées au public
+- **Balade privée** dans les allées du parc, loin de la foule
 - **Vue imprenable** sur le Grand Canal et le château
 - **Guide expert** passionné par l'histoire
 - **Chevaux soigneusement sélectionnés** pour leur tempérament
 
 ### Le Verdict
 
-Si vous ne deviez choisir qu'une seule activité à Paris, faites confiance aux milliers de voyageurs qui ont voté : **Versailles à cheval est l'expérience immanquable**.
+Si vous ne deviez choisir qu'une seule activité autour de Paris, **Versailles à cheval est l'expérience immanquable**.
 
 [Réservez votre balade maintenant]`,
     contentEn: `## The Ultimate Royal Experience
@@ -102,14 +102,14 @@ Imagine yourself on the back of a noble steed, crossing the same alleys where Lo
 
 ### What makes this experience unique:
 
-- **Privileged access** to areas usually closed to the public
+- **Private ride** through the alleys of the park, away from the crowds
 - **Breathtaking view** of the Grand Canal and the palace
 - **Expert guide** passionate about history
 - **Carefully selected horses** for their temperament
 
 ### The Verdict
 
-If you could only choose one activity in Paris, trust the thousands of travelers who have voted: **Versailles on horseback is the unmissable experience**.
+If you could only choose one activity around Paris, **Versailles on horseback is the unmissable experience**.
 
 [Book your ride now]`,
     image: "/grid-real-1.jpg",
@@ -124,8 +124,8 @@ If you could only choose one activity in Paris, trust the thousands of travelers
   },
   {
     id: "3",
-    title: "Choses Immanquables à Paris : Le Guide Ultime 2024",
-    titleEn: "Unmissable Things in Paris: The Ultimate 2024 Guide",
+    title: "Choses Immanquables à Paris : Le Guide Ultime 2026",
+    titleEn: "Unmissable Things in Paris: The Ultimate 2026 Guide",
     slug: "choses-immanquables-paris-guide",
     excerpt: "Paris regorge de trésors à découvrir. Voici notre guide complet des expériences absolument immanquables lors de votre séjour dans la capitale.",
     excerptEn: "Paris is full of treasures to discover. Here is our complete guide to absolutely unmissable experiences during your stay in the capital.",
@@ -202,7 +202,7 @@ Paris est la capitale mondiale du luxe. Voici comment vivre des expériences d'e
    - Visite privée du Château
    - Balade de 2h à cheval dans les jardins
    - Service conciergerie dédié
-   - À partir de 490€ par personne
+   - À partir de 550€ par personne
 
 2. **Dîner 3 étoiles avec vue sur la Tour Eiffel**
 
@@ -227,7 +227,7 @@ Paris is the world capital of luxury. Here's how to live exceptional experiences
    - Private Château visit
    - 2-hour horseback ride in the gardens
    - Dedicated concierge service
-   - From €490 per person
+   - From €550 per person
 
 2. **3-star dinner with Eiffel Tower view**
 
@@ -297,7 +297,7 @@ The **Versailles horseback riding** is the perfect activity for a weekend becaus
 - A unique experience to share
 
 [Book your royal weekend]`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+    image: "/cavalier-grand-canal.webp",
     category: "Week-end",
     categoryEn: "Weekend",
     published: true,
@@ -313,11 +313,11 @@ The **Versailles horseback riding** is the perfect activity for a weekend becaus
     title: "Balade à Cheval DANS le Château de Versailles | L'Expérience Unique",
     titleEn: "Horseback Riding INSIDE Versailles Palace | The Unique Experience",
     slug: "balade-dans-chateau-versailles",
-    excerpt: "Vivez une balade à cheval exceptionnelle DANS le domaine du Château de Versailles. Seul centre équestre autorisé dans le parc royal. Une expérience inaccessible ailleurs.",
-    excerptEn: "Experience exceptional horseback riding INSIDE the Palace of Versailles estate. The only equestrian center authorized in the royal park. An experience unavailable elsewhere.",
+    excerpt: "Vivez une balade à cheval exceptionnelle DANS le domaine du Château de Versailles. Une balade privée jusqu'au Grand Canal, accompagnée d'un guide.",
+    excerptEn: "Experience exceptional horseback riding INSIDE the Palace of Versailles estate. A private ride to the Grand Canal, accompanied by a guide.",
     content: `## Balade à Cheval DANS le Château de Versailles
 
-**Versailles à Cheval** est le **SEUL** centre équestre au monde autorisé à organiser des balades à cheval **DANS** les jardins du Château de Versailles.
+**Versailles à Cheval** propose une balade privée à l'intérieur du parc du Château de Versailles, jusqu'au Grand Canal, accompagnée d'un guide.
 
 ### Vous êtes sur le domaine royal
 
@@ -330,10 +330,10 @@ Contrairement aux autres centres qui proposent des balades "près de" Versailles
 - Accès au Grand Canal
 - Promenade dans les bosquets historiques
 
-**Réservez cette expérience unique au monde !**`,
+**Réservez votre balade dans le parc du Château !**`,
     contentEn: `## Horseback Riding INSIDE Versailles Palace
 
-**Versailles Horse Riding** is the **ONLY** equestrian center in the world authorized to organize horseback rides **INSIDE** the gardens of the Palace of Versailles.
+**Versailles à Cheval** offers a private ride inside the park of the Palace of Versailles, all the way to the Grand Canal, accompanied by a guide.
 
 ### You are on the royal estate
 
@@ -353,7 +353,7 @@ Unlike other centers that offer rides "near" Versailles, we take you **inside** 
     published: true,
     createdAt: "2025-01-10",
     views: 5420,
-    keywords: ["balade dans chateau versailles", "cheval dans parc versailles", "interieur domaine royal", "seul centre equestre autorise"],
+    keywords: ["balade dans chateau versailles", "cheval dans parc versailles", "interieur domaine royal"],
     author: "Équipe Versailles à Cheval",
     readTime: 6,
   },
@@ -427,7 +427,7 @@ Imaginez le scénario : vous montez à cheval avec votre bien-aimée dans les ja
 
 Vous arrivez au bord du Grand Canal, vous descendez de cheval, vous mettez à genoux...
 
-### Notre Package "Demande en Mariage" - 399€
+### Notre formule "Demande en Mariage" — sur devis, à partir de 550€ par personne
 - 🐴 Balade privée 2h pour 2 personnes
 - 🌅 Timing coucher de soleil
 - 🥂 Champagne et macarons
@@ -444,7 +444,7 @@ Imagine the scenario: you ride horseback with your loved one in the gardens of t
 
 You arrive at the edge of the Grand Canal, you dismount, you get down on one knee...
 
-### Our "Marriage Proposal" Package - €399
+### Our "Marriage Proposal" package — on request, from €550 per person
 - 🐴 Private 2h ride for 2 people
 - 🌅 Sunset timing
 - 🥂 Champagne and macarons
@@ -474,42 +474,38 @@ You arrive at the edge of the Grand Canal, you dismount, you get down on one kne
     excerptEn: "Discover the 5 best horseback rides in the Paris region. Versailles, Fontainebleau, Rambouillet... Complete comparison with reviews, prices and recommendations.",
     content: `## Top 5 des Balades à Cheval en Île-de-France
 
-### 🥇 1. Versailles à Cheval (4.9/5)
+### 🥇 1. Versailles à Cheval
 **L'EXPERIENCE UNIQUE**
-- Seul centre dans le domaine royal
-- Prix : 89-249€
+- Balade privée dans le parc du Château
+- Prix : à partir de 550€ par personne, billets du Château inclus
 - Accès privilégié au Château
 
-### 🥈 2. Fontainebleau (4.5/5)
-- Forêt immense
-- Prix : 45-120€
+### 2. Fontainebleau
+- Forêt immense, idéale pour de longues randonnées
 
-### 🥉 3. Rambouillet (4.3/5)
-- Parc naturel
-- Prix : 55-95€
+### 3. Rambouillet
+- Forêt et parc naturel, nombreux centres équestres
 
 ### Notre recommandation
-Pour une **expérience inoubliable**, choisissez Versailles. Nulle part ailleurs vous ne pourrez monter à cheval dans un site classé UNESCO.
+Pour une **expérience inoubliable**, choisissez Versailles : une balade privée dans le parc d'un château classé au patrimoine mondial de l'UNESCO.
 
 **Réservez la meilleure expérience !**`,
     contentEn: `## Top 5 Horseback Rides in Paris Region
 
-### 🥇 1. Versailles Horse Riding (4.9/5)
+### 🥇 1. Versailles à Cheval
 **THE UNIQUE EXPERIENCE**
-- Only center in the royal estate
-- Price: €89-249
+- Private ride in the park of the Palace
+- Price: from €550 per person, Palace tickets included
 - Privileged access to the Palace
 
-### 🥈 2. Fontainebleau (4.5/5)
-- Immense forest
-- Price: €45-120
+### 2. Fontainebleau
+- Immense forest, ideal for long trail rides
 
-### 🥉 3. Rambouillet (4.3/5)
-- Natural park
-- Price: €55-95
+### 3. Rambouillet
+- Forest and natural park, many riding centres
 
 ### Our recommendation
-For an **unforgettable experience**, choose Versailles. Nowhere else can you ride horseback in a UNESCO-listed site.
+For an **unforgettable experience**, choose Versailles: a private ride in the park of a UNESCO World Heritage palace.
 
 **Book the best experience!**`,
     image: "/card-real-3.jpg",
@@ -524,62 +520,64 @@ For an **unforgettable experience**, choose Versailles. Nowhere else can you rid
   },
   {
     id: "10",
-    title: "Prix Balade Cheval Versailles 2025 | Tarifs & Promotions",
-    titleEn: "Versailles Horse Riding Prices 2025 | Rates & Promotions",
+    title: "Prix Balade Cheval Versailles 2026 | Tarifs & Options",
+    titleEn: "Versailles Horse Riding Prices 2026 | Rates & Options",
     slug: "prix-balade-cheval-versailles",
-    excerpt: "Combien coûte une balade à cheval à Versailles ? Découvrez nos tarifs 2025 : Découverte 89€, Prestige 129€, Royal 249€. Réductions famille et groupes.",
-    excerptEn: "How much does a horseback ride at Versailles cost? Discover our 2025 rates: Discovery €89, Prestige €129, Royal €249. Family and group discounts.",
-    content: `## Tarifs des Balades à Cheval à Versailles (2025)
+    excerpt: "Combien coûte une balade à cheval à Versailles ? 550€ par personne : 2h de balade privée et billets du Château inclus. Options : visite guidée, déjeuner, transport.",
+    excerptEn: "How much does a horseback ride at Versailles cost? €550 per person: 2-hour private ride and Palace tickets included. Options: guided tour, lunch, transfer.",
+    content: `## Tarifs des Balades à Cheval à Versailles (2026)
 
-### Nos Formules
+### Notre formule
 
-**🌟 Découverte - 89€ (1h30)**
-- Cheval adapté
-- Guide professionnel
-- Équipement fourni
+**L'Expérience Royale Complète — à partir de 550€ par personne**
+- Balade privée de 2h dans le parc du Château
+- Billets d'accès au Château inclus
+- Cheval choisi selon votre niveau, équipement fourni
+- Guide dédié, débutants bienvenus
 
-**⭐ Prestige - 129€ (2h)** - POPULAIRE
-- Photos souvenirs OFFERTES
-- Rafraîchissements
-- Diplôme souvenir
+### Les options
 
-**👑 Royal - 249€ (demi-journée)**
-- Déjeuner panoramique
-- Champagne
-- Album photo professionnel
+- **Visite guidée privée du Château (1h30)** : 120€ pour une personne, 240€ pour le groupe à partir de 2
+- **Déjeuner gastronomique** : 200€ par personne
+- **Déjeuner bistro dans un restaurant du Château** : 100€ par personne
+- **Transport privé depuis votre hôtel parisien** : 200€ jusqu'à 3 personnes, 300€ au-delà
 
-### Réductions
-- 👨‍👩‍👧‍👦 Famille : -10% dès 4 pers
-- 🎂 Anniversaire : -15%
-- 💑 Couples : -5%
+### Combien de temps prévoir ?
 
-**Réservez au meilleur prix !**`,
-    contentEn: `## Versailles Horse Riding Prices (2025)
+La balade à cheval dure 2 heures. Avec la visite guidée du Château (1h30), le déjeuner et le domaine de Trianon, comptez la journée : la durée dépend des options choisies.
 
-### Our Packages
+### Annulation
 
-**🌟 Discovery - €89 (1h30)**
-- Suitable horse
-- Professional guide
-- Equipment provided
+Annulation gratuite jusqu'à 48h avant l'expérience.
 
-**⭐ Prestige - €129 (2h)** - POPULAR
-- FREE souvenir photos
-- Refreshments
-- Certificate
+**Réservez votre date en ligne.**`,
+    contentEn: `## Versailles Horse Riding Prices (2026)
 
-**👑 Royal - €249 (half-day)**
-- Panoramic lunch
-- Champagne
-- Professional photo album
+### Our package
 
-### Discounts
-- 👨‍👩‍👧‍👦 Family: -10% from 4 people
-- 🎂 Birthday: -15%
-- 💑 Couples: -5%
+**The Complete Royal Experience — from €550 per person**
+- Private 2-hour ride in the park of the Palace
+- Palace access tickets included
+- Horse matched to your level, equipment provided
+- Dedicated guide, beginners welcome
 
-**Book at the best price!**`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+### Options
+
+- **Private guided tour of the Palace (1.5 hours)**: €120 for one person, €240 for the group from 2 people
+- **Gastronomic lunch**: €200 per person
+- **Bistro lunch in one of the Palace restaurants**: €100 per person
+- **Private transfer from your Paris hotel**: €200 up to 3 people, €300 beyond
+
+### How long should you plan?
+
+The horseback ride lasts 2 hours. With the guided Palace tour (1.5 hours), lunch and the Trianon estate, plan a full day: the duration depends on the options you choose.
+
+### Cancellation
+
+Free cancellation up to 48 hours before the experience.
+
+**Book your date online.**`,
+    image: "/cavalier-grand-canal.webp",
     category: "Tarifs",
     categoryEn: "Pricing",
     published: true,
@@ -594,13 +592,13 @@ For an **unforgettable experience**, choose Versailles. Nowhere else can you rid
     title: "EVJF Versailles à Cheval | Enterrement Vie Jeune Fille Original",
     titleEn: "Bachelorette Party Versailles Horseback | Original Hen Do",
     slug: "evjf-versailles-cheval",
-    excerpt: "Organisez un EVJF inoubliable à Versailles à cheval. Moment magique entre copines dans les jardins du Château. Devis personnalisé dès 79€/pers.",
-    excerptEn: "Organize an unforgettable bachelorette party at Versailles on horseback. Magical moment with friends in the Palace gardens. Custom quote from €79/person.",
+    excerpt: "Organisez un EVJF inoubliable à Versailles à cheval. Moment magique entre copines dans les jardins du Château. Devis sur mesure, à partir de 550€ par personne.",
+    excerptEn: "Organize an unforgettable bachelorette party at Versailles on horseback. Magical moment with friends in the Palace gardens. Tailor-made quote, from €550 per person.",
     content: `## Le Meilleur EVJF de votre vie !
 
 Marre des EVJF classiques ? Offrez à votre meilleure amie une **expérience royale** qu'elle n'oubliera jamais !
 
-### Forfait EVJF Spécial - 79€/personne (groupe 6+)
+### Formule EVJF — devis sur mesure, à partir de 550€ par personne
 - 🐴 Balade à cheval 2h
 - 🥂 Champagne et macarons
 - 📸 Photoshoot groupe
@@ -620,7 +618,7 @@ Marre des EVJF classiques ? Offrez à votre meilleure amie une **expérience roy
 
 Tired of classic bachelorette parties? Treat your best friend to a **royal experience** she'll never forget!
 
-### Special Bachelorette Package - €79/person (group of 6+)
+### Bachelorette package — tailor-made quote, from €550 per person
 - 🐴 2-hour horseback ride
 - 🥂 Champagne and macarons
 - 📸 Group photoshoot
@@ -658,7 +656,7 @@ Tired of classic bachelorette parties? Treat your best friend to a **royal exper
 ### Top 5 des Activités Insolites
 
 1. **🐴 Versailles à Cheval** 
-   L'activité la plus unique - Seul au monde
+   Une balade privée dans le parc d'un château classé UNESCO
 
 2. **🗼 Dîner dans la Tour Eiffel**
    Expérience gastronomique avec vue
@@ -674,7 +672,7 @@ Tired of classic bachelorette parties? Treat your best friend to a **royal exper
 
 ### Notre coup de cœur
 La **balade à cheval à Versailles** car c'est :
-- Unique au monde
+- Dans un site classé au patrimoine mondial
 - Accessible à tous
 - Inoubliable
 
@@ -684,7 +682,7 @@ La **balade à cheval à Versailles** car c'est :
 ### Top 5 Unusual Activities
 
 1. **🐴 Versailles on Horseback**
-   The most unique activity - Only in the world
+   A private ride in the park of a UNESCO-listed palace
 
 2. **🗼 Dinner in the Eiffel Tower**
    Gastronomic experience with view
@@ -700,7 +698,7 @@ La **balade à cheval à Versailles** car c'est :
 
 ### Our favorite
 The **Versailles horseback ride** because it's:
-- Unique in the world
+- In a UNESCO World Heritage site
 - Accessible to all
 - Unforgettable
 
@@ -804,7 +802,6 @@ The **Versailles horseback ride** because it's:
 - ✅ Chevaux adaptés aux enfants
 - ✅ À partir de 8 ans
 - ✅ Guides pédagogues
-- ✅ Réduction famille -10%
 
 ### Ce que les enfants adorent :
 - 🐴 Leur "propre" cheval
@@ -828,7 +825,6 @@ The **Versailles horseback ride** because it's:
 - ✅ Horses adapted for children
 - ✅ From 8 years old
 - ✅ Pedagogical guides
-- ✅ Family discount -10%
 
 ### What children love:
 - 🐴 Their "own" horse
@@ -1240,14 +1236,14 @@ Le domaine du Château de Versailles s'étend sur 800 hectares. Plus qu'un simpl
 - Plaine royale
 - Forêts domaniales
 
-**🚫 Zones habituellement interdites**
-- Accès privilégié réservé
-- Chemins royaux cachés
-- Vues exclusives sur le Château
+**🌿 Allées calmes du parc**
+- Chemins loin de la foule
+- Allées ombragées
+- Vues sur le Château depuis le Grand Canal
 
 ### L'expérience complète du Château
 
-Seul à cheval, vous pouvez parcourir l'intégralité du domaine royal du Château de Versailles en quelques heures.
+À cheval, vous découvrez en deux heures une grande partie du parc du Château de Versailles.
 
 **Explorez tout le domaine royal !**`,
     contentEn: `## Estate of Palace of Versailles
@@ -1268,14 +1264,14 @@ The estate of Palace of Versailles extends over 800 hectares. More than a simple
 - Royal plain
 - Domain forests
 
-**🚫 Usually forbidden zones**
-- Reserved privileged access
-- Hidden royal paths
-- Exclusive views of the Palace
+**🌿 Quiet alleys of the park**
+- Paths away from the crowds
+- Shaded alleys
+- Views of the Palace from the Grand Canal
 
 ### The complete experience of the Palace
 
-Only on horseback, you can cover the entirety of the royal estate of Palace of Versailles in a few hours.
+On horseback, you discover a large part of the park of the Palace of Versailles in two hours.
 
 **Explore the entire royal estate!**`,
     image: "/grid-real-2.jpg",
@@ -1293,8 +1289,8 @@ Only on horseback, you can cover the entirety of the royal estate of Palace of V
     title: "Visite VIP Château de Versailles | Sans les Foules à Cheval",
     titleEn: "VIP Visit Palace of Versailles | Without Crowds on Horseback",
     slug: "visite-vip-chateau-versailles-sans-foule",
-    excerpt: "Visitez le Château de Versailles sans les foules : à cheval dans les jardins privés. Expérience VIP loin des touristes, accès exclusif garanti.",
-    excerptEn: "Visit Palace of Versailles without crowds: on horseback in private gardens. VIP experience away from tourists, guaranteed exclusive access.",
+    excerpt: "Visitez le Château de Versailles sans les foules : à cheval dans les jardins privés. Balade privée loin des touristes, avec un guide dédié.",
+    excerptEn: "Visit Palace of Versailles without crowds: on horseback in private gardens. Private ride away from the tourists, with a dedicated guide.",
     content: `## Visite VIP du Château de Versailles
 
 ### Le Château sans les foules... c'est possible !
@@ -1318,9 +1314,9 @@ Le Château de Versailles accueille 10 millions de visiteurs par an. Les files d
 - Photos professionnelles
 - Souvenirs royaux
 
-### Le luxe ultime : le Château pour vous seul
+### Le luxe ultime : une balade rien que pour vous
 
-À cheval, vous quittez les zones touristiques. Vous avez le domaine royal du Château rien que pour vous.
+À cheval, vous quittez les zones touristiques. Votre guide et vos chevaux ne sont que pour vous.
 
 **Vivez le Château en VIP !**`,
     contentEn: `## VIP Visit of Palace of Versailles
@@ -1424,7 +1420,7 @@ After the classic interior visit of the Palace, discover the exterior on horseba
 2. **Afternoon**: Horseback ride in the gardens
 
 **See everything at the Palace!**`,
-    image: "/Zhun3TjCgu4jzzZm_LGC-Equitation-Versailles-3.jpg",
+    image: "/cavalier-grand-canal.webp",
     category: "Château de Versailles",
     categoryEn: "Palace of Versailles",
     published: true,

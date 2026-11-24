@@ -9,14 +9,14 @@ export const heroConfig = {
   backgroundImage: "/versailles-sunset.webp",
   backgroundAlt: "Vue aérienne du Château de Versailles au coucher du soleil",
   title: "Versailles à Cheval",
-  subtitle: "L'EXPÉRIENCE ROYALE UNIQUE",
+  subtitle: "Balade à cheval privée dans le parc du Château de Versailles",
 };
 
 export const heroConfigEn = {
   backgroundImage: "/versailles-sunset.webp",
   backgroundAlt: "Aerial view of the Palace of Versailles at sunset",
-  title: "Versailles Horse Riding",
-  subtitle: "THE UNIQUE ROYAL EXPERIENCE",
+  title: "Versailles à Cheval",
+  subtitle: "Private horseback riding in the park of the Palace of Versailles",
 };
 
 // ─── Narrative ────────────────────────────────────────────────────────────────
@@ -127,7 +127,7 @@ export const cardStackConfig = {
   cards: [
     {
       id: 1,
-      image: "/equestre-bw-robe.webp",
+      image: "/cavaliers-parc-automne.webp",
       title: "L'Expérience Royale Complète",
       titleEn: "The Complete Royal Experience",
       description: "2h de balade à cheval dans les jardins royaux. Tickets d'accès au Château inclus. À partir de 550€ par personne.",

@@ -13,7 +13,7 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
   const config = cardStackConfig;
 
   return (
-    <section style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
+    <section className="section-pad" style={{ background: "#FAFAF8", paddingTop: "180px", paddingBottom: "180px" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto", paddingLeft: "32px", paddingRight: "32px" }}>
 
         {/* Header centré */}
@@ -53,7 +53,8 @@ export function CardStack({ lang = "fr" }: CardStackProps) {
                 {isEnglish ? card.descriptionEn : card.description}
               </p>
               <Link
-                href={`/reservation?tour=${card.id}&lang=${lang}`}
+                className="cta"
+          href={`/reservation?tour=${card.id}&lang=${lang}`}
                 style={{ display: "inline-flex", alignItems: "center", gap: "12px", background: "#2C3E2D", color: "#FAFAF8", padding: "14px 32px", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}
               >
                 {isEnglish ? "Reserve this experience" : "Réserver cette expérience"}
