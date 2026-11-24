@@ -16,7 +16,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { StickyBookBar } from "@/components/StickyBookBar";
 
 export const metadata: Metadata = {
-  title: "Balade à Cheval Versailles | Expérience Royale dans les Jardins du Château",
+  title: { absolute: "Balade à cheval privée dans le parc du Château de Versailles | Versailles à Cheval" },
   description:
     "Balade à cheval à Versailles dans les jardins royaux — 2h avec guide expert, chevaux dressés, tickets Château inclus. Débutants bienvenus. À partir de 550€/pers. Réservation en ligne.",
   alternates: {

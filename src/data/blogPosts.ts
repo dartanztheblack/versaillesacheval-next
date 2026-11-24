@@ -82,14 +82,14 @@ Imaginez-vous sur le dos d'un noble destrier, traversant les mêmes allées où 
 
 ### Ce qui rend cette expérience unique:
 
-- **Accès privilégié** aux zones habituellement fermées au public
+- **Balade privée** dans les allées du parc, loin de la foule
 - **Vue imprenable** sur le Grand Canal et le château
 - **Guide expert** passionné par l'histoire
 - **Chevaux soigneusement sélectionnés** pour leur tempérament
 
 ### Le Verdict
 
-Si vous ne deviez choisir qu'une seule activité à Paris, faites confiance aux milliers de voyageurs qui ont voté : **Versailles à cheval est l'expérience immanquable**.
+Si vous ne deviez choisir qu'une seule activité autour de Paris, **Versailles à cheval est l'expérience immanquable**.
 
 [Réservez votre balade maintenant]`,
     contentEn: `## The Ultimate Royal Experience
@@ -102,14 +102,14 @@ Imagine yourself on the back of a noble steed, crossing the same alleys where Lo
 
 ### What makes this experience unique:
 
-- **Privileged access** to areas usually closed to the public
+- **Private ride** through the alleys of the park, away from the crowds
 - **Breathtaking view** of the Grand Canal and the palace
 - **Expert guide** passionate about history
 - **Carefully selected horses** for their temperament
 
 ### The Verdict
 
-If you could only choose one activity in Paris, trust the thousands of travelers who have voted: **Versailles on horseback is the unmissable experience**.
+If you could only choose one activity around Paris, **Versailles on horseback is the unmissable experience**.
 
 [Book your ride now]`,
     image: "/grid-real-1.jpg",
@@ -313,11 +313,11 @@ The **Versailles horseback riding** is the perfect activity for a weekend becaus
     title: "Balade à Cheval DANS le Château de Versailles | L'Expérience Unique",
     titleEn: "Horseback Riding INSIDE Versailles Palace | The Unique Experience",
     slug: "balade-dans-chateau-versailles",
-    excerpt: "Vivez une balade à cheval exceptionnelle DANS le domaine du Château de Versailles. Seul centre équestre autorisé dans le parc royal. Une expérience inaccessible ailleurs.",
-    excerptEn: "Experience exceptional horseback riding INSIDE the Palace of Versailles estate. The only equestrian center authorized in the royal park. An experience unavailable elsewhere.",
+    excerpt: "Vivez une balade à cheval exceptionnelle DANS le domaine du Château de Versailles. Une balade privée jusqu'au Grand Canal, accompagnée d'un guide.",
+    excerptEn: "Experience exceptional horseback riding INSIDE the Palace of Versailles estate. A private ride to the Grand Canal, accompanied by a guide.",
     content: `## Balade à Cheval DANS le Château de Versailles
 
-**Versailles à Cheval** est le **SEUL** centre équestre au monde autorisé à organiser des balades à cheval **DANS** les jardins du Château de Versailles.
+**Versailles à Cheval** propose une balade privée à l'intérieur du parc du Château de Versailles, jusqu'au Grand Canal, accompagnée d'un guide.
 
 ### Vous êtes sur le domaine royal
 
@@ -330,10 +330,10 @@ Contrairement aux autres centres qui proposent des balades "près de" Versailles
 - Accès au Grand Canal
 - Promenade dans les bosquets historiques
 
-**Réservez cette expérience unique au monde !**`,
+**Réservez votre balade dans le parc du Château !**`,
     contentEn: `## Horseback Riding INSIDE Versailles Palace
 
-**Versailles Horse Riding** is the **ONLY** equestrian center in the world authorized to organize horseback rides **INSIDE** the gardens of the Palace of Versailles.
+**Versailles à Cheval** offers a private ride inside the park of the Palace of Versailles, all the way to the Grand Canal, accompanied by a guide.
 
 ### You are on the royal estate
 
@@ -353,7 +353,7 @@ Unlike other centers that offer rides "near" Versailles, we take you **inside** 
     published: true,
     createdAt: "2025-01-10",
     views: 5420,
-    keywords: ["balade dans chateau versailles", "cheval dans parc versailles", "interieur domaine royal", "seul centre equestre autorise"],
+    keywords: ["balade dans chateau versailles", "cheval dans parc versailles", "interieur domaine royal"],
     author: "Équipe Versailles à Cheval",
     readTime: 6,
   },
@@ -474,42 +474,38 @@ You arrive at the edge of the Grand Canal, you dismount, you get down on one kne
     excerptEn: "Discover the 5 best horseback rides in the Paris region. Versailles, Fontainebleau, Rambouillet... Complete comparison with reviews, prices and recommendations.",
     content: `## Top 5 des Balades à Cheval en Île-de-France
 
-### 🥇 1. Versailles à Cheval (4.9/5)
+### 🥇 1. Versailles à Cheval
 **L'EXPERIENCE UNIQUE**
-- Seul centre dans le domaine royal
+- Balade privée dans le parc du Château
 - Prix : à partir de 550€ par personne, billets du Château inclus
 - Accès privilégié au Château
 
-### 🥈 2. Fontainebleau (4.5/5)
-- Forêt immense
-- Prix : 45-120€
+### 2. Fontainebleau
+- Forêt immense, idéale pour de longues randonnées
 
-### 🥉 3. Rambouillet (4.3/5)
-- Parc naturel
-- Prix : 55-95€
+### 3. Rambouillet
+- Forêt et parc naturel, nombreux centres équestres
 
 ### Notre recommandation
-Pour une **expérience inoubliable**, choisissez Versailles. Nulle part ailleurs vous ne pourrez monter à cheval dans un site classé UNESCO.
+Pour une **expérience inoubliable**, choisissez Versailles : une balade privée dans le parc d'un château classé au patrimoine mondial de l'UNESCO.
 
 **Réservez la meilleure expérience !**`,
     contentEn: `## Top 5 Horseback Rides in Paris Region
 
-### 🥇 1. Versailles Horse Riding (4.9/5)
+### 🥇 1. Versailles à Cheval
 **THE UNIQUE EXPERIENCE**
-- Only center in the royal estate
+- Private ride in the park of the Palace
 - Price: from €550 per person, Palace tickets included
 - Privileged access to the Palace
 
-### 🥈 2. Fontainebleau (4.5/5)
-- Immense forest
-- Price: €45-120
+### 2. Fontainebleau
+- Immense forest, ideal for long trail rides
 
-### 🥉 3. Rambouillet (4.3/5)
-- Natural park
-- Price: €55-95
+### 3. Rambouillet
+- Forest and natural park, many riding centres
 
 ### Our recommendation
-For an **unforgettable experience**, choose Versailles. Nowhere else can you ride horseback in a UNESCO-listed site.
+For an **unforgettable experience**, choose Versailles: a private ride in the park of a UNESCO World Heritage palace.
 
 **Book the best experience!**`,
     image: "/card-real-3.jpg",
@@ -660,7 +656,7 @@ Tired of classic bachelorette parties? Treat your best friend to a **royal exper
 ### Top 5 des Activités Insolites
 
 1. **🐴 Versailles à Cheval** 
-   L'activité la plus unique - Seul au monde
+   Une balade privée dans le parc d'un château classé UNESCO
 
 2. **🗼 Dîner dans la Tour Eiffel**
    Expérience gastronomique avec vue
@@ -676,7 +672,7 @@ Tired of classic bachelorette parties? Treat your best friend to a **royal exper
 
 ### Notre coup de cœur
 La **balade à cheval à Versailles** car c'est :
-- Unique au monde
+- Dans un site classé au patrimoine mondial
 - Accessible à tous
 - Inoubliable
 
@@ -686,7 +682,7 @@ La **balade à cheval à Versailles** car c'est :
 ### Top 5 Unusual Activities
 
 1. **🐴 Versailles on Horseback**
-   The most unique activity - Only in the world
+   A private ride in the park of a UNESCO-listed palace
 
 2. **🗼 Dinner in the Eiffel Tower**
    Gastronomic experience with view
@@ -702,7 +698,7 @@ La **balade à cheval à Versailles** car c'est :
 
 ### Our favorite
 The **Versailles horseback ride** because it's:
-- Unique in the world
+- In a UNESCO World Heritage site
 - Accessible to all
 - Unforgettable
 
@@ -1240,14 +1236,14 @@ Le domaine du Château de Versailles s'étend sur 800 hectares. Plus qu'un simpl
 - Plaine royale
 - Forêts domaniales
 
-**🚫 Zones habituellement interdites**
-- Accès privilégié réservé
-- Chemins royaux cachés
-- Vues exclusives sur le Château
+**🌿 Allées calmes du parc**
+- Chemins loin de la foule
+- Allées ombragées
+- Vues sur le Château depuis le Grand Canal
 
 ### L'expérience complète du Château
 
-Seul à cheval, vous pouvez parcourir l'intégralité du domaine royal du Château de Versailles en quelques heures.
+À cheval, vous découvrez en deux heures une grande partie du parc du Château de Versailles.
 
 **Explorez tout le domaine royal !**`,
     contentEn: `## Estate of Palace of Versailles
@@ -1268,14 +1264,14 @@ The estate of Palace of Versailles extends over 800 hectares. More than a simple
 - Royal plain
 - Domain forests
 
-**🚫 Usually forbidden zones**
-- Reserved privileged access
-- Hidden royal paths
-- Exclusive views of the Palace
+**🌿 Quiet alleys of the park**
+- Paths away from the crowds
+- Shaded alleys
+- Views of the Palace from the Grand Canal
 
 ### The complete experience of the Palace
 
-Only on horseback, you can cover the entirety of the royal estate of Palace of Versailles in a few hours.
+On horseback, you discover a large part of the park of the Palace of Versailles in two hours.
 
 **Explore the entire royal estate!**`,
     image: "/grid-real-2.jpg",
@@ -1293,8 +1289,8 @@ Only on horseback, you can cover the entirety of the royal estate of Palace of V
     title: "Visite VIP Château de Versailles | Sans les Foules à Cheval",
     titleEn: "VIP Visit Palace of Versailles | Without Crowds on Horseback",
     slug: "visite-vip-chateau-versailles-sans-foule",
-    excerpt: "Visitez le Château de Versailles sans les foules : à cheval dans les jardins privés. Expérience VIP loin des touristes, accès exclusif garanti.",
-    excerptEn: "Visit Palace of Versailles without crowds: on horseback in private gardens. VIP experience away from tourists, guaranteed exclusive access.",
+    excerpt: "Visitez le Château de Versailles sans les foules : à cheval dans les jardins privés. Balade privée loin des touristes, avec un guide dédié.",
+    excerptEn: "Visit Palace of Versailles without crowds: on horseback in private gardens. Private ride away from the tourists, with a dedicated guide.",
     content: `## Visite VIP du Château de Versailles
 
 ### Le Château sans les foules... c'est possible !
@@ -1318,9 +1314,9 @@ Le Château de Versailles accueille 10 millions de visiteurs par an. Les files d
 - Photos professionnelles
 - Souvenirs royaux
 
-### Le luxe ultime : le Château pour vous seul
+### Le luxe ultime : une balade rien que pour vous
 
-À cheval, vous quittez les zones touristiques. Vous avez le domaine royal du Château rien que pour vous.
+À cheval, vous quittez les zones touristiques. Votre guide et vos chevaux ne sont que pour vous.
 
 **Vivez le Château en VIP !**`,
     contentEn: `## VIP Visit of Palace of Versailles

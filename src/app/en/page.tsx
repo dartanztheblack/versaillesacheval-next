@@ -15,7 +15,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { StickyBookBar } from "@/components/StickyBookBar";
 
 const EN_URL = `${SITE_URL}/en`;
-const title = "Horseback Riding in Versailles | Private Ride in the Palace Gardens";
+const title = "Private Horseback Riding in the Park of the Palace of Versailles | Versailles à Cheval";
 const description =
   "Private 2-hour horseback ride in the park of the Palace of Versailles with an expert guide. Palace tickets included, beginners welcome. From €550 per person. Book online.";
 

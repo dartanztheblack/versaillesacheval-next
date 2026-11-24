@@ -50,7 +50,19 @@ export async function POST(request: NextRequest) {
   let totalCents = BASE_PRICE_PER_PERSON * validParticipants;
   const addOnNameList: string[] = [];
 
-  for (const addOnId of addOns) {
+  // Date au format AAAA-MM-JJ, au plus tôt demain (heure de Paris)
+  const parisToday = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris" }).format(new Date());
+  if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date) || date <= parisToday) {
+    return NextResponse.json({ error: "Invalid date" }, { status: 400 });
+  }
+
+  // Options : sans doublon, et un seul déjeuner
+  const uniqueAddOns = Array.isArray(addOns) ? [...new Set(addOns.map(String))] : [];
+  if (uniqueAddOns.includes("lunch_ducasse") && uniqueAddOns.includes("lunch_bistro")) {
+    return NextResponse.json({ error: "Only one lunch can be selected" }, { status: 400 });
+  }
+
+  for (const addOnId of uniqueAddOns) {
     const priceFn = ADDON_PRICES[addOnId];
     if (priceFn) {
       const euros = priceFn(validParticipants);
@@ -63,7 +75,7 @@ export async function POST(request: NextRequest) {
   const tourName = isEnglish ? product.en : product.fr;
   const description = [
     date ? date : null,
-    `${validParticipants} ${isEnglish ? "travelers" : "voyageurs"}`,
+    `${validParticipants} ${isEnglish ? (validParticipants > 1 ? "riders" : "rider") : validParticipants > 1 ? "cavaliers" : "cavalier"}`,
     ...addOnNameList,
   ]
     .filter(Boolean)

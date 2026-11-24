@@ -35,7 +35,7 @@ const programmeFr: ProgrammeStep[] = [
     icon: "chateau",
     items: [
       "Arrivée libre en matinée. Présentez vos billets PDF directement à l'entrée.",
-      "Visite guidée exclusive de 1h30 — immersion dans l'histoire des grands appartements royaux.",
+      "En option : visite guidée privée de 1h30 — immersion dans l'histoire des grands appartements royaux.",
     ],
     included: true,
   },
@@ -115,7 +115,7 @@ const programmeEn: ProgrammeStep[] = [
     icon: "chateau",
     items: [
       "Free arrival in the morning. Present your PDF tickets directly at the entrance.",
-      "Exclusive 1.5-hour guided tour — immersive journey through the royal apartments.",
+      "Optional: private 1.5-hour guided tour — immersive journey through the royal apartments.",
     ],
     included: true,
   },

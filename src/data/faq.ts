@@ -6,6 +6,10 @@ export interface FaqItem {
 
 export const faqFr: FaqItem[] = [
   {
+    q: "Peut-on faire du cheval dans le parc du Château de Versailles ?",
+    a: "Oui. Versailles à Cheval propose une balade privée de 2 heures à l'intérieur du parc du Château de Versailles, jusqu'au Grand Canal, accompagnée d'un guide. Les billets d'accès au Château sont inclus et les débutants sont les bienvenus.",
+  },
+  {
     q: "Dois-je savoir monter à cheval pour faire une balade à Versailles ?",
     a: "Non. Aucune expérience équestre n'est requise. Nos chevaux sont spécialement entraînés pour accueillir des débutants. Un briefing de sécurité complet et une présentation individuelle avec votre cheval sont effectués avant chaque balade.",
   },
@@ -41,6 +45,10 @@ export const faqFr: FaqItem[] = [
 
 export const faqEn: FaqItem[] = [
   {
+    q: "Can you ride a horse in the park of the Palace of Versailles?",
+    a: "Yes. Versailles à Cheval offers a private 2-hour ride inside the park of the Palace of Versailles, all the way to the Grand Canal, accompanied by a guide. Palace access tickets are included and beginners are welcome.",
+  },
+  {
     q: "Do I need horse riding experience for the Versailles ride?",
     a: "No. No equestrian experience is required. Our horses are specially trained to welcome beginners. A full safety briefing and individual introduction with your horse are carried out before every ride.",
   },
@@ -58,7 +66,7 @@ export const faqEn: FaqItem[] = [
   },
   {
     q: "Are Château tickets included?",
-    a: "Yes. The Full Royal Experience includes entry tickets to both the gardens and the Château de Versailles. No queue — your tickets are prepaid and ready at reception.",
+    a: "Yes. The Complete Royal Experience includes entry tickets to both the gardens and the Château de Versailles. No queue — your tickets are prepaid and ready at reception.",
   },
   {
     q: "How do I get to the stables from Paris?",

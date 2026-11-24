@@ -13,8 +13,8 @@ interface HeroProps {
 export function Hero({ lang = "fr" }: HeroProps) {
   const isEnglish = lang === "en";
   const config = isEnglish ? heroConfigEn : heroConfig;
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const eyebrowRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
@@ -71,25 +71,26 @@ export function Hero({ lang = "fr" }: HeroProps) {
 
       {/* Contenu centré */}
       <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "120px 32px 80px", textAlign: "center" }}>
-        <p
+        {/* Le titre principal (H1) décrit l'activité pour Google ; le nom de marque reste en grand juste dessous */}
+        <h1
           ref={eyebrowRef}
-          style={{ color: "rgba(255,255,255,0.6)", letterSpacing: "0.35em", fontSize: "10px", fontWeight: 500, textTransform: "uppercase", marginBottom: "24px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          style={{ color: "rgba(255,255,255,0.78)", letterSpacing: "0.3em", fontSize: "11px", fontWeight: 500, textTransform: "uppercase", lineHeight: 1.7, maxWidth: "560px", marginBottom: "24px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {config.subtitle}
-        </p>
-        <h1
+        </h1>
+        <p
           ref={titleRef}
           style={{ fontFamily: "var(--font-serif)", fontWeight: 300, fontSize: "clamp(3.5rem, 10vw, 9rem)", color: "white", lineHeight: 0.92, letterSpacing: "-0.02em", marginBottom: "28px", opacity: 0, transform: "translateY(20px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}
         >
           {config.title}
-        </h1>
+        </p>
         <p
           ref={subRef}
           style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "500px", marginBottom: "48px", opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
         >
           {isEnglish
-            ? "A complete royal experience — horseback riding through Versailles, gourmet dining, and the grandeur of Trianon. All in one unforgettable day."
-            : "Une expérience royale complète — balade à cheval dans Versailles, gastronomie française, et la splendeur de Trianon. Tout en une seule journée inoubliable."}
+            ? "A private 2-hour ride through the park of the Palace, tickets included. Guided Palace tour, lunch and transfer from Paris available as options."
+            : "Une balade privée de 2 heures dans le parc du Château, billets inclus. Visite guidée, déjeuner et transfert depuis Paris en option."}
         </p>
         <div
           ref={ctaRef}
